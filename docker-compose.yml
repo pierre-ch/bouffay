@@ -1,0 +1,64 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: shop_php
+    volumes:
+      - .:/var/www/html
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: mysql://app:app@db:3306/shop?serverVersion=8.0&charset=utf8mb4
+    networks:
+      - shop_network
+
+  nginx:
+    image: nginx:alpine
+    container_name: shop_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - shop_network
+
+  db:
+    image: mysql:8.0
+    container_name: shop_db
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: shop
+      MYSQL_USER: app
+      MYSQL_PASSWORD: app
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - shop_network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: shop_phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: app
+      PMA_PASSWORD: app
+    depends_on:
+      - db
+    networks:
+      - shop_network
+
+volumes:
+  db_data:
+
+networks:
+  shop_network:
+    driver: bridge

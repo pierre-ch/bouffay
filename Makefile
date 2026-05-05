@@ -13,6 +13,9 @@ bash:
 composer-install:
 	docker compose exec php composer install
 
+composer-update:
+	docker compose exec php composer update
+
 symfony-new:
 	docker compose exec php composer create-project symfony/skeleton:"6.4.*" . --no-interaction
 

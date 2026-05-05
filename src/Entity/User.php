@@ -16,6 +16,10 @@ use App\Entity\Product;
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    public const ROLE_CLIENT = 'ROLE_CLIENT';
+    public const ROLE_VENDEUR = 'ROLE_VENDEUR';
+    public const ROLE_ADMIN = 'ROLE_ADMIN';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -28,7 +32,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column]
-    private array $roles = [];
+    private array $roles = [self::ROLE_CLIENT];
 
     #[ORM\Column(length: 255)]
     private ?string $firstName = null;
@@ -112,6 +116,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         $roles[] = 'ROLE_USER';
+
+        if (empty($roles) || $roles === ['ROLE_USER']) {
+            $roles[] = self::ROLE_CLIENT;
+        }
 
         return array_unique($roles);
     }

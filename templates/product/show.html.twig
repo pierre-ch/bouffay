@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }} — Bouffay{% endblock %}
+
+{% block body %}
+<div class="row g-4">
+    {# Images #}
+    <div class="col-md-6">
+        {% if product.images|length > 0 %}
+            <img src="{{ asset('uploads/products/' ~ product.images.first.filename) }}"
+                 class="img-fluid rounded shadow-sm w-100" style="object-fit:cover;max-height:400px;"
+                 alt="{{ product.name }}">
+            {% if product.images|length > 1 %}
+            <div class="d-flex gap-2 mt-2 flex-wrap">
+                {% for image in product.images %}
+                    <img src="{{ asset('uploads/products/' ~ image.filename) }}"
+                         class="rounded" style="height:70px;object-fit:cover;cursor:pointer;"
+                         alt="{{ product.name }}">
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% else %}
+            <div class="bg-light rounded d-flex align-items-center justify-content-center"
+                 style="height:400px;">
+                <i class="bi bi-image text-muted fs-1"></i>
+            </div>
+        {% endif %}
+    </div>
+
+    {# Infos #}
+    <div class="col-md-6">
+        <h1>{{ product.name }}</h1>
+
+        <p class="text-muted">
+            <i class="bi bi-tag"></i> {{ product.category.name }}
+            {% for tag in product.tags %}
+                <span class="badge bg-secondary ms-1">{{ tag.name }}</span>
+            {% endfor %}
+        </p>
+
+        <h2 class="text-primary">{{ product.price }} €</h2>
+
+        <ul class="list-unstyled text-muted small mt-3">
+            {% if product.stock is not null %}
+                <li><i class="bi bi-box"></i> Stock : {{ product.stock }}</li>
+            {% endif %}
+            {% if product.weight %}
+                <li><i class="bi bi-speedometer"></i> Poids : {{ product.weight }} kg</li>
+            {% endif %}
+            {% if product.origin %}
+                <li><i class="bi bi-geo-alt"></i> Origine : {{ product.origin }}</li>
+            {% endif %}
+            {% if product.expiresAt %}
+                <li><i class="bi bi-calendar"></i> Expire le : {{ product.expiresAt|date('d/m/Y') }}</li>
+            {% endif %}
+        </ul>
+
+        {% if product.description %}
+            <hr>
+            <p>{{ product.description|nl2br }}</p>
+        {% endif %}
+
+        <hr>
+        <p class="text-muted small">
+            Vendu par
+            <strong>{{ product.seller.firstName }} {{ product.seller.lastName }}</strong>
+            &bull; Publié le {{ product.createdAt|date('d/m/Y') }}
+        </p>
+
+        {% if app.user and app.user !== product.seller %}
+            <a href="#" class="btn btn-success w-100 mb-2">
+                <i class="bi bi-cart-plus"></i> Ajouter au panier
+            </a>
+        {% endif %}
+
+        {% if app.user == product.seller %}
+            <div class="d-flex gap-2">
+                <a href="{{ path('app_product_edit', {id: product.id}) }}"
+                   class="btn btn-outline-secondary flex-fill">Modifier</a>
+                <form method="post"
+                      action="{{ path('app_product_delete', {id: product.id}) }}"
+                      onsubmit="return confirm('Supprimer cette annonce ?')">
+                    <input type="hidden" name="_token"
+                           value="{{ csrf_token('delete-product-' ~ product.id) }}">
+                    <button class="btn btn-outline-danger">Supprimer</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

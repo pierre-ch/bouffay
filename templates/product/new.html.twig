@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle annonce — Bouffay{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <h1 class="mb-4">Publier une annonce</h1>
+        {{ include('product/_form.html.twig', {button_label: 'Publier l\'annonce'}) }}
+    </div>
+</div>
+{% endblock %}

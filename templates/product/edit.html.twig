@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier — {{ product.name }}{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <h1 class="mb-4">Modifier l'annonce</h1>
+
+        {% if product.images|length > 0 %}
+        <div class="mb-3 d-flex gap-2 flex-wrap">
+            {% for image in product.images %}
+                <img src="{{ asset('uploads/products/' ~ image.filename) }}"
+                     class="rounded" style="height:80px;object-fit:cover;">
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {{ include('product/_form.html.twig', {button_label: 'Enregistrer les modifications'}) }}
+    </div>
+</div>
+{% endblock %}

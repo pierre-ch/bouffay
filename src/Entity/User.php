@@ -66,12 +66,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Favorite::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $favorites;
 
+    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'author')]
+    private Collection $reviewsWritten;
+
+    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'seller', orphanRemoval: true)]
+    private Collection $reviewsReceived;
+
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
         $this->orders = new ArrayCollection();
         $this->products = new ArrayCollection();
         $this->favorites = new ArrayCollection();
+        $this->reviewsWritten = new ArrayCollection();
+        $this->reviewsReceived = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -272,9 +280,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeFavorite(Favorite $favorite): static
     {
         if ($this->favorites->removeElement($favorite)) {
-            // set the owning side to null (unless already changed)
             if ($favorite->getUser() === $this) {
                 $favorite->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getReviewsWritten(): Collection
+    {
+        return $this->reviewsWritten;
+    }
+
+    public function addReviewWritten(Review $review): static
+    {
+        if (!$this->reviewsWritten->contains($review)) {
+            $this->reviewsWritten->add($review);
+            $review->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReviewWritten(Review $review): static
+    {
+        if ($this->reviewsWritten->removeElement($review)) {
+            if ($review->getAuthor() === $this) {
+                $review->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getReviewsReceived(): Collection
+    {
+        return $this->reviewsReceived;
+    }
+
+    public function addReviewReceived(Review $review): static
+    {
+        if (!$this->reviewsReceived->contains($review)) {
+            $this->reviewsReceived->add($review);
+            $review->setSeller($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReviewReceived(Review $review): static
+    {
+        if ($this->reviewsReceived->removeElement($review)) {
+            if ($review->getSeller() === $this) {
+                $review->setSeller(null);
             }
         }
 

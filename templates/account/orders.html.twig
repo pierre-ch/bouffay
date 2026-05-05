@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes — Bouffay{% endblock %}
+
+{% block body %}
+<div class="row g-4">
+    <div class="col-md-3">
+        {{ include('account/_sidebar.html.twig') }}
+    </div>
+    <div class="col-md-9">
+        <h1 class="mb-4">Mes commandes</h1>
+
+        {% if orders|length == 0 %}
+            <div class="text-center py-5 text-muted">
+                <i class="bi bi-bag fs-1"></i>
+                <p class="mt-2">Aucune commande pour le moment.</p>
+                <a href="{{ path('app_product_index') }}" class="btn btn-primary">Découvrir les produits</a>
+            </div>
+        {% else %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>N° commande</th>
+                            <th>Date</th>
+                            <th>Articles</th>
+                            <th>Total</th>
+                            <th>Statut</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        {% set badges = {pending: 'warning', paid: 'info', shipped: 'primary', delivered: 'success', cancelled: 'danger'} %}
+                        {% set labels = {pending: 'En attente', paid: 'Payée', shipped: 'Expédiée', delivered: 'Livrée', cancelled: 'Annulée'} %}
+                        <tr>
+                            <td>#{{ order.id }}</td>
+                            <td>{{ order.createdAt|date('d/m/Y') }}</td>
+                            <td>{{ order.orderItems|length }} article(s)</td>
+                            <td class="fw-semibold">{{ order.totalPrice }} €</td>
+                            <td>
+                                <span class="badge bg-{{ badges[order.status] ?? 'secondary' }}">
+                                    {{ labels[order.status] ?? order.status }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{{ path('app_account_order_show', {id: order.id}) }}"
+                                   class="btn btn-sm btn-outline-primary">Détail</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

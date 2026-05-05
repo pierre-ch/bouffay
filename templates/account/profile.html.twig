@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil — Bouffay{% endblock %}
+
+{% block body %}
+<div class="row g-4">
+    <div class="col-md-3">
+        {{ include('account/_sidebar.html.twig') }}
+    </div>
+    <div class="col-md-9">
+        <h1 class="mb-4">Mon profil</h1>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                {{ form_start(form) }}
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        {{ form_label(form.firstName) }}
+                        {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.firstName) }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        {{ form_label(form.lastName) }}
+                        {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.lastName) }}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.email) }}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        {{ form_label(form.locale) }}
+                        {{ form_widget(form.locale, {'attr': {'class': 'form-select'}}) }}
+                        {{ form_errors(form.locale) }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        {{ form_label(form.theme) }}
+                        {{ form_widget(form.theme, {'attr': {'class': 'form-select'}}) }}
+                        {{ form_errors(form.theme) }}
+                    </div>
+                </div>
+
+                <div class="mb-3 text-muted small">
+                    <i class="bi bi-calendar me-1"></i>
+                    Membre depuis le {{ app.user.createdAt|date('d/m/Y') }}
+                </div>
+
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

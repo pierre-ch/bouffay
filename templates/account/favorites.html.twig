@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes favoris — Bouffay{% endblock %}
+
+{% block body %}
+<div class="row g-4">
+    <div class="col-md-3">
+        {{ include('account/_sidebar.html.twig') }}
+    </div>
+    <div class="col-md-9">
+        <h1 class="mb-4">Mes favoris</h1>
+
+        {% if favorites|length == 0 %}
+            <div class="text-center py-5 text-muted">
+                <i class="bi bi-heart fs-1"></i>
+                <p class="mt-2">Aucun favori pour le moment.</p>
+                <a href="{{ path('app_product_index') }}" class="btn btn-primary">Découvrir les produits</a>
+            </div>
+        {% else %}
+            <div class="row row-cols-1 row-cols-md-2 g-3">
+                {% for favorite in favorites %}
+                {% set product = favorite.product %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        {% if product.images|length > 0 %}
+                            <img src="{{ asset('uploads/products/' ~ product.images.first.filename) }}"
+                                 class="card-img-top" style="height:160px;object-fit:cover;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <a href="{{ path('app_product_show', {slug: product.slug}) }}"
+                                   class="text-decoration-none">{{ product.name }}</a>
+                            </h6>
+                            <p class="text-primary fw-semibold mb-1">{{ product.price }} €</p>
+                            <p class="text-muted small mb-0">{{ product.category.name }}</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <a href="{{ path('app_product_show', {slug: product.slug}) }}"
+                               class="btn btn-sm btn-outline-primary">Voir</a>
+                            <form method="post"
+                                  action="{{ path('app_account_favorite_toggle', {id: product.id}) }}">
+                                <input type="hidden" name="_token"
+                                       value="{{ csrf_token('favorite-' ~ product.id) }}">
+                                <button class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-heart-fill"></i> Retirer
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

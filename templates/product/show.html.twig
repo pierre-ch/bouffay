@@ -71,6 +71,16 @@
             <a href="#" class="btn btn-success w-100 mb-2">
                 <i class="bi bi-cart-plus"></i> Ajouter au panier
             </a>
+            {% set isFav = app.user.favorites|filter(f => f.product.id == product.id)|length > 0 %}
+            <form method="post"
+                  action="{{ path('app_account_favorite_toggle', {id: product.id}) }}">
+                <input type="hidden" name="_token"
+                       value="{{ csrf_token('favorite-' ~ product.id) }}">
+                <button class="btn w-100 {% if isFav %}btn-danger{% else %}btn-outline-danger{% endif %}">
+                    <i class="bi bi-heart{% if isFav %}-fill{% endif %}"></i>
+                    {% if isFav %}Retirer des favoris{% else %}Ajouter aux favoris{% endif %}
+                </button>
+            </form>
         {% endif %}
 
         {% if app.user == product.seller %}

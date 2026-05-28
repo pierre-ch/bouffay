@@ -42,16 +42,16 @@
 
         <ul class="list-unstyled text-muted small mt-3">
             {% if product.stock is not null %}
-                <li><i class="bi bi-box"></i> Stock : {{ product.stock }}</li>
+                <li><i class="bi bi-box"></i> {{ 'info.stock'|trans }} {{ product.stock }}</li>
             {% endif %}
             {% if product.weight %}
-                <li><i class="bi bi-speedometer"></i> Poids : {{ product.weight }} kg</li>
+                <li><i class="bi bi-speedometer"></i> {{ 'info.weight'|trans }} {{ product.weight }} kg</li>
             {% endif %}
             {% if product.origin %}
-                <li><i class="bi bi-geo-alt"></i> Origine : {{ product.origin }}</li>
+                <li><i class="bi bi-geo-alt"></i> {{ 'info.origin'|trans }} {{ product.origin }}</li>
             {% endif %}
             {% if product.expiresAt %}
-                <li><i class="bi bi-calendar"></i> Expire le : {{ product.expiresAt|date('d/m/Y') }}</li>
+                <li><i class="bi bi-calendar"></i> {{ 'info.expires'|trans }} {{ product.expiresAt|date('d/m/Y') }}</li>
             {% endif %}
         </ul>
 
@@ -61,12 +61,10 @@
         {% endif %}
 
         <hr>
-        <p class="text-muted small">
-            Vendu par
-            <a href="{{ path('app_seller_show', {id: product.seller.id}) }}" class="fw-semibold text-decoration-none">
+        <p class="text-muted small">{{ 'info.sold_by'|trans }}<a href="{{ path('app_seller_show', {id: product.seller.id}) }}" class="fw-semibold text-decoration-none">
                 {{ product.seller.firstName }} {{ product.seller.lastName }}
             </a>
-            &bull; Publié le {{ product.createdAt|date('d/m/Y') }}
+            &bull; {{ 'published_on_date'|trans }} {{ product.createdAt|date('d/m/Y') }}
         </p>
 
         {% if app.user and app.user !== product.seller %}
@@ -78,7 +76,7 @@
                        value="{{ csrf_token('favorite-' ~ product.id) }}">
                 <button class="btn w-100 {% if isFav %}btn-danger{% else %}btn-outline-danger{% endif %}">
                     <i class="bi bi-heart{% if isFav %}-fill{% endif %}"></i>
-                    {% if isFav %}Retirer des favoris{% else %}Ajouter aux favoris{% endif %}
+                    {% if isFav %}{{ 'button.remove_from_favorites'|trans }}{% else %}{{ 'button.add_to_favorites'|trans }}{% endif %}
                 </button>
             </form>
         {% endif %}
@@ -86,13 +84,13 @@
         {% if app.user == product.seller %}
             <div class="d-flex gap-2">
                 <a href="{{ path('app_product_edit', {id: product.id}) }}"
-                   class="btn btn-outline-secondary flex-fill">Modifier</a>
+                   class="btn btn-outline-secondary flex-fill">{{ 'button.edit'|trans }}</a>
                 <form method="post"
                       action="{{ path('app_product_delete', {id: product.id}) }}"
-                      onsubmit="return confirm('Supprimer cette annonce ?')">
+                      onsubmit="return confirm('{{ 'message.confirm_delete_product'|trans }}')">
                     <input type="hidden" name="_token"
                            value="{{ csrf_token('delete-product-' ~ product.id) }}">
-                    <button class="btn btn-outline-danger">Supprimer</button>
+                    <button class="btn btn-outline-danger">{{ 'button.delete'|trans }}</button>
                 </form>
             </div>
         {% endif %}

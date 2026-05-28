@@ -7,8 +7,7 @@
     <div class="row">
         <div class="col-12">
             <h1 class="mb-4">
-                <i class="bi bi-credit-card"></i> Valider votre commande
-            </h1>
+                <i class="bi bi-credit-card"></i>{{ 'button.checkout'|trans }}</h1>
         </div>
     </div>
 
@@ -17,16 +16,16 @@
             <!-- Commande Summary -->
             <div class="card mb-4">
                 <div class="card-header bg-light">
-                    <h5 class="mb-0">Résumé de votre commande</h5>
+                    <h5 class="mb-0">{{ 'section.order_summary_full'|trans }}</h5>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-sm mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>Produit</th>
-                                <th class="text-center">Quantité</th>
-                                <th class="text-center">Prix unitaire</th>
-                                <th class="text-right">Sous-total</th>
+                                <th>{{ 'table.product'|trans }}</th>
+                                <th class="text-center">{{ 'table.quantity'|trans }}</th>
+                                <th class="text-center">{{ 'table.unit_price'|trans }}</th>
+                                <th class="text-right">{{ 'table.subtotal'|trans }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,7 +61,7 @@
                 <div class="card-footer bg-light">
                     <div class="row">
                         <div class="col-12 d-flex justify-content-end">
-                            <strong>Total: {{ total|number_format(2, ',', ' ') }} €</strong>
+                            <strong>{{ 'table.total'|trans }}: {{ total|number_format(2, ',', ' ') }} €</strong>
                         </div>
                     </div>
                 </div>
@@ -71,7 +70,7 @@
             <!-- Address Selection -->
             <div class="card">
                 <div class="card-header bg-light">
-                    <h5 class="mb-0">Adresse de livraison</h5>
+                    <h5 class="mb-0">{{ 'table.shipping_address'|trans }}</h5>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ path('app_cart_validate') }}" id="orderForm">
@@ -79,7 +78,7 @@
 
                         <div class="mb-3">
                             {% if user.addresses|length > 0 %}
-                                <label class="form-label">Sélectionner une adresse de livraison</label>
+                                <label class="form-label">{{ 'select_shipping_address'|trans }}</label>
                                 <div class="address-list">
                                     {% for address in user.addresses %}
                                         <div class="form-check mb-3">
@@ -101,9 +100,9 @@
                                 </div>
                             {% else %}
                                 <div class="alert alert-warning">
-                                    <p>Vous n'avez pas encore d'adresse sauvegardée.</p>
+                                    <p>{{ 'empty.no_addresses'|trans }}</p>
                                     <a href="{{ path('app_account', {'_fragment': 'addresses'}) }}" class="btn btn-sm btn-warning">
-                                        Ajouter une adresse
+                                        {{ 'button.add_address'|trans }}
                                     </a>
                                 </div>
                             {% endif %}
@@ -117,24 +116,24 @@
         <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="card sticky-top" style="top: 20px;">
                 <div class="card-body">
-                    <h5 class="card-title mb-4">Récapitulatif</h5>
+                    <h5 class="card-title mb-4">{{ 'section.recap'|trans }}</h5>
 
                     <div class="mb-3">
                         <div class="d-flex justify-content-between mb-2">
-                            <span>Nombre d'articles:</span>
+                            <span>{{ 'table.items'|trans }}:</span>
                             <strong>{{ cart.cartItems|length }}</strong>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
-                            <span>Sous-total:</span>
+                            <span>{{ 'info.subtotal'|trans }}</span>
                             <strong>{{ total|number_format(2, ',', ' ') }} €</strong>
                         </div>
                         <div class="d-flex justify-content-between mb-3 text-muted">
-                            <span>Livraison:</span>
-                            <span>Gratuite</span>
+                            <span>{{ 'info.shipping'|trans }}</span>
+                            <span>{{ 'info.free_shipping'|trans }}</span>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between">
-                            <span class="h6">Total:</span>
+                            <span class="h6">{{ 'table.total'|trans }}:</span>
                             <strong class="h6 text-success">{{ total|number_format(2, ',', ' ') }} €</strong>
                         </div>
                     </div>
@@ -145,11 +144,11 @@
                         class="btn btn-success w-100 mb-2"
                         {% if user.addresses|length == 0 %}disabled{% endif %}
                     >
-                        <i class="bi bi-check-circle"></i> Confirmer la commande
+                        <i class="bi bi-check-circle"></i> {{ 'button.confirm'|trans }}
                     </button>
 
                     <a href="{{ path('app_cart_show') }}" class="btn btn-outline-secondary w-100">
-                        <i class="bi bi-arrow-left"></i> Retour au panier
+                        <i class="bi bi-arrow-left"></i> {{ 'button.back'|trans }}
                     </a>
                 </div>
             </div>

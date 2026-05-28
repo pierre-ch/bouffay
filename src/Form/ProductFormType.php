@@ -27,55 +27,55 @@ class ProductFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom de l\'annonce',
+                'label' => 'form.ad_name',
                 'constraints' => [new NotBlank()],
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description',
+                'label' => 'form.description',
                 'required' => false,
                 'attr' => ['rows' => 5],
             ])
             ->add('price', MoneyType::class, [
-                'label' => 'Prix',
+                'label' => 'form.price',
                 'currency' => 'EUR',
                 'constraints' => [new NotBlank(), new Positive()],
             ])
             ->add('stock', NumberType::class, [
-                'label' => 'Quantité disponible',
+                'label' => 'form.available_quantity',
                 'html5' => true,
                 'constraints' => [new NotBlank(), new Positive()],
             ])
             ->add('weight', NumberType::class, [
-                'label' => 'Poids (kg)',
+                'label' => 'form.weight_kg',
                 'required' => false,
                 'html5' => true,
             ])
             ->add('origin', TextType::class, [
-                'label' => 'Origine',
+                'label' => 'form.origin',
                 'required' => false,
             ])
             ->add('expiresAt', DateType::class, [
-                'label' => 'Date d\'expiration',
+                'label' => 'form.expiration_date',
                 'required' => false,
                 'widget' => 'single_text',
             ])
             ->add('status', ChoiceType::class, [
-                'label' => 'Statut',
+                'label' => 'form.status',
                 'choices' => [
-                    'En vente' => 'active',
-                    'Suspendu' => 'inactive',
-                    'Vendu' => 'sold',
+                    'form.status_active' => 'active',
+                    'form.status_inactive' => 'inactive',
+                    'form.status_sold' => 'sold',
                 ],
             ])
             ->add('category', EntityType::class, [
-                'label' => 'Catégorie',
+                'label' => 'form.category',
                 'class' => Category::class,
                 'choice_label' => 'name',
-                'placeholder' => 'Choisir une catégorie',
+                'placeholder' => 'form.choose_category',
                 'constraints' => [new NotBlank()],
             ])
             ->add('tags', EntityType::class, [
-                'label' => 'Tags',
+                'label' => 'form.tags',
                 'class' => Tag::class,
                 'choice_label' => 'name',
                 'multiple' => true,
@@ -84,7 +84,7 @@ class ProductFormType extends AbstractType
                 'attr' => ['size' => 6],
             ])
             ->add('imageFiles', FileType::class, [
-                'label' => 'Photos (max 5)',
+                'label' => 'form.photos',
                 'mapped' => false,
                 'required' => false,
                 'multiple' => true,
@@ -94,7 +94,7 @@ class ProductFormType extends AbstractType
                         new File([
                             'maxSize' => '2M',
                             'mimeTypes' => ['image/jpeg', 'image/png', 'image/webp'],
-                            'mimeTypesMessage' => 'Format accepté : JPG, PNG, WebP',
+                            'mimeTypesMessage' => 'form.error.invalid_image_format',
                         ]),
                     ]),
                 ],

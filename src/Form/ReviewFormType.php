@@ -21,8 +21,8 @@ class ReviewFormType extends AbstractType
                 'constraints' => [new NotBlank(), new Range(['min' => 1, 'max' => 5])],
             ])
             ->add('content', TextareaType::class, [
-                'label' => 'Votre commentaire',
-                'attr' => ['rows' => 4, 'placeholder' => 'Décrivez votre expérience avec ce vendeur…'],
+                'label' => 'form.review_content',
+                'attr' => ['rows' => 4, 'placeholder' => 'form.review_placeholder'],
                 'constraints' => [
                     new NotBlank(),
                     new Length(['min' => 10, 'max' => 1000]),

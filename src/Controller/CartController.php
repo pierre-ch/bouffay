@@ -68,7 +68,7 @@ class CartController extends AbstractController
         }
 
         if ($product->getStock() !== null && $quantity > $product->getStock()) {
-            $this->addFlash('error', 'Stock insuffisant pour ce produit');
+            $this->addFlash('error', 'flash.error.stock_insufficient');
             return $this->redirectToRoute('app_product_show', ['slug' => $product->getSlug()]);
         }
 
@@ -93,7 +93,7 @@ class CartController extends AbstractController
         if ($existingItem) {
             $newQuantity = $existingItem->getQuantity() + $quantity;
             if ($product->getStock() !== null && $newQuantity > $product->getStock()) {
-                $this->addFlash('error', 'Stock insuffisant pour cette quantité');
+                $this->addFlash('error', 'flash.error.stock_insufficient');
                 return $this->redirectToRoute('app_cart_show');
             }
             $existingItem->setQuantity($newQuantity);
@@ -107,7 +107,7 @@ class CartController extends AbstractController
         }
 
         $em->flush();
-        $this->addFlash('success', 'Produit ajouté au panier');
+        $this->addFlash('success', 'flash.cart_added');
 
         return $this->redirectToRoute('app_cart_show');
     }
@@ -150,12 +150,12 @@ class CartController extends AbstractController
 
             if (!$hasStockError) {
                 $em->flush();
-                $this->addFlash('success', 'Panier mis à jour');
+                $this->addFlash('success', 'flash.cart_updated');
             } else {
                 $em->flush();
             }
         } elseif ($form->isSubmitted()) {
-            $this->addFlash('error', 'Veuillez corriger les erreurs du formulaire');
+            $this->addFlash('error', 'flash.error.form_invalid');
         }
 
         return $this->redirectToRoute('app_cart_show');
@@ -183,7 +183,7 @@ class CartController extends AbstractController
 
                 $cart->removeCartItem($item);
                 $em->flush();
-                $this->addFlash('success', 'Produit supprimé du panier');
+                $this->addFlash('success', 'flash.cart_removed');
                 break;
             }
         }
@@ -210,7 +210,7 @@ class CartController extends AbstractController
             }
 
             $em->flush();
-            $this->addFlash('success', 'Panier vidé');
+            $this->addFlash('success', 'flash.cart_emptied');
         }
 
         return $this->redirectToRoute('app_cart_show');
@@ -223,7 +223,7 @@ class CartController extends AbstractController
         $cart = $cartRepository->findOneBy(['user' => $user]);
 
         if (!$cart || $cart->getCartItems()->isEmpty()) {
-            $this->addFlash('warning', 'Votre panier est vide');
+            $this->addFlash('warning', 'flash.error.cart_empty');
 
             return $this->redirectToRoute('app_cart_show');
         }
@@ -254,7 +254,7 @@ class CartController extends AbstractController
         $cart = $cartRepository->findOneBy(['user' => $user]);
 
         if (!$cart || $cart->getCartItems()->isEmpty()) {
-            $this->addFlash('warning', 'Votre panier est vide');
+            $this->addFlash('warning', 'flash.error.cart_empty');
 
             return $this->redirectToRoute('app_cart_show');
         }
@@ -270,7 +270,7 @@ class CartController extends AbstractController
         }
 
         if (!$selectedAddress) {
-            $this->addFlash('error', 'Veuillez sélectionner une adresse de livraison');
+            $this->addFlash('error', 'flash.error.address_missing');
 
             return $this->redirectToRoute('app_cart_checkout');
         }
@@ -310,7 +310,7 @@ class CartController extends AbstractController
 
         $em->flush();
 
-        $this->addFlash('success', 'Commande créée avec succès');
+        $this->addFlash('success', 'flash.order_created');
 
         return $this->redirectToRoute('app_account_orders');
     }

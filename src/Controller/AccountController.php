@@ -42,7 +42,7 @@ class AccountController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
-            $this->addFlash('success', 'Profil mis à jour.');
+            $this->addFlash('success', 'flash.profile_updated');
 
             return $this->redirectToRoute('app_account_profile');
         }
@@ -93,14 +93,14 @@ class AccountController extends AbstractController
         if ($existing) {
             $em->remove($existing);
             $em->flush();
-            $this->addFlash('success', 'Retiré des favoris.');
+            $this->addFlash('success', 'flash.favorite_removed');
         } else {
             $favorite = new Favorite();
             $favorite->setUser($user);
             $favorite->setProduct($product);
             $em->persist($favorite);
             $em->flush();
-            $this->addFlash('success', 'Ajouté aux favoris.');
+            $this->addFlash('success', 'flash.favorite_added');
         }
 
         return $this->redirectToRoute('app_product_show', ['slug' => $product->getSlug()]);
@@ -135,7 +135,7 @@ class AccountController extends AbstractController
 
             $em->persist($address);
             $em->flush();
-            $this->addFlash('success', 'Adresse ajoutée avec succès.');
+            $this->addFlash('success', 'flash.address_added');
 
             return $this->redirectToRoute('app_account_addresses');
         }
@@ -167,7 +167,7 @@ class AccountController extends AbstractController
             }
 
             $em->flush();
-            $this->addFlash('success', 'Adresse mise à jour.');
+            $this->addFlash('success', 'flash.address_updated');
 
             return $this->redirectToRoute('app_account_addresses');
         }
@@ -192,7 +192,7 @@ class AccountController extends AbstractController
 
         $em->remove($address);
         $em->flush();
-        $this->addFlash('success', 'Adresse supprimée.');
+        $this->addFlash('success', 'flash.address_deleted');
 
         return $this->redirectToRoute('app_account_addresses');
     }
@@ -215,7 +215,7 @@ class AccountController extends AbstractController
 
         $address->setIsDefault(true);
         $em->flush();
-        $this->addFlash('success', 'Adresse par défaut mise à jour.');
+        $this->addFlash('success', 'flash.address_default_updated');
 
         return $this->redirectToRoute('app_account_addresses');
     }

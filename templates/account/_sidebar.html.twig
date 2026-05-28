@@ -10,34 +10,30 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-action {% if route == 'app_account' %}active{% endif %}">
                 <a href="{{ path('app_account') }}" class="text-decoration-none {% if route == 'app_account' %}text-white{% endif %}">
-                    <i class="bi bi-speedometer2 me-2"></i>Tableau de bord
+                    <i class="bi bi-speedometer2 me-2"></i>{{ 'nav.dashboard'|trans }}
                 </a>
             </li>
             <li class="list-group-item list-group-item-action {% if route == 'app_account_profile' %}active{% endif %}">
                 <a href="{{ path('app_account_profile') }}" class="text-decoration-none {% if route == 'app_account_profile' %}text-white{% endif %}">
-                    <i class="bi bi-person me-2"></i>Mon profil
-                </a>
+                    <i class="bi bi-person me-2"></i>{{ 'nav.my_profile'|trans }}</a>
             </li>
             <li class="list-group-item list-group-item-action {% if route starts with 'app_account_order' %}active{% endif %}">
                 <a href="{{ path('app_account_orders') }}" class="text-decoration-none {% if route starts with 'app_account_order' %}text-white{% endif %}">
-                    <i class="bi bi-bag me-2"></i>Mes commandes
-                </a>
+                    <i class="bi bi-bag me-2"></i>{{ 'nav.my_orders'|trans }}</a>
             </li>
             <li class="list-group-item list-group-item-action {% if route == 'app_account_favorites' %}active{% endif %}">
                 <a href="{{ path('app_account_favorites') }}" class="text-decoration-none {% if route == 'app_account_favorites' %}text-white{% endif %}">
-                    <i class="bi bi-heart me-2"></i>Mes favoris
-                </a>
+                    <i class="bi bi-heart me-2"></i>{{ 'nav.my_favorites'|trans }}</a>
             </li>
             <li class="list-group-item list-group-item-action {% if route starts with 'app_account_address' %}active{% endif %}">
                 <a href="{{ path('app_account_addresses') }}" class="text-decoration-none {% if route starts with 'app_account_address' %}text-white{% endif %}">
-                    <i class="bi bi-geo-alt me-2"></i>Mes adresses
+                    <i class="bi bi-geo-alt me-2"></i>{{ 'nav.addresses'|trans }}
                 </a>
             </li>
             {% if is_granted('ROLE_VENDEUR') %}
             <li class="list-group-item list-group-item-action {% if route starts with 'app_product_my' or route == 'app_product_new' %}active{% endif %}">
                 <a href="{{ path('app_product_my') }}" class="text-decoration-none {% if route starts with 'app_product_my' %}text-white{% endif %}">
-                    <i class="bi bi-tag me-2"></i>Mes annonces
-                </a>
+                    <i class="bi bi-tag me-2"></i>{{ 'nav.my_ads'|trans }}</a>
             </li>
             {% endif %}
         </ul>

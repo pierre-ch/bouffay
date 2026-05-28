@@ -17,35 +17,35 @@ class AddressFormType extends AbstractType
     {
         $builder
             ->add('street', TextType::class, [
-                'label' => 'Rue',
+                'label' => 'form.street',
                 'constraints' => [
-                    new NotBlank(['message' => 'Veuillez entrer une adresse']),
+                    new NotBlank(['message' => 'form.error.street_blank']),
                     new Length(['max' => 255]),
                 ],
             ])
             ->add('city', TextType::class, [
-                'label' => 'Ville',
+                'label' => 'form.city',
                 'constraints' => [
-                    new NotBlank(['message' => 'Veuillez entrer une ville']),
+                    new NotBlank(['message' => 'form.error.city_blank']),
                     new Length(['max' => 255]),
                 ],
             ])
             ->add('zipCode', TextType::class, [
-                'label' => 'Code postal',
+                'label' => 'form.zip_code',
                 'constraints' => [
-                    new NotBlank(['message' => 'Veuillez entrer un code postal']),
+                    new NotBlank(['message' => 'form.error.zip_blank']),
                     new Length(['max' => 10]),
                 ],
             ])
             ->add('country', TextType::class, [
-                'label' => 'Pays',
+                'label' => 'form.country',
                 'constraints' => [
-                    new NotBlank(['message' => 'Veuillez entrer un pays']),
+                    new NotBlank(['message' => 'form.error.country_blank']),
                     new Length(['max' => 255]),
                 ],
             ])
             ->add('isDefault', CheckboxType::class, [
-                'label' => 'Utiliser cette adresse par défaut',
+                'label' => 'form.is_default',
                 'required' => false,
             ])
         ;

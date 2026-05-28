@@ -45,7 +45,7 @@ class SellerController extends AbstractController
                     $em->persist($review);
                     $em->flush();
 
-                    $this->addFlash('success', 'Votre avis a été publié.');
+                    $this->addFlash('success', 'flash.review_published');
 
                     return $this->redirectToRoute('app_seller_show', ['id' => $seller->getId()]);
                 }
@@ -77,7 +77,7 @@ class SellerController extends AbstractController
         $em->remove($review);
         $em->flush();
 
-        $this->addFlash('success', 'Votre avis a été supprimé.');
+        $this->addFlash('success', 'flash.review_deleted');
 
         return $this->redirectToRoute('app_seller_show', ['id' => $sellerId]);
     }

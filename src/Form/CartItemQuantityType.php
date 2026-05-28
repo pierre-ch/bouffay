@@ -18,7 +18,7 @@ class CartItemQuantityType extends AbstractType
                 'constraints' => [
                     new GreaterThan([
                         'value' => 0,
-                        'message' => 'La quantité doit être au moins 1',
+                        'message' => 'form.error.min_quantity',
                     ]),
                 ],
             ])

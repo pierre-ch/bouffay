@@ -16,10 +16,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="alert alert-info">
-                    <p>Votre panier est vide.</p>
-                    <a href="{{ path('app_product_index') }}" class="btn btn-primary">
-                        Continuer vos achats
-                    </a>
+                    <p>{{ 'empty.empty_cart'|trans }}</p>
+                    <a href="{{ path('app_product_index') }}" class="btn btn-primary">{{ 'button.continue_shopping'|trans }}</a>
                 </div>
             </div>
         </div>
@@ -32,11 +30,11 @@
                         <table class="table table-hover mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th>Produit</th>
-                                    <th class="text-center">Prix</th>
-                                    <th class="text-center">Quantité</th>
-                                    <th class="text-center">Sous-total</th>
-                                    <th class="text-center">Action</th>
+                                    <th>{{ 'table.product'|trans }}</th>
+                                    <th class="text-center">{{ 'table.price'|trans }}</th>
+                                    <th class="text-center">{{ 'table.quantity'|trans }}</th>
+                                    <th class="text-center">{{ 'table.subtotal'|trans }}</th>
+                                    <th class="text-center">{{ 'table.action'|trans }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -99,12 +97,10 @@
                     <div class="card-footer bg-light d-flex justify-content-between align-items-center">
                         <div>
                             <a href="{{ path('app_product_index') }}" class="btn btn-outline-secondary">
-                                <i class="bi bi-arrow-left"></i> Continuer vos achats
-                            </a>
+                                <i class="bi bi-arrow-left"></i>{{ 'button.continue_shopping'|trans }}</a>
                         </div>
                         <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-arrow-repeat"></i> Mettre à jour
-                        </button>
+                            <i class="bi bi-arrow-repeat"></i>{{ 'button.update'|trans }}</button>
                     </div>
                     {{ form_end(form) }}
                 </div>
@@ -113,33 +109,31 @@
             <div class="col-lg-4 mt-4 mt-lg-0">
                 <div class="card sticky-top" style="top: 20px;">
                     <div class="card-body">
-                        <h5 class="card-title mb-4">Résumé de la commande</h5>
+                        <h5 class="card-title mb-4">{{ 'section.order_summary'|trans }}</h5>
 
                         <div class="mb-3">
                             <div class="d-flex justify-content-between mb-2">
-                                <span>Sous-total:</span>
+                                <span>{{ 'info.subtotal'|trans }}</span>
                                 <strong>{{ total|number_format(2, ',', ' ') }} €</strong>
                             </div>
                             <div class="d-flex justify-content-between mb-3 text-muted">
-                                <span>Livraison:</span>
+                                <span>{{ 'info.shipping'|trans }}</span>
                                 <span>À définir</span>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between">
-                                <span class="h6">Total:</span>
+                                <span class="h6">{{ 'table.total'|trans }}:</span>
                                 <strong class="h6">{{ total|number_format(2, ',', ' ') }} €</strong>
                             </div>
                         </div>
 
                         <a href="{{ path('app_cart_checkout') }}" class="btn btn-success w-100 mb-2">
-                            <i class="bi bi-credit-card"></i> Procéder au paiement
-                        </a>
+                            <i class="bi bi-credit-card"></i>{{ 'button.checkout'|trans }}</a>
 
                         <form method="POST" action="{{ path('app_cart_clear') }}" onsubmit="return confirm('Êtes-vous sûr de vouloir vider votre panier ?');">
                             <input type="hidden" name="_token" value="{{ csrf_token('clear-cart') }}">
                             <button type="submit" class="btn btn-outline-danger w-100">
-                                <i class="bi bi-trash"></i> Vider le panier
-                            </button>
+                                <i class="bi bi-trash"></i>{{ 'button.empty_cart'|trans }}</button>
                         </form>
                     </div>
                 </div>

@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Annonces — Bouffay{% endblock %}
+{% block title %}{{ 'title.products'|trans }}{% endblock %}
 
 {% block body %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Annonces</h1>
+    <h1>{{ 'nav.products'|trans }}</h1>
     {% if is_granted('ROLE_VENDEUR') %}
         <a href="{{ path('app_product_new') }}" class="btn btn-primary">
-            <i class="bi bi-plus-lg"></i> Nouvelle annonce
+            <i class="bi bi-plus-lg"></i> {{ 'button.new_product'|trans }}
         </a>
     {% endif %}
 </div>
 
 {% if products|length == 0 %}
-    <p class="text-muted">Aucune annonce disponible pour le moment.</p>
+    <p class="text-muted">{{ 'empty.no_products'|trans }}</p>
 {% else %}
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for product in products %}
@@ -40,20 +40,20 @@
                             {% endfor %}
                         {% endif %}
                     </p>
-                    <p class="card-text fw-bold fs-5">{{ product.price }} €</p>
+                    <p class="card-text fw-bold fs-5">{{ product.price }} {{ 'format.currency'|trans }}</p>
                 </div>
                 <div class="card-footer d-flex justify-content-between align-items-center gap-2">
                     <small class="text-muted">{{ product.seller.firstName }}</small>
                     {% if app.user and app.user !== product.seller %}
                     <form method="POST" action="{{ path('app_cart_add', {productId: product.id}) }}" class="d-inline">
                         <input type="hidden" name="quantity" value="1">
-                        <button type="submit" class="btn btn-sm btn-primary" title="Ajouter au panier">
+                        <button type="submit" class="btn btn-sm btn-primary" title="{{ 'button.add_to_cart'|trans }}">
                             <i class="bi bi-bag-plus"></i>
                         </button>
                     </form>
                     {% endif %}
                     <a href="{{ path('app_product_show', {slug: product.slug}) }}"
-                       class="btn btn-sm btn-outline-primary">Voir</a>
+                       class="btn btn-sm btn-outline-primary">{{ 'button.view'|trans }}</a>
                 </div>
             </div>
         </div>
@@ -61,3 +61,4 @@
     </div>
 {% endif %}
 {% endblock %}
+

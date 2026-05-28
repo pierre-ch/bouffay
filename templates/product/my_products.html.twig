@@ -4,25 +4,25 @@
 
 {% block body %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Mes annonces</h1>
+    <h1>{{ 'nav.my_ads'|trans }}</h1>
     <a href="{{ path('app_product_new') }}" class="btn btn-primary">
-        <i class="bi bi-plus-lg"></i> Nouvelle annonce
+        <i class="bi bi-plus-lg"></i> {{ 'button.new_product'|trans }}
     </a>
 </div>
 
 {% if products|length == 0 %}
-    <p class="text-muted">Vous n'avez pas encore publié d'annonce.</p>
+    <p class="text-muted">{{ 'empty.no_user_products'|trans }}</p>
 {% else %}
     <div class="table-responsive">
         <table class="table table-hover align-middle">
             <thead>
                 <tr>
-                    <th>Annonce</th>
-                    <th>Catégorie</th>
-                    <th>Prix</th>
-                    <th>Stock</th>
-                    <th>Statut</th>
-                    <th>Publiée le</th>
+                    <th>{{ 'table.ad'|trans }}</th>
+                    <th>{{ 'table.category'|trans }}</th>
+                    <th>{{ 'table.price'|trans }}</th>
+                    <th>{{ 'info.stock'|trans }}</th>
+                    <th>{{ 'table.status'|trans }}</th>
+                    <th>{{ 'table.published'|trans }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -47,14 +47,14 @@
                     <td>{{ product.createdAt|date('d/m/Y') }}</td>
                     <td class="text-end">
                         <a href="{{ path('app_product_edit', {id: product.id}) }}"
-                           class="btn btn-sm btn-outline-secondary">Modifier</a>
+                           class="btn btn-sm btn-outline-secondary">{{ 'button.edit'|trans }}</a>
                         <form method="post"
                               action="{{ path('app_product_delete', {id: product.id}) }}"
                               class="d-inline"
                               onsubmit="return confirm('Supprimer cette annonce ?')">
                             <input type="hidden" name="_token"
                                    value="{{ csrf_token('delete-product-' ~ product.id) }}">
-                            <button class="btn btn-sm btn-outline-danger">Supprimer</button>
+                            <button class="btn btn-sm btn-outline-danger">{{ 'button.delete'|trans }}</button>
                         </form>
                     </td>
                 </tr>

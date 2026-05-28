@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription — Bouffay{% endblock %}
+{% block title %}{{ 'title.register'|trans }}{% endblock %}
 
 {% block body %}
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card shadow-sm mt-4">
             <div class="card-body p-4">
-                <h2 class="card-title text-center mb-4">Inscription</h2>
+                <h2 class="card-title text-center mb-4">{{ 'nav.register'|trans }}</h2>
 
                 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
@@ -42,15 +42,16 @@
                     {{ form_errors(form.plainPassword.second) }}
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100">Créer mon compte</button>
+                <button type="submit" class="btn btn-primary w-100">{{ 'button.register'|trans }}</button>
 
                 {{ form_end(form) }}
 
                 <div class="text-center mt-3">
-                    <a href="{{ path('app_login') }}">Déjà un compte ? Se connecter</a>
+                    <a href="{{ path('app_login') }}">{{ 'message.already_account'|trans }}</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
+

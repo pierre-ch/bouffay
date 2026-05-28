@@ -13,6 +13,7 @@ button.delete_review: "Supprimer l'avis"
 button.edit: Modifier
 button.edit_product: Éditer
 button.empty_cart: 'Vider le panier'
+button.filters: Filtres
 button.leave_review: 'Laisser un avis'
 button.login: 'Se connecter'
 button.my_products: 'Mes annonces'
@@ -22,8 +23,10 @@ button.publish_ad: "Publier l'annonce"
 button.register: 'Créer mon compte'
 button.remove: Retirer
 button.remove_from_favorites: 'Retirer des favoris'
+button.reset: Réinitialiser
 button.save: Enregistrer
 button.save_changes: 'Enregistrer les modifications'
+button.search: Rechercher
 button.set_as_default: 'Définir par défaut'
 button.update: 'Mettre à jour'
 button.view: Voir
@@ -100,6 +103,20 @@ form.rating: Note
 form.remember_me: 'Se souvenir de moi'
 form.review_content: 'Votre commentaire'
 form.review_placeholder: 'Décrivez votre expérience avec ce vendeur…'
+form.search.expires_after: 'Expire après le'
+form.search.expires_before: 'Expire avant le'
+form.search.max_price: 'Prix max'
+form.search.min_price: 'Prix min'
+form.search.placeholder: Rechercher…
+form.search.placeholder_long: 'Rechercher un produit…'
+form.sort.date_asc: 'Trier par : Plus anciens'
+form.sort.date_desc: 'Trier par : Plus récents'
+form.sort.expires_asc: 'Trier par : Expiration proche'
+form.sort.name_asc: 'Trier par : Nom A→Z'
+form.sort.name_desc: 'Trier par : Nom Z→A'
+form.sort.price_asc: 'Trier par : Prix croissant'
+form.sort.price_desc: 'Trier par : Prix décroissant'
+form.sort.trending: 'Trier par : Tendance'
 form.status: Statut
 form.status_active: 'En vente'
 form.status_inactive: Suspendu
@@ -116,6 +133,7 @@ form.weight_kg: 'Poids (kg)'
 form.zip_code: 'Code postal'
 form.zip_placeholder: '75001'
 format.currency: €
+info.ads_found: 'annonce(s) trouvée(s)'
 info.default_address: 'Adresse par défaut'
 info.expires: 'Expire le :'
 info.free_shipping: Gratuite

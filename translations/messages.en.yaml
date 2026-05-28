@@ -13,6 +13,7 @@ button.delete_review: 'Delete Review'
 button.edit: Edit
 button.edit_product: Edit
 button.empty_cart: 'Empty Cart'
+button.filters: Filters
 button.leave_review: 'Leave Review'
 button.login: 'Sign In'
 button.my_products: 'My Ads'
@@ -22,8 +23,10 @@ button.publish_ad: 'Publish Ad'
 button.register: 'Create Account'
 button.remove: Remove
 button.remove_from_favorites: 'Remove from Favorites'
+button.reset: Reset
 button.save: Save
 button.save_changes: 'Save Changes'
+button.search: Search
 button.set_as_default: 'Set as Default'
 button.update: Update
 button.view: View
@@ -100,6 +103,20 @@ form.rating: Rating
 form.remember_me: 'Remember me'
 form.review_content: 'Your comment'
 form.review_placeholder: 'Describe your experience with this seller…'
+form.search.expires_after: 'Expires after'
+form.search.expires_before: 'Expires before'
+form.search.max_price: 'Max price'
+form.search.min_price: 'Min price'
+form.search.placeholder: Search…
+form.search.placeholder_long: 'Search for a product…'
+form.sort.date_asc: 'Sort by: Oldest'
+form.sort.date_desc: 'Sort by: Newest'
+form.sort.expires_asc: 'Sort by: Expiring soon'
+form.sort.name_asc: 'Sort by: Name A→Z'
+form.sort.name_desc: 'Sort by: Name Z→A'
+form.sort.price_asc: 'Sort by: Price low to high'
+form.sort.price_desc: 'Sort by: Price high to low'
+form.sort.trending: 'Sort by: Trending'
 form.status: Status
 form.status_active: 'For sale'
 form.status_inactive: Suspended
@@ -116,6 +133,7 @@ form.weight_kg: 'Weight (kg)'
 form.zip_code: 'Postal Code'
 form.zip_placeholder: '75001'
 format.currency: €
+info.ads_found: 'ad(s) found'
 info.default_address: 'Default Address'
 info.expires: 'Expires:'
 info.free_shipping: Free

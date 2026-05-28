@@ -15,17 +15,17 @@
 {# Barre de recherche rapide + bouton filtres #}
 {{ form_start(searchForm) }}
 <div class="d-flex gap-2 mb-2">
-    {{ form_widget(searchForm.name, {attr: {class: 'form-control', placeholder: 'Rechercher un produit…'}}) }}
+    {{ form_widget(searchForm.name, {attr: {class: 'form-control', placeholder: 'form.search.placeholder_long'|trans}}) }}
     {{ form_widget(searchForm.sort, {attr: {class: 'form-select w-auto'}}) }}
     <button type="button" class="btn btn-outline-secondary text-nowrap"
             data-bs-toggle="collapse" data-bs-target="#filtresAvances"
             aria-expanded="false">
-        <i class="bi bi-sliders"></i> Filtres
+        <i class="bi bi-sliders"></i> {{ 'button.filters'|trans }}
     </button>
     <button type="submit" class="btn btn-primary text-nowrap">
-        <i class="bi bi-search"></i> Rechercher
+        <i class="bi bi-search"></i> {{ 'button.search'|trans }}
     </button>
-    <a href="{{ path('app_product_index') }}" class="btn btn-outline-danger" title="Réinitialiser">
+    <a href="{{ path('app_product_index') }}" class="btn btn-outline-danger" title="{{ 'button.reset'|trans }}">
         <i class="bi bi-arrow-counterclockwise"></i>
     </a>
 </div>
@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="mt-3">
-            <p class="small fw-semibold mb-2">Tags</p>
+            <p class="small fw-semibold mb-2">{{ 'form.tags'|trans }}</p>
             <div class="d-flex flex-wrap gap-2">
                 {% for checkbox in searchForm.tags %}
                     <div>
@@ -73,7 +73,7 @@
 {{ form_end(searchForm) }}
 
 {# Résultats #}
-<p class="text-muted small mb-3">{{ products|length }} annonce{{ products|length != 1 ? 's' : '' }} trouvée{{ products|length != 1 ? 's' : '' }}</p>
+<p class="text-muted small mb-3">{{ products|length }} {{ 'info.ads_found'|trans }}</p>
 
 {% if products|length == 0 %}
     <p class="text-muted">{{ 'empty.no_products'|trans }}</p>

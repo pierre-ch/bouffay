@@ -19,18 +19,18 @@ class ProductSearchType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label'    => 'Nom',
+                'label'    => 'form.name',
                 'required' => false,
-                'attr'     => ['placeholder' => 'Rechercher…'],
+                'attr'     => ['placeholder' => 'form.search.placeholder'],
             ])
             ->add('category', EntityType::class, [
-                'label'       => 'Catégorie',
+                'label'       => 'form.category',
                 'class'       => Category::class,
                 'choice_label'=> 'name',
                 'required'    => false,
             ])
             ->add('tags', EntityType::class, [
-                'label'       => 'Tags',
+                'label'       => 'form.tags',
                 'class'       => Tag::class,
                 'choice_label'=> 'name',
                 'multiple'    => true,
@@ -38,24 +38,24 @@ class ProductSearchType extends AbstractType
                 'required'    => false,
             ])
             ->add('minPrice', MoneyType::class, [
-                'label'    => 'Prix min',
+                'label'    => 'form.search.min_price',
                 'currency' => 'EUR',
                 'required' => false,
                 'attr'     => ['placeholder' => '0,00'],
             ])
             ->add('maxPrice', MoneyType::class, [
-                'label'    => 'Prix max',
+                'label'    => 'form.search.max_price',
                 'currency' => 'EUR',
                 'required' => false,
                 'attr'     => ['placeholder' => '999,99'],
             ])
             ->add('expiresAtAfter', DateType::class, [
-                'label'    => 'Expire après le',
+                'label'    => 'form.search.expires_after',
                 'required' => false,
                 'widget'   => 'single_text',
             ])
             ->add('expiresAtBefore', DateType::class, [
-                'label'    => 'Expire avant le',
+                'label'    => 'form.search.expires_before',
                 'required' => false,
                 'widget'   => 'single_text',
             ])
@@ -63,14 +63,14 @@ class ProductSearchType extends AbstractType
                 'label'    => false,
                 'required' => true,
                 'choices'  => [
-                    'Trier par : Tendance'          => 'trending',
-                    'Trier par : Plus récents'      => 'date_desc',
-                    'Trier par : Plus anciens'      => 'date_asc',
-                    'Trier par : Prix croissant'    => 'price_asc',
-                    'Trier par : Prix décroissant'  => 'price_desc',
-                    'Trier par : Nom A→Z'           => 'name_asc',
-                    'Trier par : Nom Z→A'           => 'name_desc',
-                    'Trier par : Expiration proche' => 'expires_asc',
+                    'form.sort.trending'          => 'trending',
+                    'form.sort.date_desc'      => 'date_desc',
+                    'form.sort.date_asc'      => 'date_asc',
+                    'form.sort.price_asc'    => 'price_asc',
+                    'form.sort.price_desc'  => 'price_desc',
+                    'form.sort.name_asc'           => 'name_asc',
+                    'form.sort.name_desc'           => 'name_desc',
+                    'form.sort.expires_asc' => 'expires_asc',
                 ],
             ]);
     }

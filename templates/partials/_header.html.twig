@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm">
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom shadow-sm">
     <div class="container">
 
         {# Logo #}
@@ -52,6 +52,19 @@
 
             {# Actions droite #}
             <ul class="navbar-nav align-items-center gap-1">
+
+                {# Bascule thème clair/sombre #}
+                <li class="nav-item">
+                    <form method="post" action="{{ path('app_theme_toggle') }}">
+                        <button type="submit" class="btn btn-link nav-link px-2" title="Changer de thème">
+                            {% if theme == 'dark' %}
+                                <i class="bi bi-sun fs-5"></i>
+                            {% else %}
+                                <i class="bi bi-moon fs-5"></i>
+                            {% endif %}
+                        </button>
+                    </form>
+                </li>
 
                 {# Sélecteur de langue #}
                 <li class="nav-item dropdown">

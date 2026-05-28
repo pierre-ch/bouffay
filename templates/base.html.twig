@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ app.request.locale|default('fr') }}">
+{% set theme = app.user ? app.user.theme : app.session.get('theme', 'light') %}
+<html lang="{{ app.request.locale|default('fr') }}" data-bs-theme="{{ theme }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
 </head>
 <body>
 
-    {% include 'partials/_header.html.twig' %}
+    {% include 'partials/_header.html.twig' with {theme: theme} %}
 
     <main class="container py-4">
         {% for message in app.flashes('success') %}

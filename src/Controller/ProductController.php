@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Entity\ProductImage;
 use App\Form\ProductFormType;
+use App\Form\ProductSearchType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,10 +18,18 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ProductController extends AbstractController
 {
     #[Route('/produits', name: 'app_product_index')]
-    public function index(ProductRepository $repository): Response
+    public function index(Request $request, ProductRepository $repository): Response
     {
+        $form = $this->createForm(ProductSearchType::class, ['sort' => 'trending']);
+        $form->handleRequest($request);
+
+        $filters = $form->isSubmitted() && $form->isValid()
+            ? $form->getData()
+            : ['sort' => 'trending'];
+
         return $this->render('product/index.html.twig', [
-            'products' => $repository->findBy(['status' => 'active'], ['createdAt' => 'DESC']),
+            'products'    => $repository->findByFilters($filters),
+            'searchForm'  => $form,
         ]);
     }
 

@@ -44,6 +44,9 @@ class Product
     private ?string $status = null;
 
     #[ORM\Column]
+    private int $soldCount = 0;
+
+    #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
@@ -166,6 +169,18 @@ class Product
     public function setExpiresAt(?\DateTime $expiresAt): static
     {
         $this->expiresAt = $expiresAt;
+
+        return $this;
+    }
+
+    public function getSoldCount(): int
+    {
+        return $this->soldCount;
+    }
+
+    public function setSoldCount(int $soldCount): static
+    {
+        $this->soldCount = $soldCount;
 
         return $this;
     }

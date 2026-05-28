@@ -33,6 +33,9 @@
                         <li><a class="dropdown-item" href="{{ path('app_product_my') }}">
                             <i class="bi bi-list-ul me-2"></i>{{ 'nav.my_ads'|trans }}
                         </a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_seller_sales') }}">
+                            <i class="bi bi-bag-check me-2"></i>{{ 'nav.orders_received'|trans }}
+                        </a></li>
                         <li><a class="dropdown-item" href="{{ path('app_product_new') }}">
                             <i class="bi bi-plus-circle me-2"></i>{{ 'button.publish_ad'|trans }}
                         </a></li>
@@ -71,6 +74,11 @@
                         </a></li>
                     </ul>
                 </li>
+
+                {# Notifications #}
+                {% if app.user %}
+                    {{ render(controller('App\\Controller\\NotificationController::dropdown')) }}
+                {% endif %}
 
                 {# Panier #}
                 {% if is_granted('ROLE_CLIENT') %}

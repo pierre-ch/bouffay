@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OrderItemRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,6 +21,22 @@ class OrderItem
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $unitPrice = null;
+
+    #[ORM\Column(length: 20)]
+    private ?string $status = 'pending';
+
+    /**
+     * @var Collection<int, OrderItemStatusHistory>
+     */
+    #[ORM\OneToMany(targetEntity: OrderItemStatusHistory::class, mappedBy: 'orderItem', orphanRemoval: true)]
+    #[ORM\OrderBy(['createdAt' => 'DESC'])]
+    private Collection $statusHistories;
+
+    public function __construct()
+    {
+        $this->statusHistories = new ArrayCollection();
+    }
+
 
     #[ORM\ManyToOne(inversedBy: 'orderItems')]
     #[ORM\JoinColumn(nullable: false)]
@@ -57,6 +75,18 @@ class OrderItem
         return $this;
     }
 
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
     public function getOrderRef(): ?Order
     {
         return $this->orderRef;
@@ -77,6 +107,36 @@ class OrderItem
     public function setProduct(?Product $product): static
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderItemStatusHistory>
+     */
+    public function getStatusHistories(): Collection
+    {
+        return $this->statusHistories;
+    }
+
+    public function addStatusHistory(OrderItemStatusHistory $statusHistory): static
+    {
+        if (!$this->statusHistories->contains($statusHistory)) {
+            $this->statusHistories->add($statusHistory);
+            $statusHistory->setOrderItem($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatusHistory(OrderItemStatusHistory $statusHistory): static
+    {
+        if ($this->statusHistories->removeElement($statusHistory)) {
+            // set the owning side to null (unless already changed)
+            if ($statusHistory->getOrderItem() === $this) {
+                $statusHistory->setOrderItem(null);
+            }
+        }
 
         return $this;
     }

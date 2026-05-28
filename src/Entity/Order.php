@@ -17,9 +17,6 @@ class Order
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 20)]
-    private ?string $status = null;
-
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $totalPrice = null;
 
@@ -49,16 +46,40 @@ class Order
         return $this->id;
     }
 
-    public function getStatus(): ?string
+    public function getGlobalStatus(): string
     {
-        return $this->status;
-    }
+        if ($this->orderItems->isEmpty()) {
+            return 'pending';
+        }
 
-    public function setStatus(string $status): static
-    {
-        $this->status = $status;
+        $statuses = [];
+        foreach ($this->orderItems as $item) {
+            $statuses[] = $item->getStatus() ?? 'pending';
+        }
 
-        return $this;
+        $statuses = array_unique($statuses);
+
+        if (count($statuses) === 1) {
+            return $statuses[0]; // If all items have same status
+        }
+
+        if (in_array('cancelled', $statuses, true)) {
+            return 'partially_cancelled'; // At least one cancelled
+        }
+
+        if (in_array('delivered', $statuses, true)) {
+            return 'partially_delivered';
+        }
+
+        if (in_array('shipped', $statuses, true)) {
+            return 'partially_shipped';
+        }
+
+        if (in_array('paid', $statuses, true)) {
+            return 'partially_paid';
+        }
+
+        return 'pending';
     }
 
     public function getTotalPrice(): ?string

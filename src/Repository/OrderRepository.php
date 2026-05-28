@@ -40,4 +40,23 @@ class OrderRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    /**
+     * Retrieves all orders that contain at least one product sold by the given seller.
+     * @return Order[]
+     */
+    public function findOrdersForSeller(\App\Entity\User $seller): array
+    {
+        return $this->createQueryBuilder('o')
+            ->join('o.orderItems', 'oi')
+            ->join('oi.product', 'p')
+            ->andWhere('p.seller = :seller')
+            ->setParameter('seller', $seller)
+            ->orderBy('o.createdAt', 'DESC')
+            // Using distinct because an order might have multiple items from the same seller
+            ->distinct()
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

@@ -31,16 +31,15 @@
                     </thead>
                     <tbody>
                     {% for order in orders %}
-                        {% set badges = {pending: 'warning', paid: 'info', shipped: 'primary', delivered: 'success', cancelled: 'danger'} %}
-                        {% set labels = {pending: 'En attente', paid: 'Payée', shipped: 'Expédiée', delivered: 'Livrée', cancelled: 'Annulée'} %}
+                        {% set badges = {pending: 'warning', paid: 'info', shipped: 'primary', delivered: 'success', cancelled: 'danger', partially_shipped: 'info', partially_delivered: 'info'} %}
                         <tr>
                             <td>#{{ order.id }}</td>
                             <td>{{ order.createdAt|date('d/m/Y') }}</td>
                             <td>{{ order.orderItems|length }} article(s)</td>
-                            <td class="fw-semibold">{{ order.totalPrice }} €</td>
+                            <td class="fw-semibold">{{ order.totalPrice }} {{ 'format.currency'|trans }}</td>
                             <td>
-                                <span class="badge bg-{{ badges[order.status] ?? 'secondary' }}">
-                                    {{ ('status.' ~ order.status)|trans }}
+                                <span class="badge bg-{{ badges[order.globalStatus] ?? 'secondary' }}">
+                                    {{ ('status.' ~ order.globalStatus)|trans }}
                                 </span>
                             </td>
                             <td>

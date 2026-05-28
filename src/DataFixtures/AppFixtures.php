@@ -90,6 +90,7 @@ class AppFixtures extends Fixture
 
         $origins = ['Japon', 'Corée du Sud', 'USA', 'Mexique', 'Allemagne', 'UK', 'Thaïlande', 'Inde', 'Chine'];
 
+        $createdProducts = [];
         foreach ($productNames as $name) {
             $product = new Product();
             $product->setName($name);
@@ -118,6 +119,65 @@ class AppFixtures extends Fixture
             }
 
             $manager->persist($product);
+            $createdProducts[] = $product;
+        }
+
+        // --- Clients (Acheteurs) & Adresses ---
+        $buyers = [];
+        $addresses = [];
+        for ($i = 0; $i < 10; $i++) {
+            $user = new User();
+            $user->setFirstName($faker->firstName());
+            $user->setLastName($faker->lastName());
+            $user->setEmail($faker->unique()->safeEmail());
+            $user->setRoles(['ROLE_CLIENT']);
+            $user->setPassword($this->hasher->hashPassword($user, 'password'));
+            $user->setTheme('light');
+            $user->setLocale('fr');
+            $user->setCreatedAt(new \DateTimeImmutable($faker->dateTimeBetween('-1 year')->format('Y-m-d H:i:s')));
+            $manager->persist($user);
+            $buyers[] = $user;
+
+            $address = new \App\Entity\Address();
+            $address->setStreet($faker->streetAddress());
+            $address->setCity($faker->city());
+            // max 10 chars for zipcode
+            $address->setZipCode(substr($faker->postcode(), 0, 10));
+            $address->setCountry('France');
+            $address->setIsDefault(true);
+            $address->setUser($user);
+            $manager->persist($address);
+            $addresses[$user->getId() ?? spl_object_id($user)] = $address;
+        }
+
+        // --- Commandes ---
+        $statuses = ['pending', 'paid', 'shipped', 'delivered', 'cancelled'];
+        for ($i = 0; $i < 25; $i++) {
+            $order = new \App\Entity\Order();
+            $buyer = $faker->randomElement($buyers);
+            $order->setBuyer($buyer);
+            $order->setAddress($addresses[spl_object_id($buyer)]);
+            $order->setCreatedAt(new \DateTimeImmutable($faker->dateTimeBetween('-6 months')->format('Y-m-d H:i:s')));
+
+            $numItems = $faker->numberBetween(1, 4);
+            $total = 0;
+            $orderProducts = $faker->randomElements($createdProducts, $numItems);
+            
+            foreach ($orderProducts as $product) {
+                $item = new \App\Entity\OrderItem();
+                $item->setProduct($product);
+                $item->setQuantity($faker->numberBetween(1, 3));
+                $item->setUnitPrice($product->getPrice());
+                $item->setStatus($faker->randomElement($statuses));
+                
+                $order->addOrderItem($item);
+                $manager->persist($item);
+                
+                $total += $item->getQuantity() * $product->getPrice();
+            }
+            
+            $order->setTotalPrice((string) $total);
+            $manager->persist($order);
         }
 
         $manager->flush();

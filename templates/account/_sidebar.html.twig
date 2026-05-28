@@ -30,12 +30,7 @@
                     <i class="bi bi-geo-alt me-2"></i>{{ 'nav.addresses'|trans }}
                 </a>
             </li>
-            {% if is_granted('ROLE_VENDEUR') %}
-            <li class="list-group-item list-group-item-action {% if route starts with 'app_product_my' or route == 'app_product_new' %}active{% endif %}">
-                <a href="{{ path('app_product_my') }}" class="text-decoration-none {% if route starts with 'app_product_my' %}text-white{% endif %}">
-                    <i class="bi bi-tag me-2"></i>{{ 'nav.my_ads'|trans }}</a>
-            </li>
-            {% endif %}
+
         </ul>
     </div>
 </div>

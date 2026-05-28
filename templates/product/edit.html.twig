@@ -3,8 +3,11 @@
 {% block title %}Modifier — {{ product.name }}{% endblock %}
 
 {% block body %}
-<div class="row justify-content-center">
-    <div class="col-lg-8">
+<div class="row g-4">
+    <div class="col-md-3">
+        {{ include('seller/_sidebar.html.twig') }}
+    </div>
+    <div class="col-md-9">
         <h1 class="mb-4">{{ 'title.edit_product'|trans }}</h1>
 
         {% if product.images|length > 0 %}
@@ -16,7 +19,11 @@
         </div>
         {% endif %}
 
-        {{ include('product/_form.html.twig', {button_label: 'Enregistrer les modifications'}) }}
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                {{ include('product/_form.html.twig', {button_label: 'Enregistrer les modifications'}) }}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'title.my_sales'|trans }} — Bouffay{% endblock %}
+
+{% block body %}
+<div class="row g-4">
+    <div class="col-md-3">
+        {{ include('seller/_sidebar.html.twig') }}
+    </div>
+    <div class="col-md-9">
+        <h1 class="mb-4">{{ 'nav.orders_received'|trans }}</h1>
+
+        {% if orders|length == 0 %}
+            <div class="text-center py-5 text-muted">
+                <i class="bi bi-bag-check fs-1"></i>
+                <p class="mt-2">{{ 'empty.no_sales'|trans }}</p>
+            </div>
+        {% else %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>{{ 'table.order_number'|trans }}</th>
+                            <th>{{ 'table.date'|trans }}</th>
+                            <th>{{ 'table.buyer'|trans }}</th>
+                            <th>{{ 'table.items'|trans }}</th>
+                            <th>{{ 'table.total'|trans }}</th>
+                            <th>{{ 'table.status'|trans }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        {% set sellerItems = [] %}
+                        {% set sellerTotal = 0 %}
+                        {% set sellerStatus = 'pending' %}
+                        
+                        {% for item in order.orderItems %}
+                            {% if item.product.seller.id == app.user.id %}
+                                {% set sellerItems = sellerItems|merge([item]) %}
+                                {% set sellerTotal = sellerTotal + (item.product.price * item.quantity) %}
+                                {% set sellerStatus = item.status %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% set badges = {pending: 'warning', paid: 'info', shipped: 'primary', delivered: 'success', cancelled: 'danger'} %}
+                        
+                        <tr>
+                            <td>#{{ order.id }}</td>
+                            <td>{{ order.createdAt|date('d/m/Y') }}</td>
+                            <td>{{ order.buyer.firstName }} {{ order.buyer.lastName }}</td>
+                            <td>{{ sellerItems|length }} article(s)</td>
+                            <td class="fw-semibold">{{ sellerTotal }} {{ 'format.currency'|trans }}</td>
+                            <td>
+                                <span class="badge bg-{{ badges[sellerStatus] ?? 'secondary' }}">
+                                    {{ ('status.' ~ sellerStatus)|trans }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{{ path('app_seller_sale_show', {id: order.id}) }}"
+                                   class="btn btn-sm btn-outline-primary">{{ 'detail'|trans }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

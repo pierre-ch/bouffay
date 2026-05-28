@@ -3,10 +3,17 @@
 {% block title %}{{ 'button.new_product'|trans }} — Bouffay{% endblock %}
 
 {% block body %}
-<div class="row justify-content-center">
-    <div class="col-lg-8">
+<div class="row g-4">
+    <div class="col-md-3">
+        {{ include('seller/_sidebar.html.twig') }}
+    </div>
+    <div class="col-md-9">
         <h1 class="mb-4">{{ 'title.new_product'|trans }}</h1>
-        {{ include('product/_form.html.twig', {button_label: 'Publier l\'annonce'}) }}
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                {{ include('product/_form.html.twig', {button_label: 'Publier l\'annonce'}) }}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

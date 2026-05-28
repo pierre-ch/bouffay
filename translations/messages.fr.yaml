@@ -16,6 +16,8 @@ button.empty_cart: 'Vider le panier'
 button.filters: Filtres
 button.leave_review: 'Laisser un avis'
 button.login: 'Se connecter'
+button.manage: Gérer
+button.mark_all_read: 'Tout marquer comme lu'
 button.my_products: 'Mes annonces'
 button.new_product: 'Nouvelle annonce'
 button.publish: Publier
@@ -35,9 +37,11 @@ discover_products: 'Découvrir les produits'
 empty.empty_cart: 'Votre panier est vide.'
 empty.no_addresses: 'Aucune adresse enregistrée.'
 empty.no_favorites: 'Aucun favori pour le moment.'
+empty.no_notifications: 'Aucune notification non lue'
 empty.no_orders: 'Aucune commande pour le moment.'
 empty.no_products: 'Aucune annonce disponible pour le moment.'
 empty.no_reviews: 'Aucun avis pour le moment.'
+empty.no_sales: "Vous n'avez pas encore de ventes."
 empty.no_seller_products: "Ce vendeur n'a aucune annonce active."
 empty.no_user_products: "Vous n'avez pas encore publié d'annonce."
 flash.account_created: 'Votre compte a été créé avec succès.'
@@ -55,10 +59,12 @@ flash.cart_updated: 'Panier mis à jour.'
 flash.error.address_missing: 'Veuillez sélectionner une adresse de livraison.'
 flash.error.cart_empty: 'Votre panier est vide.'
 flash.error.form_invalid: 'Veuillez corriger les erreurs du formulaire.'
+flash.error.invalid_status: 'Statut invalide.'
 flash.error.stock_insufficient: 'Stock insuffisant'
 flash.favorite_added: 'Ajouté aux favoris.'
 flash.favorite_removed: 'Retiré des favoris.'
 flash.order_created: 'Commande créée avec succès.'
+flash.order_status_updated: 'Le statut de la commande a été mis à jour.'
 flash.profile_updated: 'Profil mis à jour.'
 flash.review_deleted: 'Votre avis a été supprimé.'
 flash.review_published: 'Votre avis a été publié.'
@@ -142,6 +148,7 @@ info.items: articles
 info.member_since: 'Membre depuis'
 info.no_address: "À l'absence d'adresse"
 info.origin: 'Origine :'
+info.other_items_in_order: "Cette commande contient également des produits d'autres vendeurs. Les modifier affectera le statut global."
 info.published_on: 'Publié le'
 info.review: avis
 info.reviews: avis
@@ -183,27 +190,39 @@ nav.my_favorites: 'Mes favoris'
 nav.my_orders: 'Mes commandes'
 nav.my_profile: 'Mon profil'
 nav.my_sales: 'Mes ventes'
+nav.notifications: Notifications
+nav.orders_received: 'Commandes reçues'
 nav.products: Produits
 nav.register: Inscription
 nav.sign_up: "S'inscrire"
+notification.new_order: 'Nouvelle commande reçue ! (%order_id%)'
+notification.order_status_updated: 'Votre colis pour la commande #%order_id% a été mis à jour par %seller%'
 published_on_date: 'Publié le'
 section.all_orders: 'Toutes les commandes'
 section.discover: 'Découvrez des snacks du monde entier.'
+section.items_sold_by_you: 'Produits vendus par vous'
 section.leave_review: 'Laisser un avis'
 section.my_review: 'Mon avis'
 section.order_summary: 'Résumé de la commande'
 section.order_summary_full: 'Résumé de votre commande'
 section.ordered_items: 'Articles commandés'
+section.other_items_in_order: 'Autres produits dans cette commande (Vendeurs tiers)'
 section.other_reviews: 'Autres avis'
+section.package_from: 'Colis expédié par'
 section.recap: Récapitulatif
 section.recent_orders: 'Dernières commandes'
 section.shipping_address: 'Adresse de livraison'
+section.status_history: 'Historique des statuts'
 section.welcome: 'Bienvenue sur Bouffay'
 select_shipping_address: 'Sélectionner une adresse de livraison'
 status.cancelled: Annulée
 status.delivered: Livrée
 status.for_sale: 'En vente'
 status.paid: Payée
+status.partially_cancelled: 'Partiellement annulée'
+status.partially_delivered: 'Partiellement livrée'
+status.partially_paid: 'Partiellement payée'
+status.partially_shipped: 'Partiellement expédiée'
 status.pending: 'En attente'
 status.shipped: Expédiée
 status.sold: Vendu
@@ -211,6 +230,7 @@ status.suspended: Suspendu
 table.action: Action
 table.ad: Annonce
 table.category: Catégorie
+table.client: Client
 table.date: Date
 table.items: Articles
 table.number: '#'
@@ -220,11 +240,13 @@ table.price: Prix
 table.product: Produit
 table.published: 'Publiée le'
 table.quantity: Quantité
+table.seller: Vendeur
 table.shipping_address: 'Adresse de livraison'
 table.status: Statut
 table.stock: Stock
 table.subtotal: Sous-total
 table.total: Total
+table.total_for_you: 'Total de vos ventes :'
 table.unit_price: 'Prix unitaire'
 title.cart: 'Mon Panier - Bouffay Shop'
 title.checkout: 'Valider la Commande - Bouffay Shop'
@@ -235,10 +257,12 @@ title.home: 'Accueil — Bouffay'
 title.login: 'Connexion — Bouffay'
 title.my_products: 'Mes Annonces - Bouffay Shop'
 title.my_profile: 'Mon Profil - Bouffay Shop'
+title.my_sales: 'Mes ventes'
 title.new_product: 'Nouvelle Annonce - Bouffay Shop'
-title.order_show: 'Commande - Bouffay Shop'
+title.order_show: 'Commande'
 title.orders: 'Mes Commandes - Bouffay Shop'
 title.product_show: 'Produit — Bouffay'
 title.products: 'Annonces — Bouffay'
 title.register: 'Inscription — Bouffay'
+title.sale_show: 'Commande Client'
 title.seller: 'Vendeur - Bouffay Shop'

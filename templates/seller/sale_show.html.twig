@@ -1,0 +1,175 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'title.sale_show'|trans }} #{{ order.id }} — Bouffay{% endblock %}
+
+{% block body %}
+<div class="row g-4">
+    <div class="col-md-3">
+        {{ include('seller/_sidebar.html.twig') }}
+    </div>
+    <div class="col-md-9">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>{{ 'title.sale_show'|trans }} #{{ order.id }}</h1>
+            <a href="{{ path('app_seller_sales') }}" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left me-1"></i>{{ 'button.back'|trans }}
+            </a>
+        </div>
+
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="card border-0 bg-light p-3 h-100">
+                    <h6 class="text-muted small text-uppercase mb-2">{{ 'table.client'|trans }}</h6>
+                    <div class="fw-semibold">{{ order.buyer.firstName }} {{ order.buyer.lastName }}</div>
+                    <div class="small text-muted">{{ order.buyer.email }}</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 bg-light p-3 h-100">
+                    <h6 class="text-muted small text-uppercase mb-2">{{ 'table.shipping_address'|trans }}</h6>
+                    {% if order.address %}
+                        <div class="small">
+                            {{ order.address.street }}<br>
+                            {{ order.address.zipCode }} {{ order.address.city }}<br>
+                            {{ order.address.country }}
+                        </div>
+                    {% else %}
+                        <span class="text-muted fst-italic">{{ 'empty.no_address'|trans }}</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 bg-light p-3 h-100">
+                    <h6 class="text-muted small text-uppercase mb-2">{{ 'table.status'|trans }}</h6>
+                    {% set badges = {pending: 'warning', paid: 'info', shipped: 'primary', delivered: 'success', cancelled: 'danger'} %}
+                    {% set currentStatus = sellerItems[0].status %}
+                    <div class="mb-3">
+                        <span class="badge bg-{{ badges[currentStatus] ?? 'secondary' }} fs-6">
+                            {{ ('status.' ~ currentStatus)|trans }}
+                        </span>
+                    </div>
+
+                    <form method="POST" action="{{ path('app_seller_sale_status', {id: order.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('update-status-' ~ order.id) }}">
+                        <div class="input-group input-group-sm">
+                            <select name="status" class="form-select">
+                                <option value="pending" {% if currentStatus == 'pending' %}selected{% endif %}>{{ 'status.pending'|trans }}</option>
+                                <option value="paid" {% if currentStatus == 'paid' %}selected{% endif %}>{{ 'status.paid'|trans }}</option>
+                                <option value="shipped" {% if currentStatus == 'shipped' %}selected{% endif %}>{{ 'status.shipped'|trans }}</option>
+                                <option value="delivered" {% if currentStatus == 'delivered' %}selected{% endif %}>{{ 'status.delivered'|trans }}</option>
+                                <option value="cancelled" {% if currentStatus == 'cancelled' %}selected{% endif %}>{{ 'status.cancelled'|trans }}</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">{{ 'button.update'|trans }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <h5 class="mb-3">{{ 'section.items_sold_by_you'|trans }}</h5>
+        <div class="table-responsive card border-0 shadow-sm">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>{{ 'table.product'|trans }}</th>
+                        <th class="text-center">{{ 'table.quantity'|trans }}</th>
+                        <th class="text-end">{{ 'table.unit_price'|trans }}</th>
+                        <th class="text-end">{{ 'table.subtotal'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% set sellerTotal = 0 %}
+                {% for item in sellerItems %}
+                    {% set subtotal = item.quantity * item.unitPrice %}
+                    {% set sellerTotal = sellerTotal + subtotal %}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                {% if item.product.images|length > 0 %}
+                                    <img src="{{ asset('uploads/products/' ~ item.product.images.first.filename) }}"
+                                         alt="{{ item.product.name }}" class="rounded" style="width: 40px; height: 40px; object-fit: cover;">
+                                {% else %}
+                                    <div class="bg-light rounded d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-image text-muted"></i>
+                                    </div>
+                                {% endif %}
+                                {{ item.product.name }}
+                            </div>
+                        </td>
+                        <td class="text-center">{{ item.quantity }}</td>
+                        <td class="text-end">{{ item.unitPrice }} {{ 'format.currency'|trans }}</td>
+                        <td class="text-end fw-semibold">{{ subtotal|number_format(2, ',', ' ') }} {{ 'format.currency'|trans }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot class="table-light">
+                    <tr>
+                        <td colspan="3" class="text-end fw-bold">{{ 'table.total_for_you'|trans }}</td>
+                        <td class="text-end fw-bold">{{ sellerTotal|number_format(2, ',', ' ') }} {{ 'format.currency'|trans }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        {% if sellerItems[0].statusHistories|length > 0 %}
+            <h5 class="mb-3 mt-4">{{ 'section.status_history'|trans }}</h5>
+            <div class="card border-0 shadow-sm p-4 mb-4 bg-light">
+                <ul class="list-unstyled mb-0 ms-2" style="border-left: 2px solid #dee2e6; padding-left: 1.5rem; position: relative;">
+                    {% for history in sellerItems[0].statusHistories %}
+                        <li class="mb-3 position-relative">
+                            <span class="position-absolute bg-primary rounded-circle" style="width: 12px; height: 12px; left: -1.9rem; top: 0.25rem;"></span>
+                            <div class="fw-semibold text-primary">{{ ('status.' ~ history.status)|trans }}</div>
+                            <div class="text-muted small">{{ history.createdAt|date('d/m/Y H:i') }}</div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% set otherItems = [] %}
+        {% for item in order.orderItems %}
+            {% if item.product.seller.id != app.user.id %}
+                {% set otherItems = otherItems|merge([item]) %}
+            {% endif %}
+        {% endfor %}
+
+        {% if otherItems|length > 0 %}
+            <h5 class="mb-3 mt-5 text-muted">{{ 'section.other_items_in_order'|trans }}</h5>
+            <div class="table-responsive card border-0 shadow-sm opacity-75 bg-light">
+                <table class="table align-middle mb-0 text-muted">
+                    <thead class="table-light">
+                        <tr>
+                            <th>{{ 'table.product'|trans }}</th>
+                            <th>{{ 'table.seller'|trans }}</th>
+                            <th class="text-center">{{ 'table.quantity'|trans }}</th>
+                            <th class="text-end">{{ 'table.status'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in otherItems %}
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center gap-3">
+                                    {% if item.product.images|length > 0 %}
+                                        <img src="{{ asset('uploads/products/' ~ item.product.images.first.filename) }}"
+                                             alt="{{ item.product.name }}" class="rounded grayscale" style="width: 30px; height: 30px; object-fit: cover; filter: grayscale(100%); opacity: 0.7;">
+                                    {% endif %}
+                                    <small>{{ item.product.name }}</small>
+                                </div>
+                            </td>
+                            <td><small>{{ item.product.seller.firstName }} {{ item.product.seller.lastName }}</small></td>
+                            <td class="text-center"><small>{{ item.quantity }}</small></td>
+                            <td class="text-end">
+                                <span class="badge bg-{{ badges[item.status] ?? 'secondary' }} fw-normal" style="font-size: 0.7rem;">
+                                    {{ ('status.' ~ item.status)|trans }}
+                                </span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

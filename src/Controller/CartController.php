@@ -6,10 +6,12 @@ use App\Entity\Cart;
 use App\Entity\CartItem;
 use App\Entity\Order;
 use App\Entity\OrderItem;
+use App\Entity\OrderItemStatusHistory;
 use App\Entity\Product;
 use App\Form\CartFormType;
 use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
+use App\Service\NotificationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -245,6 +247,7 @@ class CartController extends AbstractController
         Request $request,
         CartRepository $cartRepository,
         EntityManagerInterface $em,
+        NotificationService $notificationService,
     ): Response {
         if (!$this->isCsrfTokenValid('validate-order', $request->request->get('_token'))) {
             throw $this->createAccessDeniedException();
@@ -279,9 +282,9 @@ class CartController extends AbstractController
         $order->setBuyer($user);
         $order->setAddress($selectedAddress);
         $order->setCreatedAt(new \DateTimeImmutable());
-        $order->setStatus('pending');
 
         $total = 0;
+        $sellers = [];
         foreach ($cart->getCartItems() as $cartItem) {
             $product = $cartItem->getProduct();
             $orderItem = new OrderItem();
@@ -289,9 +292,17 @@ class CartController extends AbstractController
             $orderItem->setProduct($product);
             $orderItem->setQuantity($cartItem->getQuantity());
             $orderItem->setUnitPrice((string) $product->getPrice());
+            $orderItem->setStatus('pending');
 
             $order->addOrderItem($orderItem);
             $em->persist($orderItem);
+
+            $history = new OrderItemStatusHistory();
+            $history->setOrderItem($orderItem);
+            $history->setStatus('pending');
+            $em->persist($history);
+
+            $sellers[$product->getSeller()->getId()] = $product->getSeller();
 
             // Diminuer le stock
             if ($product->getStock() !== null) {
@@ -308,6 +319,16 @@ class CartController extends AbstractController
             $cart->removeCartItem($item);
         }
 
+        $em->flush();
+
+        foreach ($sellers as $seller) {
+            $notificationService->createNotification(
+                $seller,
+                'notification.new_order',
+                ['%order_id%' => $order->getId()],
+                $this->generateUrl('app_seller_sale_show', ['id' => $order->getId()])
+            );
+        }
         $em->flush();
 
         $this->addFlash('success', 'flash.order_created');

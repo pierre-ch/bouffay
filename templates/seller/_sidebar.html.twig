@@ -1,0 +1,27 @@
+{% set route = app.request.attributes.get('_route') %}
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-0">
+        <div class="p-3 border-bottom text-center">
+            <i class="bi bi-shop fs-1 text-primary"></i>
+            <div class="fw-semibold mt-1">{{ 'nav.my_sales'|trans }}</div>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-action {% if route starts with 'app_product_my' %}active{% endif %}">
+                <a href="{{ path('app_product_my') }}" class="text-decoration-none {% if route starts with 'app_product_my' %}text-white{% endif %}">
+                    <i class="bi bi-tag me-2"></i>{{ 'nav.my_ads'|trans }}
+                </a>
+            </li>
+            <li class="list-group-item list-group-item-action {% if route starts with 'app_seller_sale' %}active{% endif %}">
+                <a href="{{ path('app_seller_sales') }}" class="text-decoration-none {% if route starts with 'app_seller_sale' %}text-white{% endif %}">
+                    <i class="bi bi-bag-check me-2"></i>{{ 'nav.orders_received'|trans }}
+                </a>
+            </li>
+            <li class="list-group-item list-group-item-action {% if route == 'app_product_new' %}active{% endif %}">
+                <a href="{{ path('app_product_new') }}" class="text-decoration-none {% if route == 'app_product_new' %}text-white{% endif %}">
+                    <i class="bi bi-plus-circle me-2"></i>{{ 'button.new_product'|trans }}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

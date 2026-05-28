@@ -16,6 +16,8 @@ button.empty_cart: 'Empty Cart'
 button.filters: Filters
 button.leave_review: 'Leave Review'
 button.login: 'Sign In'
+button.manage: Manage
+button.mark_all_read: 'Mark all as read'
 button.my_products: 'My Ads'
 button.new_product: 'New Ad'
 button.publish: Publish
@@ -35,9 +37,11 @@ discover_products: 'Discover products'
 empty.empty_cart: 'Your cart is empty.'
 empty.no_addresses: 'No addresses recorded.'
 empty.no_favorites: 'No favorites at the moment.'
+empty.no_notifications: 'No unread notifications'
 empty.no_orders: 'No orders at the moment.'
 empty.no_products: 'No announcements available at the moment.'
 empty.no_reviews: 'No reviews at the moment.'
+empty.no_sales: "You don't have any sales yet."
 empty.no_seller_products: 'This seller has no active ads.'
 empty.no_user_products: 'You have not published any ads yet.'
 flash.account_created: 'Your account was successfully created.'
@@ -55,10 +59,12 @@ flash.cart_updated: 'Cart updated.'
 flash.error.address_missing: 'Please select a shipping address.'
 flash.error.cart_empty: 'Your cart is empty.'
 flash.error.form_invalid: 'Please fix the form errors.'
+flash.error.invalid_status: 'Invalid status.'
 flash.error.stock_insufficient: 'Insufficient stock'
 flash.favorite_added: 'Added to favorites.'
 flash.favorite_removed: 'Removed from favorites.'
 flash.order_created: 'Order successfully created.'
+flash.order_status_updated: 'The order status has been updated.'
 flash.profile_updated: 'Profile updated.'
 flash.review_deleted: 'Your review has been deleted.'
 flash.review_published: 'Your review has been published.'
@@ -142,6 +148,7 @@ info.items: items
 info.member_since: 'Member since'
 info.no_address: 'If no address'
 info.origin: 'Origin:'
+info.other_items_in_order: 'This order also contains items from other sellers. Modifying it affects the global status.'
 info.published_on: 'Published on'
 info.review: review
 info.reviews: reviews
@@ -183,27 +190,39 @@ nav.my_favorites: 'My Favorites'
 nav.my_orders: 'My Orders'
 nav.my_profile: 'My Profile'
 nav.my_sales: 'My Sales'
+nav.notifications: Notifications
+nav.orders_received: 'Orders received'
 nav.products: Products
 nav.register: Register
 nav.sign_up: 'Sign Up'
+notification.new_order: 'New order received! (%order_id%)'
+notification.order_status_updated: 'Your package for order #%order_id% was updated by %seller%'
 published_on_date: 'Published on'
 section.all_orders: 'All Orders'
 section.discover: 'Discover snacks from all over the world.'
+section.items_sold_by_you: 'Items sold by you'
 section.leave_review: 'Leave a Review'
 section.my_review: 'My Review'
 section.order_summary: 'Order Summary'
 section.order_summary_full: 'Your Order Summary'
 section.ordered_items: 'Ordered Items'
+section.other_items_in_order: 'Other items in this order (Third-party sellers)'
 section.other_reviews: 'Other Reviews'
+section.package_from: 'Package from'
 section.recap: Summary
 section.recent_orders: 'Recent Orders'
 section.shipping_address: 'Shipping Address'
+section.status_history: 'Status history'
 section.welcome: 'Welcome to Bouffay'
 select_shipping_address: 'Select a shipping address'
 status.cancelled: Cancelled
 status.delivered: Delivered
 status.for_sale: 'For Sale'
 status.paid: Paid
+status.partially_cancelled: 'Partially cancelled'
+status.partially_delivered: 'Partially delivered'
+status.partially_paid: 'Partially paid'
+status.partially_shipped: 'Partially shipped'
 status.pending: Pending
 status.shipped: Shipped
 status.sold: Sold
@@ -211,6 +230,7 @@ status.suspended: Suspended
 table.action: Action
 table.ad: Ad
 table.category: Category
+table.client: Client
 table.date: Date
 table.items: Items
 table.number: '#'
@@ -220,11 +240,13 @@ table.price: Price
 table.product: Product
 table.published: Published
 table.quantity: Quantity
+table.seller: Seller
 table.shipping_address: 'Shipping Address'
 table.status: Status
 table.stock: Stock
 table.subtotal: Subtotal
 table.total: Total
+table.total_for_you: 'Your sales total:'
 table.unit_price: 'Unit Price'
 title.cart: 'My Cart - Bouffay Shop'
 title.checkout: 'Checkout - Bouffay Shop'
@@ -235,10 +257,12 @@ title.home: 'Home — Bouffay'
 title.login: 'Login — Bouffay'
 title.my_products: 'My Ads - Bouffay Shop'
 title.my_profile: 'My Profile - Bouffay Shop'
+title.my_sales: 'My sales'
 title.new_product: 'New Ad - Bouffay Shop'
 title.order_show: 'Order - Bouffay Shop'
 title.orders: 'My Orders - Bouffay Shop'
 title.product_show: 'Product — Bouffay'
 title.products: 'Announcements — Bouffay'
 title.register: 'Register — Bouffay'
+title.sale_show: 'Customer Order'
 title.seller: 'Seller - Bouffay Shop'

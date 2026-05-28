@@ -18,29 +18,29 @@ class ProfileFormType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class, [
-                'label' => 'Prénom',
+                'label' => 'form.first_name',
                 'constraints' => [new NotBlank(), new Length(['max' => 255])],
             ])
             ->add('lastName', TextType::class, [
-                'label' => 'Nom',
+                'label' => 'form.last_name',
                 'constraints' => [new NotBlank(), new Length(['max' => 255])],
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Email',
+                'label' => 'form.email',
                 'constraints' => [new NotBlank(), new Length(['max' => 100])],
             ])
             ->add('locale', ChoiceType::class, [
-                'label' => 'Langue',
+                'label' => 'form.locale',
                 'choices' => [
-                    'Français' => 'fr',
-                    'English'  => 'en',
+                    'form.locale_fr' => 'fr',
+                    'form.locale_en' => 'en',
                 ],
             ])
             ->add('theme', ChoiceType::class, [
-                'label' => 'Thème',
+                'label' => 'form.theme',
                 'choices' => [
-                    'Clair' => 'light',
-                    'Sombre' => 'dark',
+                    'form.theme_light' => 'light',
+                    'form.theme_dark' => 'dark',
                 ],
             ]);
     }

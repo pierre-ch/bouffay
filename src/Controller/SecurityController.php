@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -55,10 +56,15 @@ class SecurityController extends AbstractController
             $user->setTheme('light');
             $user->setLocale('fr');
 
+            $cart = new Cart();
+            $cart->setUser($user);
+            $cart->setCreatedAt(new \DateTimeImmutable());
+
             $em->persist($user);
+            $em->persist($cart);
             $em->flush();
 
-            $this->addFlash('success', 'Votre compte a été créé avec succès.');
+            $this->addFlash('success', 'flash.account_created');
 
             return $this->redirectToRoute('app_login');
         }

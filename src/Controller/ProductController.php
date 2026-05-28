@@ -71,7 +71,7 @@ class ProductController extends AbstractController
             $em->persist($product);
             $em->flush();
 
-            $this->addFlash('success', 'Votre annonce a été publiée.');
+            $this->addFlash('success', 'flash.ad_published');
 
             return $this->redirectToRoute('app_product_show', ['slug' => $product->getSlug()]);
         }
@@ -102,7 +102,7 @@ class ProductController extends AbstractController
 
             $em->flush();
 
-            $this->addFlash('success', 'Annonce mise à jour.');
+            $this->addFlash('success', 'flash.ad_updated');
 
             return $this->redirectToRoute('app_product_show', ['slug' => $product->getSlug()]);
         }
@@ -121,7 +121,7 @@ class ProductController extends AbstractController
         if ($this->isCsrfTokenValid('delete-product-' . $product->getId(), $request->request->get('_token'))) {
             $em->remove($product);
             $em->flush();
-            $this->addFlash('success', 'Annonce supprimée.');
+            $this->addFlash('success', 'flash.ad_deleted');
         }
 
         return $this->redirectToRoute('app_product_my');

@@ -19,21 +19,21 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class, [
-                'label' => 'Prénom',
+                'label' => 'form.first_name',
                 'constraints' => [
                     new NotBlank(),
                     new Length(['max' => 255]),
                 ],
             ])
             ->add('lastName', TextType::class, [
-                'label' => 'Nom',
+                'label' => 'form.last_name',
                 'constraints' => [
                     new NotBlank(),
                     new Length(['max' => 255]),
                 ],
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Email',
+                'label' => 'form.email',
                 'constraints' => [
                     new NotBlank(),
                     new Length(['max' => 100]),
@@ -42,8 +42,8 @@ class RegistrationFormType extends AbstractType
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,
-                'first_options' => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmer le mot de passe'],
+                'first_options' => ['label' => 'form.password'],
+                'second_options' => ['label' => 'form.password_confirm'],
                 'constraints' => [
                     new NotBlank(),
                     new Length(['min' => 8, 'max' => 4096]),

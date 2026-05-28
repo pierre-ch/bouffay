@@ -1,0 +1,162 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Panier - Bouffay Shop{% endblock %}
+
+{% block body %}
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="bi bi-bag"></i> Mon Panier
+            </h1>
+        </div>
+    </div>
+
+    {% if cart.cartItems|length == 0 %}
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <p>{{ 'empty.empty_cart'|trans }}</p>
+                    <a href="{{ path('app_product_index') }}" class="btn btn-primary">{{ 'button.continue_shopping'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    {{ form_start(form, {'attr': {'method': 'POST', 'action': path('app_cart_update')}}) }}
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>{{ 'table.product'|trans }}</th>
+                                    <th class="text-center">{{ 'table.price'|trans }}</th>
+                                    <th class="text-center">{{ 'table.quantity'|trans }}</th>
+                                    <th class="text-center">{{ 'table.subtotal'|trans }}</th>
+                                    <th class="text-center">{{ 'table.action'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart.cartItems %}
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                {% if item.product.images|first %}
+                                                    <img
+                                                        src="{{ asset('uploads/products/' ~ item.product.images|first.filename) }}"
+                                                        alt="{{ item.product.name }}"
+                                                        class="img-thumbnail me-3"
+                                                        style="width: 60px; height: 60px; object-fit: cover;"
+                                                    >
+                                                {% else %}
+                                                    <div class="bg-light me-3 rounded" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                                        <i class="bi bi-image text-muted"></i>
+                                                    </div>
+                                                {% endif %}
+                                                <div>
+                                                    <h6 class="mb-1">
+                                                        <a href="{{ path('app_product_show', {slug: item.product.slug}) }}" class="text-decoration-none">
+                                                            {{ item.product.name }}
+                                                        </a>
+                                                    </h6>
+                                                    <small class="text-muted">{{ item.product.seller.firstName }}</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            {{ item.product.price|number_format(2, ',', ' ') }} €
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="form-quantity">
+                                                {{ form_widget(form.cartItems[loop.index0].quantity, {'attr': {'class': 'form-control form-control-sm text-center', 'style': 'width: 70px; margin: 0 auto;', 'min': '1', 'max': '999'}}) }}
+                                                {% if form.cartItems[loop.index0].quantity.vars.errors|length > 0 %}
+                                                    <div class="text-danger small mt-1">
+                                                        {% for error in form.cartItems[loop.index0].quantity.vars.errors %}
+                                                            {{ error.message }}
+                                                        {% endfor %}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            {% set subtotal = item.product.price * item.quantity %}
+                                            <strong>{{ subtotal|number_format(2, ',', ' ') }} €</strong>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm btn-outline-danger delete-item-btn" data-item-id="{{ item.id }}" data-csrf="{{ csrf_token('delete-' ~ item.id) }}">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-footer bg-light d-flex justify-content-between align-items-center">
+                        <div>
+                            <a href="{{ path('app_product_index') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left"></i>{{ 'button.continue_shopping'|trans }}</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-arrow-repeat"></i>{{ 'button.update'|trans }}</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-4 mt-lg-0">
+                <div class="card sticky-top" style="top: 20px;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">{{ 'section.order_summary'|trans }}</h5>
+
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>{{ 'info.subtotal'|trans }}</span>
+                                <strong>{{ total|number_format(2, ',', ' ') }} €</strong>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3 text-muted">
+                                <span>{{ 'info.shipping'|trans }}</span>
+                                <span>À définir</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="h6">{{ 'table.total'|trans }}:</span>
+                                <strong class="h6">{{ total|number_format(2, ',', ' ') }} €</strong>
+                            </div>
+                        </div>
+
+                        <a href="{{ path('app_cart_checkout') }}" class="btn btn-success w-100 mb-2">
+                            <i class="bi bi-credit-card"></i>{{ 'button.checkout'|trans }}</a>
+
+                        <form method="POST" action="{{ path('app_cart_clear') }}" onsubmit="return confirm('Êtes-vous sûr de vouloir vider votre panier ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('clear-cart') }}">
+                            <button type="submit" class="btn btn-outline-danger w-100">
+                                <i class="bi bi-trash"></i>{{ 'button.empty_cart'|trans }}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+document.querySelectorAll('.delete-item-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const itemId = this.dataset.itemId;
+        const csrf = this.dataset.csrf;
+
+        if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '{{ path("app_cart_remove", {"cartItemId": "PLACEHOLDER"}) }}'.replace('PLACEHOLDER', itemId);
+            form.innerHTML = `<input type="hidden" name="_token" value="${csrf}">`;
+            document.body.appendChild(form);
+            form.submit();
+        }
+    });
+});
+</script>
+{% endblock %}

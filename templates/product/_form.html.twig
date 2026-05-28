@@ -57,7 +57,7 @@
 <div class="mb-3">
     {{ form_label(form.tags) }}
     {{ form_widget(form.tags, {'attr': {'class': 'form-select'}}) }}
-    <div class="form-text">Maintenez Ctrl (ou Cmd) pour sélectionner plusieurs tags.</div>
+    <div class="form-text">{{ 'form.helper_tags'|trans }}</div>
     {{ form_errors(form.tags) }}
 </div>
 
@@ -65,7 +65,7 @@
     {{ form_label(form.imageFiles) }}
     {{ form_widget(form.imageFiles, {'attr': {'class': 'form-control'}}) }}
     {{ form_errors(form.imageFiles) }}
-    <div class="form-text">JPG, PNG ou WebP, 2 Mo max par image.</div>
+    <div class="form-text">{{ 'form.helper_images'|trans }}</div>
 </div>
 
 <button type="submit" class="btn btn-primary">{{ button_label ?? 'Enregistrer' }}</button>

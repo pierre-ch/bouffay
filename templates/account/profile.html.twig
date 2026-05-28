@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon profil — Bouffay{% endblock %}
+{% block title %}{{ 'title.my_profile'|trans }}{% endblock %}
 
 {% block body %}
 <div class="row g-4">
@@ -8,7 +8,7 @@
         {{ include('account/_sidebar.html.twig') }}
     </div>
     <div class="col-md-9">
-        <h1 class="mb-4">Mon profil</h1>
+        <h1 class="mb-4">{{ 'nav.my_profile'|trans }}</h1>
 
         <div class="card border-0 shadow-sm">
             <div class="card-body p-4">
@@ -48,10 +48,10 @@
 
                 <div class="mb-3 text-muted small">
                     <i class="bi bi-calendar me-1"></i>
-                    Membre depuis le {{ app.user.createdAt|date('d/m/Y') }}
+                    {{ 'info.member_since'|trans }} {{ app.user.createdAt|date('d/m/Y') }}
                 </div>
 
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <button type="submit" class="btn btn-primary">{{ 'button.save'|trans }}</button>
 
                 {{ form_end(form) }}
             </div>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon compte — Bouffay{% endblock %}
+{% block title %}{{ 'title.dashboard'|trans }}{% endblock %}
 
 {% block body %}
 <div class="row g-4">
@@ -12,7 +12,7 @@
 
     {# Contenu #}
     <div class="col-md-9">
-        <h1 class="mb-4">Bonjour, {{ app.user.firstName }} 👋</h1>
+        <h1 class="mb-4">{{ 'message.greeting'|trans({'%firstName%': app.user.firstName}) }} 👋</h1>
 
         <div class="row g-3 mb-4">
             <div class="col-sm-4">
@@ -21,7 +21,7 @@
                         <div class="card-body">
                             <i class="bi bi-bag fs-2 text-primary"></i>
                             <div class="fw-semibold mt-2">{{ app.user.orders|length }}</div>
-                            <div class="text-muted small">Commandes</div>
+                            <div class="text-muted small">{{ 'nav.my_orders'|trans }}</div>
                         </div>
                     </div>
                 </a>
@@ -32,7 +32,18 @@
                         <div class="card-body">
                             <i class="bi bi-heart fs-2 text-danger"></i>
                             <div class="fw-semibold mt-2">{{ favoritesCount }}</div>
-                            <div class="text-muted small">Favoris</div>
+                            <div class="text-muted small">{{ 'nav.my_favorites'|trans }}</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-4">
+                <a href="{{ path('app_account_addresses') }}" class="text-decoration-none">
+                    <div class="card text-center h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <i class="bi bi-geo-alt fs-2 text-info"></i>
+                            <div class="fw-semibold mt-2">{{ addressesCount }}</div>
+                            <div class="text-muted small">{{ 'nav.addresses'|trans }}</div>
                         </div>
                     </div>
                 </a>
@@ -44,7 +55,7 @@
                         <div class="card-body">
                             <i class="bi bi-tag fs-2 text-success"></i>
                             <div class="fw-semibold mt-2">{{ app.user.products|length }}</div>
-                            <div class="text-muted small">Annonces</div>
+                            <div class="text-muted small">{{ 'nav.my_ads'|trans }}</div>
                         </div>
                     </div>
                 </a>
@@ -53,18 +64,18 @@
         </div>
 
         {# Dernières commandes #}
-        <h5 class="mb-3">Dernières commandes</h5>
+        <h5 class="mb-3">{{ 'section.recent_orders'|trans }}</h5>
         {% if recentOrders|length == 0 %}
-            <p class="text-muted">Aucune commande pour le moment.</p>
+            <p class="text-muted">{{ 'empty.no_orders'|trans }}</p>
         {% else %}
             <div class="table-responsive">
                 <table class="table table-hover align-middle">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Date</th>
-                            <th>Total</th>
-                            <th>Statut</th>
+                            <th>{{ 'table.date'|trans }}</th>
+                            <th>{{ 'table.total'|trans }}</th>
+                            <th>{{ 'table.status'|trans }}</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -74,19 +85,17 @@
                             <td>{{ order.id }}</td>
                             <td>{{ order.createdAt|date('d/m/Y') }}</td>
                             <td>{{ order.totalPrice }} €</td>
-                            <td><span class="badge bg-secondary">{{ order.status }}</span></td>
+                            <td><span class="badge bg-secondary">{{ ('status.' ~ order.status)|trans }}</span></td>
                             <td>
                                 <a href="{{ path('app_account_order_show', {id: order.id}) }}"
-                                   class="btn btn-sm btn-outline-primary">Détail</a>
+                                   class="btn btn-sm btn-outline-primary">{{ 'detail'|trans }}</a>
                             </td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
             </div>
-            <a href="{{ path('app_account_orders') }}" class="btn btn-outline-secondary btn-sm">
-                Toutes les commandes
-            </a>
+            <a href="{{ path('app_account_orders') }}" class="btn btn-outline-secondary btn-sm">{{ 'section.all_orders'|trans }}</a>
         {% endif %}
     </div>
 

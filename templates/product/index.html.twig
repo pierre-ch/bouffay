@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Annonces — Bouffay{% endblock %}
+{% block title %}{{ 'title.products'|trans }}{% endblock %}
 
 {% block body %}
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h1>Annonces</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>{{ 'nav.products'|trans }}</h1>
     {% if is_granted('ROLE_VENDEUR') %}
         <a href="{{ path('app_product_new') }}" class="btn btn-primary">
-            <i class="bi bi-plus-lg"></i> Nouvelle annonce
+            <i class="bi bi-plus-lg"></i> {{ 'button.new_product'|trans }}
         </a>
     {% endif %}
 </div>
@@ -76,9 +76,7 @@
 <p class="text-muted small mb-3">{{ products|length }} annonce{{ products|length != 1 ? 's' : '' }} trouvée{{ products|length != 1 ? 's' : '' }}</p>
 
 {% if products|length == 0 %}
-    <div class="alert alert-info">
-        <i class="bi bi-info-circle"></i> Aucune annonce ne correspond à vos critères.
-    </div>
+    <p class="text-muted">{{ 'empty.no_products'|trans }}</p>
 {% else %}
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for product in products %}
@@ -102,17 +100,20 @@
                             <span class="badge bg-secondary">{{ tag.name }}</span>
                         {% endfor %}
                     </p>
-                    {% if product.expiresAt %}
-                        <p class="card-text text-muted small">
-                            <i class="bi bi-calendar"></i> Expire le {{ product.expiresAt|date('d/m/Y') }}
-                        </p>
-                    {% endif %}
-                    <p class="card-text fw-bold fs-5">{{ product.price }} €</p>
+                    <p class="card-text fw-bold fs-5">{{ product.price }} {{ 'format.currency'|trans }}</p>
                 </div>
-                <div class="card-footer d-flex justify-content-between align-items-center">
-                    <small class="text-muted">{{ product.seller.firstName }} {{ product.seller.lastName }}</small>
+                <div class="card-footer d-flex justify-content-between align-items-center gap-2">
+                    <small class="text-muted">{{ product.seller.firstName }}</small>
+                    {% if app.user and app.user !== product.seller %}
+                    <form method="POST" action="{{ path('app_cart_add', {productId: product.id}) }}" class="d-inline">
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit" class="btn btn-sm btn-primary" title="{{ 'button.add_to_cart'|trans }}">
+                            <i class="bi bi-bag-plus"></i>
+                        </button>
+                    </form>
+                    {% endif %}
                     <a href="{{ path('app_product_show', {slug: product.slug}) }}"
-                       class="btn btn-sm btn-outline-primary">Voir</a>
+                       class="btn btn-sm btn-outline-primary">{{ 'button.view'|trans }}</a>
                 </div>
             </div>
         </div>
@@ -120,3 +121,4 @@
     </div>
 {% endif %}
 {% endblock %}
+

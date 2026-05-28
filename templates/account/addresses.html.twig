@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'nav.addresses'|trans }} - Bouffay Shop{% endblock %}
+
+{% block body %}
+<div class="container mt-5 mb-5">
+    <div class="row g-4">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            {% include 'account/_sidebar.html.twig' %}
+        </div>
+
+        <!-- Content -->
+        <div class="col-md-9">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>{{ 'nav.addresses'|trans }}</h1>
+                <a href="{{ path('app_account_address_add') }}" class="btn btn-primary">
+                    <i class="bi bi-plus-lg"></i> {{ 'button.add_address'|trans }}
+                </a>
+            </div>
+
+            {% if addresses|length == 0 %}
+                <div class="alert alert-info">
+                    <p>{{ 'empty.no_addresses'|trans }}</p>
+                    <a href="{{ path('app_account_address_add') }}" class="btn btn-primary btn-sm">
+                        Ajouter votre première adresse
+                    </a>
+                </div>
+            {% else %}
+                <div class="row g-3">
+                    {% for address in addresses %}
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    {% if address.isDefault %}
+                                        <span class="badge bg-success mb-2">
+                                            <i class="bi bi-star-fill"></i> {{ 'info.default_address'|trans }}
+                                        </span>
+                                    {% endif %}
+
+                                    <p class="card-text mb-3">
+                                        <strong>{{ address.street }}</strong><br>
+                                        {{ address.zipCode }} {{ address.city }}<br>
+                                        {{ address.country }}
+                                    </p>
+
+                                    <div class="btn-group w-100" role="group">
+                                        <a href="{{ path('app_account_address_edit', {id: address.id}) }}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-pencil"></i>{{ 'button.edit'|trans }}</a>
+
+                                        {% if not address.isDefault %}
+                                            <form method="POST" action="{{ path('app_account_address_default', {id: address.id}) }}" class="d-inline" style="flex: 1;">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('default-address-' ~ address.id) }}">
+                                                <button type="submit" class="btn btn-sm btn-outline-warning w-100">
+                                                    <i class="bi bi-star"></i> Par défaut
+                                                </button>
+                                            </form>
+                                        {% endif %}
+
+                                        <button type="button" class="btn btn-sm btn-outline-danger delete-address-btn"
+                                                data-address-id="{{ address.id }}"
+                                                data-csrf="{{ csrf_token('delete-address-' ~ address.id) }}">
+                                            <i class="bi bi-trash"></i>{{ 'button.delete'|trans }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+document.querySelectorAll('.delete-address-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const addressId = this.dataset.addressId;
+        const csrf = this.dataset.csrf;
+
+        if (confirm('Êtes-vous sûr de vouloir supprimer cette adresse ?')) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '{{ path("app_account_address_delete", {"id": "PLACEHOLDER"}) }}'.replace('PLACEHOLDER', addressId);
+            form.innerHTML = `<input type="hidden" name="_token" value="${csrf}">`;
+            document.body.appendChild(form);
+            form.submit();
+        }
+    });
+});
+</script>
+{% endblock %}

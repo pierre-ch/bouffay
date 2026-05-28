@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil — Bouffay{% endblock %}
+{% block title %}{{ 'title.home'|trans }}{% endblock %}
 
 {% block body %}
 <div class="py-5 text-center">
-    <h1 class="display-5 fw-bold">Bienvenue sur Bouffay</h1>
-    <p class="lead text-muted">Découvrez des snacks du monde entier.</p>
-    <a href="{{ path('app_product_index') }}" class="btn btn-primary btn-lg">Voir les produits</a>
+    <h1 class="display-5 fw-bold">{{ 'section.welcome'|trans }}</h1>
+    <p class="lead text-muted">{{ 'section.discover'|trans }}</p>
+    <a href="{{ path('app_product_index') }}" class="btn btn-primary btn-lg">{{ 'nav.products'|trans }}</a>
 </div>
 {% endblock %}
+

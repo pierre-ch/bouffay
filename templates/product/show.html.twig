@@ -63,7 +63,9 @@
         <hr>
         <p class="text-muted small">
             Vendu par
-            <strong>{{ product.seller.firstName }} {{ product.seller.lastName }}</strong>
+            <a href="{{ path('app_seller_show', {id: product.seller.id}) }}" class="fw-semibold text-decoration-none">
+                {{ product.seller.firstName }} {{ product.seller.lastName }}
+            </a>
             &bull; Publié le {{ product.createdAt|date('d/m/Y') }}
         </p>
 

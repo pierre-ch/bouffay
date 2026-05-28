@@ -1,0 +1,12 @@
+{% set r = rating ?? 0 %}
+<span class="text-warning">
+    {% for i in 1..5 %}
+        {% if i <= r %}
+            <i class="bi bi-star-fill"></i>
+        {% elseif i - 0.5 <= r %}
+            <i class="bi bi-star-half"></i>
+        {% else %}
+            <i class="bi bi-star"></i>
+        {% endif %}
+    {% endfor %}
+</span>

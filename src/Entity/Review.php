@@ -6,6 +6,7 @@ use App\Repository\ReviewRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReviewRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_REVIEW_AUTHOR_SELLER', fields: ['author', 'seller'])]
 class Review
 {
     #[ORM\Id]

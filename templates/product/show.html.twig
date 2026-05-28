@@ -70,12 +70,10 @@
         </p>
 
         {% if app.user and app.user !== product.seller %}
-            <a href="#" class="btn btn-success w-100 mb-2">
-                <i class="bi bi-cart-plus"></i> Ajouter au panier
-            </a>
+            {% include 'cart/_add_form.html.twig' %}
             {% set isFav = app.user.favorites|filter(f => f.product.id == product.id)|length > 0 %}
             <form method="post"
-                  action="{{ path('app_account_favorite_toggle', {id: product.id}) }}">
+                  action="{{ path('app_account_favorite_toggle', {id: product.id}) }}" class="mt-2">
                 <input type="hidden" name="_token"
                        value="{{ csrf_token('favorite-' ~ product.id) }}">
                 <button class="btn w-100 {% if isFav %}btn-danger{% else %}btn-outline-danger{% endif %}">

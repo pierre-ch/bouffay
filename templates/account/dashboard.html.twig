@@ -37,6 +37,17 @@
                     </div>
                 </a>
             </div>
+            <div class="col-sm-4">
+                <a href="{{ path('app_account_addresses') }}" class="text-decoration-none">
+                    <div class="card text-center h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <i class="bi bi-geo-alt fs-2 text-info"></i>
+                            <div class="fw-semibold mt-2">{{ addressesCount }}</div>
+                            <div class="text-muted small">Adresses</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
             {% if is_granted('ROLE_VENDEUR') %}
             <div class="col-sm-4">
                 <a href="{{ path('app_product_my') }}" class="text-decoration-none">

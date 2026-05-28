@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valider la Commande - Bouffay Shop{% endblock %}
+
+{% block body %}
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="bi bi-credit-card"></i> Valider votre commande
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Commande Summary -->
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Résumé de votre commande</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-sm mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Produit</th>
+                                <th class="text-center">Quantité</th>
+                                <th class="text-center">Prix unitaire</th>
+                                <th class="text-right">Sous-total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart.cartItems %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            {% if item.product.images|first %}
+                                                <img
+                                                    src="{{ asset('uploads/products/' ~ item.product.images|first.filename) }}"
+                                                    alt="{{ item.product.name }}"
+                                                    class="img-thumbnail me-2"
+                                                    style="width: 40px; height: 40px; object-fit: cover;"
+                                                >
+                                            {% endif %}
+                                            <div>
+                                                <strong>{{ item.product.name }}</strong><br>
+                                                <small class="text-muted">{{ item.product.seller.firstName }}</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">{{ item.quantity }}</td>
+                                    <td class="text-center">{{ item.product.price|number_format(2, ',', ' ') }} €</td>
+                                    <td class="text-right">
+                                        {% set subtotal = item.product.price * item.quantity %}
+                                        <strong>{{ subtotal|number_format(2, ',', ' ') }} €</strong>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer bg-light">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-end">
+                            <strong>Total: {{ total|number_format(2, ',', ' ') }} €</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Address Selection -->
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Adresse de livraison</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ path('app_cart_validate') }}" id="orderForm">
+                        <input type="hidden" name="_token" value="{{ csrf_token('validate-order') }}">
+
+                        <div class="mb-3">
+                            {% if user.addresses|length > 0 %}
+                                <label class="form-label">Sélectionner une adresse de livraison</label>
+                                <div class="address-list">
+                                    {% for address in user.addresses %}
+                                        <div class="form-check mb-3">
+                                            <input
+                                                class="form-check-input"
+                                                type="radio"
+                                                name="address_id"
+                                                id="address_{{ address.id }}"
+                                                value="{{ address.id }}"
+                                                {% if loop.first %}checked{% endif %}
+                                                required
+                                            >
+                                            <label class="form-check-label" for="address_{{ address.id }}">
+                                                <strong>{{ address.street }}</strong><br>
+                                                {{ address.zipCode }} {{ address.city }}, {{ address.country }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <div class="alert alert-warning">
+                                    <p>Vous n'avez pas encore d'adresse sauvegardée.</p>
+                                    <a href="{{ path('app_account', {'_fragment': 'addresses'}) }}" class="btn btn-sm btn-warning">
+                                        Ajouter une adresse
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Sidebar -->
+        <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="card sticky-top" style="top: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Récapitulatif</h5>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Nombre d'articles:</span>
+                            <strong>{{ cart.cartItems|length }}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Sous-total:</span>
+                            <strong>{{ total|number_format(2, ',', ' ') }} €</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3 text-muted">
+                            <span>Livraison:</span>
+                            <span>Gratuite</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <span class="h6">Total:</span>
+                            <strong class="h6 text-success">{{ total|number_format(2, ',', ' ') }} €</strong>
+                        </div>
+                    </div>
+
+                    <button
+                        type="submit"
+                        form="orderForm"
+                        class="btn btn-success w-100 mb-2"
+                        {% if user.addresses|length == 0 %}disabled{% endif %}
+                    >
+                        <i class="bi bi-check-circle"></i> Confirmer la commande
+                    </button>
+
+                    <a href="{{ path('app_cart_show') }}" class="btn btn-outline-secondary w-100">
+                        <i class="bi bi-arrow-left"></i> Retour au panier
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

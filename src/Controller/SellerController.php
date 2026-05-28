@@ -25,12 +25,12 @@ class SellerController extends AbstractController
     ): Response {
         $currentUser = $this->getUser();
         $canReview   = false;
-        $alreadyReviewed = false;
+        $userReview  = null;
         $form = null;
 
         if ($currentUser && $currentUser !== $seller) {
-            $alreadyReviewed = $reviewRepo->hasAlreadyReviewed($currentUser, $seller);
-            $canReview = !$alreadyReviewed;
+            $userReview = $reviewRepo->findOneBy(['author' => $currentUser, 'seller' => $seller]);
+            $canReview = !$userReview;
 
             if ($canReview) {
                 $review = new Review();
@@ -57,8 +57,28 @@ class SellerController extends AbstractController
             'products'        => $productRepo->findBy(['seller' => $seller, 'status' => 'active'], ['createdAt' => 'DESC']),
             'reviews'         => $reviewRepo->findBy(['seller' => $seller], ['createdAt' => 'DESC']),
             'averageRating'   => $reviewRepo->getAverageRating($seller),
+            'userReview'      => $userReview,
             'form'            => $form,
-            'alreadyReviewed' => $alreadyReviewed,
         ]);
+    }
+
+    #[Route('/avis/{id}/supprimer', name: 'app_review_delete', methods: ['POST'])]
+    public function deleteReview(Review $review, Request $request, EntityManagerInterface $em): Response
+    {
+        if ($review->getAuthor() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        if (!$this->isCsrfTokenValid('delete-review-' . $review->getId(), $request->request->get('_token'))) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $sellerId = $review->getSeller()->getId();
+        $em->remove($review);
+        $em->flush();
+
+        $this->addFlash('success', 'Votre avis a été supprimé.');
+
+        return $this->redirectToRoute('app_seller_show', ['id' => $sellerId]);
     }
 }

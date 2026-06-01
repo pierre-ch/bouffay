@@ -33,7 +33,8 @@ RUN composer install --no-dev --no-interaction --no-progress --optimize-autoload
     && composer dump-autoload --optimize --classmap-authoritative --no-dev \
     && mkdir -p var/cache var/log \
     && php bin/console cache:clear --env=prod --no-debug \
-    && php bin/console cache:warmup --env=prod --no-debug --no-optional-warmers
+    && php bin/console cache:warmup --env=prod --no-debug --no-optional-warmers \
+    && php bin/console assets:install public
 
 FROM base AS final
 

@@ -15,7 +15,8 @@ class LocaleController extends AbstractController
     #[Route('/change-locale/{locale}', name: 'app_change_locale')]
     public function changeLocale(string $locale, Request $request): Response
     {
-        if (!in_array($locale, ['fr', 'en'])) {
+        $supportedLocales = ['fr', 'en', 'pt', 'ja', 'ht', 'ar', 'es', 'de', 'ko', 'it'];
+        if (!in_array($locale, $supportedLocales)) {
             $locale = 'fr';
         }
 
@@ -36,7 +37,7 @@ class LocaleController extends AbstractController
 
     private function replaceLocaleInUrl(string $url, string $locale): string
     {
-        $locales = ['fr', 'en'];
+        $locales = ['fr', 'en', 'pt', 'ja', 'ht', 'ar', 'es', 'de', 'ko', 'it'];
         foreach ($locales as $l) {
             if (preg_match('#/' . $l . '(/|$)#', $url)) {
                 return preg_replace('#/' . $l . '(/|$)#', '/' . $locale . '$1', $url);

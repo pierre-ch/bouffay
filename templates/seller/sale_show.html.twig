@@ -17,14 +17,14 @@
 
         <div class="row g-3 mb-4">
             <div class="col-md-4">
-                <div class="card border-0 bg-light p-3 h-100">
+                <div class="card border-0 bg-body-tertiary p-3 h-100">
                     <h6 class="text-muted small text-uppercase mb-2">{{ 'table.client'|trans }}</h6>
                     <div class="fw-semibold">{{ order.buyer.firstName }} {{ order.buyer.lastName }}</div>
                     <div class="small text-muted">{{ order.buyer.email }}</div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card border-0 bg-light p-3 h-100">
+                <div class="card border-0 bg-body-tertiary p-3 h-100">
                     <h6 class="text-muted small text-uppercase mb-2">{{ 'table.shipping_address'|trans }}</h6>
                     {% if order.address %}
                         <div class="small">
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card border-0 bg-light p-3 h-100">
+                <div class="card border-0 bg-body-tertiary p-3 h-100">
                     <h6 class="text-muted small text-uppercase mb-2">{{ 'table.status'|trans }}</h6>
                     {% set badges = {pending: 'warning', paid: 'info', shipped: 'primary', delivered: 'success', cancelled: 'danger'} %}
                     {% set currentStatus = sellerItems[0].status %}
@@ -88,7 +88,7 @@
                                     <img src="{{ asset('uploads/products/' ~ item.product.images.first.filename) }}"
                                          alt="{{ item.product.name }}" class="rounded" style="width: 40px; height: 40px; object-fit: cover;">
                                 {% else %}
-                                    <div class="bg-light rounded d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <div class="bg-body-tertiary rounded d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                                         <i class="bi bi-image text-muted"></i>
                                     </div>
                                 {% endif %}
@@ -112,7 +112,7 @@
 
         {% if sellerItems[0].statusHistories|length > 0 %}
             <h5 class="mb-3 mt-4">{{ 'section.status_history'|trans }}</h5>
-            <div class="card border-0 shadow-sm p-4 mb-4 bg-light">
+            <div class="card border-0 shadow-sm p-4 mb-4 bg-body-tertiary">
                 <ul class="list-unstyled mb-0 ms-2" style="border-left: 2px solid #dee2e6; padding-left: 1.5rem; position: relative;">
                     {% for history in sellerItems[0].statusHistories %}
                         <li class="mb-3 position-relative">
@@ -134,7 +134,7 @@
 
         {% if otherItems|length > 0 %}
             <h5 class="mb-3 mt-5 text-muted">{{ 'section.other_items_in_order'|trans }}</h5>
-            <div class="table-responsive card border-0 shadow-sm opacity-75 bg-light">
+            <div class="table-responsive card border-0 shadow-sm opacity-75 bg-body-tertiary">
                 <table class="table align-middle mb-0 text-muted">
                     <thead class="table-light">
                         <tr>

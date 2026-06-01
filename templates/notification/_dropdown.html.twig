@@ -24,7 +24,7 @@
         {% else %}
             {% for notification in notifications %}
                 <li>
-                    <a class="dropdown-item py-2 {{ not notification.isRead ? 'bg-light' : '' }}" href="{{ path('app_notification_read', {id: notification.id}) }}">
+                    <a class="dropdown-item py-2 {{ not notification.isRead ? 'bg-body-secondary' : '' }}" href="{{ path('app_notification_read', {id: notification.id}) }}">
                         <div class="d-flex align-items-center mb-1">
                             {% if not notification.isRead %}
                                 <span class="spinner-grow spinner-grow-sm text-primary me-2" role="status" aria-hidden="true" style="width: 0.5rem; height: 0.5rem;"></span>
@@ -32,7 +32,7 @@
                             <small class="text-muted" style="font-size: 0.75rem;">{{ notification.createdAt|date('d/m/Y H:i') }}</small>
                         </div>
                         <div class="text-wrap" style="font-size: 0.85rem; line-height: 1.3;">
-                            {{ notification.messageKey|trans(notification.params) }}
+                            {{ notification.messageKey|trans(notification.params|default({})) }}
                         </div>
                     </a>
                 </li>

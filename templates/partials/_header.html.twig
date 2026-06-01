@@ -76,6 +76,8 @@
                         🇬🇧 EN
                         {% elseif app.request.locale == 'pt' %}
                         🇧🇷 PT
+                        {% elseif app.request.locale == 'ja' %}
+                        🇯🇵 JA
                         {% else %}
                         🇫🇷 FR
                         {% endif %}
@@ -89,6 +91,9 @@
                         </a></li>
                         <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'pt'}) }}">
                             🇧🇷 Português
+                        </a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'ja'}) }}">
+                            🇯🇵 日本語
                         </a></li>
                     </ul>
                 </li>

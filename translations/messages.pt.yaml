@@ -1,270 +1,210 @@
-button.add_address: 'Ajouter une adresse'
-button.add_to_cart: 'Ajouter au panier'
-button.add_to_favorites: 'Ajouter aux favoris'
-button.back: Retour
-button.cancel: Annuler
-button.checkout: 'Procéder au paiement'
-button.confirm: Confirmer
-button.continue_shopping: 'Continuer vos achats'
-button.create_account: 'Créer un compte'
-button.default: 'Par défaut'
-button.delete: Supprimer
-button.delete_review: "Supprimer l'avis"
-button.edit: Modifier
-button.edit_product: Éditer
-button.empty_cart: 'Vider le panier'
-button.filters: Filtres
-button.leave_review: 'Laisser un avis'
-button.login: 'Se connecter'
-button.manage: Gérer
-button.mark_all_read: 'Tout marquer comme lu'
-button.my_products: 'Mes annonces'
-button.new_product: 'Nouvelle annonce'
-button.publish: Publier
-button.publish_ad: "Publier l'annonce"
-button.register: 'Créer mon compte'
-button.remove: Retirer
-button.remove_from_favorites: 'Retirer des favoris'
-button.reset: Réinitialiser
-button.save: Enregistrer
-button.save_changes: 'Enregistrer les modifications'
-button.search: Rechercher
-button.set_as_default: 'Définir par défaut'
-button.update: 'Mettre à jour'
-button.view: Voir
-detail: Détail
-discover_products: 'Découvrir les produits'
-empty.empty_cart: 'Votre panier est vide.'
-empty.no_addresses: 'Aucune adresse enregistrée.'
-empty.no_favorites: 'Aucun favori pour le moment.'
-empty.no_notifications: 'Aucune notification non lue'
-empty.no_orders: 'Aucune commande pour le moment.'
-empty.no_products: 'Aucune annonce disponible pour le moment.'
-empty.no_reviews: 'Aucun avis pour le moment.'
-empty.no_sales: "Vous n'avez pas encore de ventes."
-empty.no_seller_products: "Ce vendeur n'a aucune annonce active."
-empty.no_user_products: "Vous n'avez pas encore publié d'annonce."
-flash.account_created: 'Votre compte a été créé avec succès.'
-flash.ad_deleted: 'Annonce supprimée.'
-flash.ad_published: 'Votre annonce a été publiée.'
-flash.ad_updated: 'Annonce mise à jour.'
-flash.address_added: 'Adresse ajoutée avec succès.'
-flash.address_default_updated: 'Adresse par défaut mise à jour.'
-flash.address_deleted: 'Adresse supprimée.'
-flash.address_updated: 'Adresse mise à jour.'
-flash.cart_added: 'Produit ajouté au panier.'
-flash.cart_emptied: 'Panier vidé.'
-flash.cart_removed: 'Produit supprimé du panier.'
-flash.cart_updated: 'Panier mis à jour.'
-flash.error.address_missing: 'Veuillez sélectionner une adresse de livraison.'
-flash.error.cart_empty: 'Votre panier est vide.'
-flash.error.form_invalid: 'Veuillez corriger les erreurs du formulaire.'
-flash.error.invalid_status: 'Statut invalide.'
-flash.error.stock_insufficient: 'Stock insuffisant'
-flash.favorite_added: 'Ajouté aux favoris.'
-flash.favorite_removed: 'Retiré des favoris.'
-flash.order_created: 'Commande créée avec succès.'
-flash.order_status_updated: 'Le statut de la commande a été mis à jour.'
-flash.profile_updated: 'Profil mis à jour.'
-flash.review_deleted: 'Votre avis a été supprimé.'
-flash.review_published: 'Votre avis a été publié.'
-form.ad_name: "Nom de l'annonce"
-form.available_quantity: 'Quantité disponible'
-form.category: Catégorie
-form.choose_category: 'Choisir une catégorie'
-form.city: Ville
-form.city_placeholder: Paris
-form.content: Contenu
-form.country: Pays
-form.country_placeholder: France
-form.description: Description
-form.email: Email
-form.error.city_blank: 'Veuillez entrer une ville'
-form.error.country_blank: 'Veuillez entrer un pays'
-form.error.invalid_image_format: 'Format accepté : JPG, PNG, WebP'
-form.error.min_quantity: 'La quantité doit être au moins 1'
-form.error.street_blank: 'Veuillez entrer une adresse'
-form.error.zip_blank: 'Veuillez entrer un code postal'
-form.expires_at: 'Expire le'
-form.first_name: Prénom
-form.helper_images: 'JPG, PNG ou WebP, 2 Mo max par image.'
-form.helper_password: 'Minimum 10 caractères'
-form.helper_tags: 'Maintenez Ctrl (ou Cmd) pour sélectionner plusieurs tags.'
-form.images: Images
-form.is_default: 'Par défaut'
-form.last_name: Nom
-form.locale: Langue
-form.locale_en: Inglês
-form.locale_fr: Francês
-form.name: Nom
-form.origin: Origine
-form.password: 'Mot de passe'
-form.password_confirm: 'Confirmer le mot de passe'
-form.phone: Téléphone
-form.photos: 'Photos (max 5)'
-form.price: Prix
-form.quantity: Quantité
-form.quantity_placeholder: Quantité
-form.rating: Note
-form.remember_me: 'Se souvenir de moi'
-form.review_content: 'Votre commentaire'
-form.review_placeholder: 'Décrivez votre expérience avec ce vendeur…'
-form.search.expires_after: 'Expire après le'
-form.search.expires_before: 'Expire avant le'
-form.search.max_price: 'Prix max'
-form.search.min_price: 'Prix min'
-form.search.placeholder: Rechercher…
-form.search.placeholder_long: 'Rechercher un produit…'
-form.sort.date_asc: 'Trier par : Plus anciens'
-form.sort.date_desc: 'Trier par : Plus récents'
-form.sort.expires_asc: 'Trier par : Expiration proche'
-form.sort.name_asc: 'Trier par : Nom A→Z'
-form.sort.name_desc: 'Trier par : Nom Z→A'
-form.sort.price_asc: 'Trier par : Prix croissant'
-form.sort.price_desc: 'Trier par : Prix décroissant'
-form.sort.trending: 'Trier par : Tendance'
-form.status: Statut
-form.status_active: 'En vente'
-form.status_inactive: Suspendu
-form.status_sold: Vendu
-form.stock: Stock
-form.street: Rue
-form.street_placeholder: '123 Rue de la Paix'
-form.tags: Tags
-form.theme: Thème
-form.theme_dark: Sombre
-form.theme_light: Clair
-form.weight: Poids
-form.weight_kg: 'Poids (kg)'
-form.zip_code: 'Code postal'
-form.zip_placeholder: '75001'
-format.currency: €
-info.ads_found: 'annonce(s) trouvée(s)'
-info.default_address: 'Adresse par défaut'
-info.expires: 'Expire le :'
-info.free_shipping: Gratuite
-info.item: article
-info.items: articles
-info.member_since: 'Membre depuis'
-info.new_seller: 'Nouveau vendeur'
-info.no_address: "À l'absence d'adresse"
-info.origin: 'Origine :'
-info.other_items_in_order: "Cette commande contient également des produits d'autres vendeurs. Les modifier affectera le statut global."
-info.published_on: 'Publié le'
-info.review: avis
-info.reviews: avis
-info.shipping: 'Livraison:'
-info.sold_by: 'Vendu par'
-info.stock: 'Stock :'
-info.subtotal: 'Sous-total:'
-info.to_define: 'À définir'
-info.weight: 'Poids :'
-message.already_account: 'Déjà un compte ? Se connecter'
-message.cannot_self_rate: 'Vous ne pouvez pas vous noter vous-même.'
-message.confirm_delete_address: 'Êtes-vous sûr de vouloir supprimer cette adresse ?'
-message.confirm_delete_product: 'Êtes-vous sûr de vouloir supprimer ce produit ?'
-message.confirm_delete_review: 'Êtes-vous sûr de vouloir supprimer votre avis ?'
-message.confirm_empty_cart: 'Êtes-vous sûr de vouloir vider votre panier ?'
-message.error_generic: "Une erreur s'est produite. Veuillez réessayer."
-message.greeting: 'Bonjour, %firstName%'
-message.login_to_review: 'Connectez-vous pour laisser un avis.'
-message.no_account: "Pas encore de compte ? S'inscrire"
-message.success_address_created: 'Adresse créée avec succès.'
-message.success_address_deleted: 'Adresse supprimée avec succès.'
-message.success_address_updated: 'Adresse mise à jour avec succès.'
-message.success_product_created: 'Produit créé avec succès.'
-message.success_product_deleted: 'Produit supprimé avec succès.'
-message.success_product_updated: 'Produit mis à jour avec succès.'
-message.success_review_created: 'Avis créé avec succès.'
-message.success_review_deleted: 'Avis supprimé avec succès.'
-nav.addresses: Adresses
-nav.admin: Administração
-nav.cart: Carrinho
-nav.dashboard: 'Tableau de bord'
-nav.home: Início
-nav.language: Idioma
-nav.login: Entrar
-nav.logout: Sair
+flash.error.invalid_status: 'Status inválido.'
+flash.error.stock_insufficient: 'Estoque insuficiente'
+flash.favorite_added: 'Adicionado aos favoritos.'
+flash.favorite_removed: 'Removido dos favoritos.'
+flash.order_created: 'Pedido criado com sucesso.'
+flash.order_status_updated: 'O status do pedido foi atualizado.'
+flash.profile_updated: 'Perfil atualizado.'
+flash.review_deleted: 'Sua avaliação foi excluída.'
+flash.review_published: 'Sua avaliação foi publicada.'
+form.ad_name: 'Nome do anúncio'
+form.available_quantity: 'Quantidade disponível'
+form.category: 'Categoria'
+form.choose_category: 'Escolher uma categoria'
+form.city: 'Cidade'
+form.city_placeholder: 'São Paulo'
+form.content: 'Conteúdo'
+form.country: 'País'
+form.country_placeholder: 'Brasil'
+form.description: 'Descrição'
+form.email: 'E-mail'
+form.error.city_blank: 'Por favor, insira uma cidade'
+form.error.country_blank: 'Por favor, insira um país'
+form.error.invalid_image_format: 'Formato aceito: JPG, PNG, WebP'
+form.error.min_quantity: 'A quantidade deve ser pelo menos 1'
+form.error.street_blank: 'Por favor, insira um endereço'
+form.error.zip_blank: 'Por favor, insira um CEP'
+form.expires_at: 'Expira em'
+form.first_name: 'Nome'
+form.helper_images: 'JPG, PNG ou WebP, máx 2 MB por imagem.'
+form.helper_password: 'Mínimo de 10 caracteres'
+form.helper_tags: 'Segure Ctrl (ou Cmd) para selecionar várias tags.'
+form.images: 'Imagens'
+form.is_default: 'Padrão'
+form.last_name: 'Sobrenome'
+form.locale: 'Idioma'
+form.locale_en: 'Inglês'
+form.locale_fr: 'Francês'
+form.locale_pt: 'Português (BR)'
+form.locale_ja: 'Japonês'
+form.name: 'Nome'
+form.origin: 'Origem'
+form.password: 'Senha'
+form.password_confirm: 'Confirmar senha'
+form.phone: 'Telefone'
+form.photos: 'Fotos (máx 5)'
+form.price: 'Preço'
+form.quantity: 'Quantidade'
+form.quantity_placeholder: 'Quantidade'
+form.rating: 'Nota'
+form.remember_me: 'Lembrar-me'
+form.review_content: 'Seu comentário'
+form.review_placeholder: 'Descreva sua experiência com este vendedor…'
+form.search.expires_after: 'Expira após'
+form.search.expires_before: 'Expira antes de'
+form.search.max_price: 'Preço máx'
+form.search.min_price: 'Preço mín'
+form.search.placeholder: 'Buscar…'
+form.search.placeholder_long: 'Buscar um produto…'
+form.sort.date_asc: 'Ordenar por: Mais antigos'
+form.sort.date_desc: 'Ordenar por: Mais recentes'
+form.sort.expires_asc: 'Ordenar por: Expiração próxima'
+form.sort.name_asc: 'Ordenar por: Nome A→Z'
+form.sort.name_desc: 'Ordenar por: Nome Z→A'
+form.sort.price_asc: 'Ordenar por: Preço crescente'
+form.sort.price_desc: 'Ordenar por: Preço decrescente'
+form.sort.trending: 'Ordenar por: Tendência'
+form.status: 'Status'
+form.status_active: 'À venda'
+form.status_inactive: 'Suspenso'
+form.status_sold: 'Vendido'
+form.stock: 'Estoque'
+form.street: 'Rua'
+form.street_placeholder: 'Rua das Flores, 123'
+form.tags: 'Tags'
+form.theme: 'Tema'
+form.theme_dark: 'Escuro'
+form.theme_light: 'Claro'
+form.weight: 'Peso'
+form.weight_kg: 'Peso (kg)'
+form.zip_code: 'CEP'
+form.zip_placeholder: '01000-000'
+format.currency: 'R$'
+info.ads_found: 'anúncio(s) encontrado(s)'
+info.default_address: 'Endereço padrão'
+info.expires: 'Expira em:'
+info.free_shipping: 'Grátis'
+info.item: 'item'
+info.items: 'itens'
+info.member_since: 'Membro desde'
+info.new_seller: 'Novo vendedor'
+info.no_address: 'Sem endereço'
+info.origin: 'Origem:'
+info.other_items_in_order: 'Este pedido também contém produtos de outros vendedores. Alterá-los afetará o status global.'
+info.published_on: 'Publicado em'
+info.review: 'avaliação'
+info.reviews: 'avaliações'
+info.shipping: 'Frete:'
+info.sold_by: 'Vendido por'
+info.stock: 'Estoque:'
+info.subtotal: 'Subtotal:'
+info.to_define: 'A definir'
+info.weight: 'Peso:'
+message.already_account: 'Já tem uma conta? Entrar'
+message.cannot_self_rate: 'Você não pode se avaliar.'
+message.confirm_delete_address: 'Tem certeza de que deseja excluir este endereço?'
+message.confirm_delete_product: 'Tem certeza de que deseja excluir este produto?'
+message.confirm_delete_review: 'Tem certeza de que deseja excluir sua avaliação?'
+message.confirm_empty_cart: 'Tem certeza de que deseja esvaziar seu carrinho?'
+message.error_generic: 'Ocorreu um erro. Por favor, tente novamente.'
+message.greeting: 'Olá, %firstName%'
+message.login_to_review: 'Faça login para deixar uma avaliação.'
+message.no_account: 'Ainda não tem conta? Cadastrar-se'
+message.success_address_created: 'Endereço criado com sucesso.'
+message.success_address_deleted: 'Endereço excluído com sucesso.'
+message.success_address_updated: 'Endereço atualizado com sucesso.'
+message.success_product_created: 'Produto criado com sucesso.'
+message.success_product_deleted: 'Produto excluído com sucesso.'
+message.success_product_updated: 'Produto atualizado com sucesso.'
+message.success_review_created: 'Avaliação criada com sucesso.'
+message.success_review_deleted: 'Avaliação excluída com sucesso.'
+nav.addresses: 'Endereços'
+nav.admin: 'Administração'
+nav.cart: 'Carrinho'
+nav.dashboard: 'Painel'
+nav.home: 'Início'
+nav.language: 'Idioma'
+nav.login: 'Entrar'
+nav.logout: 'Sair'
 nav.my_account: 'Minha Conta'
-nav.my_ads: 'Mes annonces'
-nav.my_favorites: 'Mes favoris'
-nav.my_orders: 'Meus Pedidos'
-nav.my_profile: 'Mon profil'
-nav.my_sales: 'Mes ventes'
-nav.notifications: Notifications
-nav.orders_received: 'Commandes reçues'
-nav.products: Produtos
-nav.register: Cadastrar
-nav.sign_up: "S'inscrire"
-notification.new_order: 'Nouvelle commande reçue ! (%order_id%)'
-notification.order_status_updated: 'Votre colis pour la commande #%order_id% a été mis à jour par %seller%'
-published_on_date: 'Publié le'
-section.all_orders: 'Toutes les commandes'
+nav.my_ads: 'Meus anúncios'
+nav.my_favorites: 'Meus favoritos'
+nav.my_orders: 'Meus pedidos'
+nav.my_profile: 'Meu perfil'
+nav.my_sales: 'Minhas vendas'
+nav.notifications: 'Notificações'
+nav.orders_received: 'Pedidos recebidos'
+nav.products: 'Produtos'
+nav.register: 'Cadastro'
+nav.sign_up: 'Cadastrar-se'
+notification.new_order: 'Novo pedido recebido! (%order_id%)'
+notification.order_status_updated: 'Seu pacote do pedido #%order_id% foi atualizado por %seller%'
+published_on_date: 'Publicado em'
+section.all_orders: 'Todos os pedidos'
 section.discover: 'Descubra snacks do mundo inteiro.'
-section.items_sold_by_you: 'Produits vendus par vous'
-section.leave_review: 'Laisser un avis'
-section.my_review: 'Mon avis'
-section.order_summary: 'Résumé de la commande'
-section.order_summary_full: 'Résumé de votre commande'
-section.ordered_items: 'Articles commandés'
-section.other_items_in_order: 'Autres produits dans cette commande (Vendeurs tiers)'
-section.other_reviews: 'Autres avis'
-section.package_from: 'Colis expédié par'
-section.recap: Récapitulatif
-section.recent_orders: 'Dernières commandes'
-section.shipping_address: 'Adresse de livraison'
-section.status_history: 'Historique des statuts'
+section.items_sold_by_you: 'Produtos vendidos por você'
+section.leave_review: 'Deixar uma avaliação'
+section.my_review: 'Minha avaliação'
+section.order_summary: 'Resumo do pedido'
+section.order_summary_full: 'Resumo do seu pedido'
+section.ordered_items: 'Itens pedidos'
+section.other_items_in_order: 'Outros produtos neste pedido (vendedores terceiros)'
+section.other_reviews: 'Outras avaliações'
+section.package_from: 'Pacote enviado por'
+section.recap: 'Recapitulação'
+section.recent_orders: 'Últimos pedidos'
+section.shipping_address: 'Endereço de entrega'
+section.status_history: 'Histórico de status'
 section.welcome: 'Bem-vindo ao Bouffay'
-select_shipping_address: 'Sélectionner une adresse de livraison'
-status.cancelled: Annulée
-status.delivered: Livrée
-status.for_sale: 'En vente'
-status.paid: Payée
-status.partially_cancelled: 'Partiellement annulée'
-status.partially_delivered: 'Partiellement livrée'
-status.partially_paid: 'Partiellement payée'
-status.partially_shipped: 'Partiellement expédiée'
-status.pending: 'En attente'
-status.shipped: Expédiée
-status.sold: Vendu
-status.suspended: Suspendu
-table.action: Action
-table.ad: Annonce
-table.category: Catégorie
-table.client: Client
-table.date: Date
-table.items: Articles
+select_shipping_address: 'Selecionar endereço de entrega'
+status.cancelled: 'Cancelado'
+status.delivered: 'Entregue'
+status.for_sale: 'À venda'
+status.paid: 'Pago'
+status.partially_cancelled: 'Parcialmente cancelado'
+status.partially_delivered: 'Parcialmente entregue'
+status.partially_paid: 'Parcialmente pago'
+status.partially_shipped: 'Parcialmente enviado'
+status.pending: 'Pendente'
+status.shipped: 'Enviado'
+status.sold: 'Vendido'
+status.suspended: 'Suspenso'
+table.action: 'Ação'
+table.ad: 'Anúncio'
+table.category: 'Categoria'
+table.client: 'Cliente'
+table.date: 'Data'
+table.items: 'Itens'
 table.number: '#'
-table.order_number: 'N° commande'
-table.ordered_items: 'Articles commandés'
-table.price: Prix
-table.product: Produit
-table.published: 'Publiée le'
-table.quantity: Quantité
-table.seller: Vendeur
-table.shipping_address: 'Adresse de livraison'
-table.status: Statut
-table.stock: Stock
-table.subtotal: Sous-total
-table.total: Total
-table.total_for_you: 'Total de vos ventes :'
-table.unit_price: 'Prix unitaire'
+table.order_number: 'Nº do pedido'
+table.ordered_items: 'Itens pedidos'
+table.price: 'Preço'
+table.product: 'Produto'
+table.published: 'Publicado em'
+table.quantity: 'Quantidade'
+table.seller: 'Vendedor'
+table.shipping_address: 'Endereço de entrega'
+table.status: 'Status'
+table.stock: 'Estoque'
+table.subtotal: 'Subtotal'
+table.total: 'Total'
+table.total_for_you: 'Total das suas vendas:'
+table.unit_price: 'Preço unitário'
 title.cart: 'Meu Carrinho - Bouffay Shop'
-title.checkout: 'Valider la Commande - Bouffay Shop'
-title.dashboard: 'Tableau de Bord - Bouffay Shop'
-title.edit_product: 'Éditer Annonce - Bouffay Shop'
-title.favorites: 'Mes Favoris - Bouffay Shop'
+title.checkout: 'Finalizar Pedido - Bouffay Shop'
+title.dashboard: 'Painel - Bouffay Shop'
+title.edit_product: 'Editar Anúncio - Bouffay Shop'
+title.favorites: 'Meus Favoris - Bouffay Shop'
 title.home: 'Início — Bouffay'
 title.login: 'Entrar — Bouffay'
-title.my_products: 'Mes Annonces - Bouffay Shop'
-title.my_profile: 'Mon Profil - Bouffay Shop'
-title.my_sales: 'Mes ventes'
-title.new_product: 'Nouvelle Annonce - Bouffay Shop'
-title.order_show: 'Commande'
-title.orders: 'Mes Commandes - Bouffay Shop'
-title.product_show: 'Produit — Bouffay'
-title.products: 'Produtos — Bouffay'
-title.register: 'Cadastrar — Bouffay'
-title.sale_show: 'Commande Client'
-title.seller: 'Vendeur - Bouffay Shop'
-form.locale_pt: 'Português (BR)'
+title.my_products: 'Meus Anúncios - Bouffay Shop'
+title.my_profile: 'Meu Perfil - Bouffay Shop'
+title.my_sales: 'Minhas Vendas'
+title.new_product: 'Novo Anúncio - Bouffay Shop'
+title.order_show: 'Pedido'
+title.orders: 'Meus Pedidos - Bouffay Shop'
+title.product_show: 'Produto — Bouffay'
+title.products: 'Anúncios — Bouffay'
+title.register: 'Cadastro — Bouffay'
+title.sale_show: 'Pedido de Cliente'
+title.seller: 'Vendedor - Bouffay Shop'

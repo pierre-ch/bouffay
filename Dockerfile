@@ -29,8 +29,6 @@ ENV APP_ENV=prod
 ENV APP_DEBUG=0
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
-RUN echo "APP_ENV=prod" > .env.local
-
 RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader --no-scripts \
     && composer dump-autoload --optimize --classmap-authoritative --no-dev \
     && mkdir -p var/cache var/log \

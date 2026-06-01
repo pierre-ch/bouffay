@@ -146,6 +146,7 @@ info.free_shipping: Gratuite
 info.item: article
 info.items: articles
 info.member_since: 'Membre depuis'
+info.new_seller: 'Nouveau vendeur'
 info.no_address: "À l'absence d'adresse"
 info.origin: 'Origine :'
 info.other_items_in_order: "Cette commande contient également des produits d'autres vendeurs. Les modifier affectera le statut global."

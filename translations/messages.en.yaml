@@ -146,6 +146,7 @@ info.free_shipping: Free
 info.item: item
 info.items: items
 info.member_since: 'Member since'
+info.new_seller: 'New seller'
 info.no_address: 'If no address'
 info.origin: 'Origin:'
 info.other_items_in_order: 'This order also contains items from other sellers. Modifying it affects the global status.'

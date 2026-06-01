@@ -187,6 +187,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return trim($this->firstName . ' ' . $this->lastName) ?: $this->email;
+    }
+
     public function getTheme(): ?string
     {
         return $this->theme;
@@ -354,5 +359,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function getAverageRating(): ?float
+    {
+        if ($this->reviewsReceived->isEmpty()) {
+            return null;
+        }
+
+        $sum = 0;
+        foreach ($this->reviewsReceived as $review) {
+            $sum += $review->getRating();
+        }
+
+        return round($sum / $this->reviewsReceived->count(), 1);
     }
 }

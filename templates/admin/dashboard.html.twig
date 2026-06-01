@@ -1,0 +1,85 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}Dashboard Bouffay{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card bg-primary text-white shadow">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-users me-2"></i> Utilisateurs</h5>
+                    <p class="card-text fs-2 fw-bold">{{ users_count }}</p>
+                    <a href="{{ path('admin_user_index') }}" class="text-white text-decoration-none">
+                        Gérer les utilisateurs <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card bg-success text-white shadow">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-box me-2"></i> Produits</h5>
+                    <p class="card-text fs-2 fw-bold">{{ products_count }}</p>
+                    <a href="{{ path('admin_product_index') }}" class="text-white text-decoration-none">
+                        Gérer les produits <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card bg-info text-white shadow">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-shopping-cart me-2"></i> Commandes</h5>
+                    <p class="card-text fs-2 fw-bold">{{ orders_count }}</p>
+                    <a href="{{ path('admin_order_index') }}" class="text-white text-decoration-none">
+                        Gérer les commandes <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0"><i class="fas fa-clock me-2 text-muted"></i> 5 dernières commandes</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Client</th>
+                                    <th>Date</th>
+                                    <th>Total</th>
+                                    <th>Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in recent_orders %}
+                                    <tr>
+                                        <td>#{{ order.id }}</td>
+                                        <td>{{ order.buyer.firstName }} {{ order.buyer.lastName }}</td>
+                                        <td>{{ order.createdAt|date('d/m/Y H:i') }}</td>
+                                        <td>{{ order.totalPrice }} €</td>
+                                        <td>
+                                            <span class="badge bg-secondary">{{ order.globalStatus }}</span>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="5" class="text-center text-muted py-3">Aucune commande pour le moment.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

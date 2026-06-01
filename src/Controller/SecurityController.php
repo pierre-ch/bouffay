@@ -35,42 +35,9 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/inscription', name: 'app_register')]
-    public function register(
-        Request $request,
-        UserPasswordHasherInterface $passwordHasher,
-        EntityManagerInterface $em,
-    ): Response {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('app_home');
-        }
-
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(
-                $passwordHasher->hashPassword($user, $form->get('plainPassword')->getData())
-            );
-            $user->setCreatedAt(new \DateTimeImmutable());
-            $user->setTheme('light');
-            $user->setLocale('fr');
-
-            $cart = new Cart();
-            $cart->setUser($user);
-            $cart->setCreatedAt(new \DateTimeImmutable());
-
-            $em->persist($user);
-            $em->persist($cart);
-            $em->flush();
-
-            $this->addFlash('success', 'flash.account_created');
-
-            return $this->redirectToRoute('app_login');
-        }
-
-        return $this->render('security/register.html.twig', [
-            'form' => $form,
-        ]);
+    public function register(): Response
+    {
+        $this->addFlash('warning', 'Les inscriptions sont temporairement désactivées.');
+        return $this->redirectToRoute('app_login');
     }
 }

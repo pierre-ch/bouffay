@@ -61,11 +61,28 @@
         {% endif %}
 
         <hr>
-        <p class="text-muted small">{{ 'info.sold_by'|trans }}<a href="{{ path('app_seller_show', {id: product.seller.id}) }}" class="fw-semibold text-decoration-none">
-                {{ product.seller.firstName }} {{ product.seller.lastName }}
-            </a>
-            &bull; {{ 'published_on_date'|trans }} {{ product.createdAt|date('d/m/Y') }}
-        </p>
+        <div class="card border-0 bg-body-tertiary mb-3">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <p class="mb-1 text-muted small">{{ 'info.sold_by'|trans }} <a href="{{ path('app_seller_show', {id: product.seller.id}) }}" class="fw-semibold text-decoration-none">{{ product.seller.firstName }} {{ product.seller.lastName }}</a></p>
+                    <small class="text-muted">{{ 'published_on_date'|trans }} {{ product.createdAt|date('d/m/Y') }}</small>
+                </div>
+                {% set rating = product.seller.averageRating ?? 0 %}
+                {% set reviewCount = product.seller.reviewsReceived|length %}
+                <div class="text-end">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-star-fill text-warning me-1"></i>
+                        <span class="fw-bold fs-5">{{ rating|number_format(1, ',', ' ') }}</span>
+                        <span class="text-muted small ms-1">/ 5</span>
+                    </div>
+                    {% if reviewCount > 0 %}
+                        <small class="text-muted">({{ reviewCount }} {{ 'info.reviews'|trans }})</small>
+                    {% else %}
+                        <small class="text-muted fst-italic">{{ 'info.new_seller'|trans }}</small>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
 
         {% if app.user and app.user !== product.seller %}
             {% include 'cart/_add_form.html.twig' %}

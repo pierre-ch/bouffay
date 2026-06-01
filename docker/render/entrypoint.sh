@@ -12,14 +12,10 @@ mkdir -p var/cache var/log public/uploads
 chown -R www-data:www-data var public/uploads
 chmod -R u+rwX var public/uploads
 
-# Toutes les commandes Symfony tournent en www-data pour que les fichiers
-# générés (cache, logs) appartiennent au même user que php-fpm.
-su-exec www-data php bin/console cache:clear --env=prod --no-debug || true
-su-exec www-data php bin/console cache:warmup --env=prod --no-debug || true
-
 # Création/MAJ du schéma à partir des entités (les migrations existantes sont MySQL-only)
+# Lancée en arrière-plan pour ne pas bloquer le boot — le healthcheck doit répondre vite.
 if [ -n "${DATABASE_URL}" ]; then
-    su-exec www-data php bin/console doctrine:schema:update --force --complete --env=prod || true
+    su-exec www-data php bin/console doctrine:schema:update --force --complete --env=prod --no-interaction >/proc/1/fd/1 2>/proc/1/fd/2 &
 fi
 
 exec "$@"

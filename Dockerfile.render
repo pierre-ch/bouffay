@@ -30,7 +30,9 @@ ENV APP_DEBUG=0
 
 RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader --no-scripts \
     && composer dump-autoload --optimize --classmap-authoritative --no-dev \
-    && mkdir -p var/cache var/log
+    && mkdir -p var/cache var/log \
+    && php bin/console cache:clear --env=prod --no-debug \
+    && php bin/console cache:warmup --env=prod --no-debug --no-optional-warmers
 
 FROM base AS final
 

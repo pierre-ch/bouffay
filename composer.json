@@ -8,9 +8,11 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^2.18",
+        "doctrine/doctrine-fixtures-bundle": "^4.3",
         "doctrine/doctrine-migrations-bundle": "^3.7",
         "doctrine/orm": "^3.6",
         "easycorp/easyadmin-bundle": "^5.0",
+        "fakerphp/faker": "^1.24",
         "symfony/asset": "6.4.*",
         "symfony/console": "6.4.*",
         "symfony/dotenv": "6.4.*",
@@ -28,8 +30,6 @@
         "symfony/yaml": "6.4.*"
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^4.3",
-        "fakerphp/faker": "^1.24",
         "symfony/maker-bundle": "^1.67"
     },
     "config": {

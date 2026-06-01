@@ -3,10 +3,26 @@
 {% block title %}{{ 'title.home'|trans }}{% endblock %}
 
 {% block body %}
-<div class="py-5 text-center">
-    <h1 class="display-5 fw-bold">{{ 'section.welcome'|trans }}</h1>
+<style>
+@keyframes slide-up-fade {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-animate > * {
+  opacity: 0;
+  animation: slide-up-fade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.hero-animate h1 { animation-delay: 0.1s; }
+.hero-animate p { animation-delay: 0.3s; }
+.hero-animate a { animation-delay: 0.5s; }
+</style>
+
+<div class="py-5 text-center hero-animate">
+    <h1 class="display-5 fw-bold text-primary">{{ 'section.welcome'|trans }}</h1>
     <p class="lead text-muted">{{ 'section.discover'|trans }}</p>
-    <a href="{{ path('app_product_index') }}" class="btn btn-primary btn-lg">{{ 'nav.products'|trans }}</a>
+    <a href="{{ path('app_product_index') }}" class="btn btn-primary btn-lg mt-3 shadow-sm">{{ 'nav.products'|trans }} <i class="bi bi-arrow-right ms-2"></i></a>
 </div>
 {% endblock %}
 

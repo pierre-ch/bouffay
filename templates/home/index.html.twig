@@ -86,28 +86,14 @@
 .snack-2 { right: 25%; bottom: 15%; width: 140px; animation-delay: 2s; transform: rotate(-10deg); }
 .snack-3 { right: 5%; bottom: 30%; width: 120px; animation-delay: 4s; transform: rotate(25deg); }
 
-/* Features */
-.feature-card {
-  border: none;
-  border-radius: 1rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background: var(--bs-body-bg);
-}
-.feature-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-}
-.feature-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+/* Feature Icons (Keeping the circle background since Bootstrap lacks a circle-icon class) */
+.feature-icon-wrapper {
+  width: 64px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  margin: 0 auto 1rem;
-  background: rgba(var(--bs-primary-rgb), 0.1);
-  color: var(--bs-primary);
+  font-size: 1.75rem;
 }
 
 /* Scroll Animations */
@@ -128,7 +114,7 @@
 </style>
 
 <!-- Hero Section -->
-<div class="hero-section text-center text-md-start">
+<div class="hero-section text-center d-flex align-items-center justify-content-center">
     <div class="hero-overlay"></div>
     <!-- Decorative floating elements (visible on md+) -->
     <div class="d-none d-md-block">
@@ -138,24 +124,24 @@
     </div>
 
     <div class="container hero-content py-5">
-        <div class="row align-items-center">
-            <div class="col-md-7 hero-animate">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 hero-animate">
                 <span class="badge bg-primary rounded-pill px-3 py-2 mb-3 fw-bold shadow-sm">
                     ✨ {{ 'section.welcome'|trans }}
                 </span>
                 <h1 class="display-3 fw-bolder mb-3" style="line-height: 1.1;">
-                    Explore the World<br>
-                    <span class="text-primary">One Snack at a Time</span>
+                    {{ 'home.hero.title_1'|trans }}<br>
+                    <span class="text-primary">{{ 'home.hero.title_2'|trans }}</span>
                 </h1>
-                <p class="lead mb-4 fw-medium text-body-secondary" style="max-width: 500px;">
-                    {{ 'section.discover'|trans }} We bring the best international candies, chips, and drinks straight to your door.
+                <p class="lead mb-4 fw-medium text-body-secondary mx-auto">
+                    {{ 'section.discover'|trans }} {{ 'home.hero.subtitle'|trans }}
                 </p>
-                <div class="cta-buttons d-flex gap-3 justify-content-center justify-content-md-start">
-                    <a href="{{ path('app_product_index') }}" class="btn btn-primary btn-lg rounded-pill px-4 shadow-lg">
+                <div class="cta-buttons d-flex gap-3 justify-content-center">
+                    <a href="{{ path('app_product_index') }}" class="btn btn-primary btn-lg rounded-pill px-4 shadow-sm">
                         {{ 'nav.products'|trans }} <i class="bi bi-arrow-right ms-2"></i>
                     </a>
                     {% if not app.user %}
-                        <a href="{{ path('app_login') }}" class="btn btn-outline-dark btn-lg rounded-pill px-4 bg-white">
+                        <a href="{{ path('app_login') }}" class="btn btn-outline-dark btn-lg rounded-pill px-4 bg-white shadow-sm">
                             {{ 'nav.login'|trans }}
                         </a>
                     {% endif %}
@@ -169,30 +155,30 @@
 <div class="container mb-5 pb-5 border-bottom">
     <div class="row g-4 text-center">
         <div class="col-md-4">
-            <div class="card feature-card h-100 p-4">
-                <div class="feature-icon">
+            <div class="card h-100 p-4 border-0 shadow-sm rounded-4 bg-body">
+                <div class="feature-icon-wrapper rounded-circle bg-primary bg-opacity-10 text-primary mx-auto mb-3">
                     <i class="bi bi-globe-americas"></i>
                 </div>
-                <h4 class="fw-bold">Global Selection</h4>
-                <p class="text-muted mb-0">Rare and exclusive snacks from Japan, USA, Mexico, and more.</p>
+                <h4 class="fw-bold">{{ 'home.features.selection.title'|trans }}</h4>
+                <p class="text-muted mb-0">{{ 'home.features.selection.desc'|trans }}</p>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card feature-card h-100 p-4">
-                <div class="feature-icon">
+            <div class="card h-100 p-4 border-0 shadow-sm rounded-4 bg-body">
+                <div class="feature-icon-wrapper rounded-circle bg-primary bg-opacity-10 text-primary mx-auto mb-3">
                     <i class="bi bi-lightning-charge"></i>
                 </div>
-                <h4 class="fw-bold">Fast Delivery</h4>
-                <p class="text-muted mb-0">Get your cravings satisfied quickly with our express shipping network.</p>
+                <h4 class="fw-bold">{{ 'home.features.delivery.title'|trans }}</h4>
+                <p class="text-muted mb-0">{{ 'home.features.delivery.desc'|trans }}</p>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card feature-card h-100 p-4">
-                <div class="feature-icon">
+            <div class="card h-100 p-4 border-0 shadow-sm rounded-4 bg-body">
+                <div class="feature-icon-wrapper rounded-circle bg-primary bg-opacity-10 text-primary mx-auto mb-3">
                     <i class="bi bi-shield-check"></i>
                 </div>
-                <h4 class="fw-bold">Secure Marketplace</h4>
-                <p class="text-muted mb-0">Safe transactions between verified sellers and snack enthusiasts.</p>
+                <h4 class="fw-bold">{{ 'home.features.secure.title'|trans }}</h4>
+                <p class="text-muted mb-0">{{ 'home.features.secure.desc'|trans }}</p>
             </div>
         </div>
     </div>
@@ -202,16 +188,16 @@
 <div class="container mb-5">
     <div class="d-flex justify-content-between align-items-end mb-4">
         <div>
-            <h2 class="display-6 fw-bold mb-1">Trending Drops 🔥</h2>
-            <p class="text-muted mb-0">Freshly added to our catalog.</p>
+            <h2 class="display-6 fw-bold mb-1">{{ 'home.trending.title'|trans }} 🔥</h2>
+            <p class="text-muted mb-0">{{ 'home.trending.desc'|trans }}</p>
         </div>
-        <a href="{{ path('app_product_index') }}" class="btn btn-outline-primary rounded-pill px-4">View All</a>
+        <a href="{{ path('app_product_index') }}" class="btn btn-outline-primary rounded-pill px-4">{{ 'button.view_all'|trans }}</a>
     </div>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
         {% for product in latestProducts %}
             <div class="col scroll-reveal">
-                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden" style="transition: transform 0.2s;">
+                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
                     {% if product.images|length > 0 %}
                         <img src="{{ asset('uploads/products/' ~ product.images.first.filename) }}"
                              class="card-img-top" style="height:250px;object-fit:cover;"
@@ -239,7 +225,7 @@
                             <small class="text-muted fw-medium">{{ product.seller.firstName }}</small>
                         </div>
                         <a href="{{ path('app_product_show', {slug: product.slug}) }}"
-                           class="btn btn-sm btn-dark rounded-pill px-3 shadow-sm">View</a>
+                           class="btn btn-sm btn-dark rounded-pill px-3 shadow-sm">{{ 'button.view'|trans }}</a>
                     </div>
                 </div>
             </div>

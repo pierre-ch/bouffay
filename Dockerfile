@@ -27,6 +27,7 @@ COPY .env ./.env
 
 ENV APP_ENV=prod
 ENV APP_DEBUG=0
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
 RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader --no-scripts \
     && composer dump-autoload --optimize --classmap-authoritative --no-dev \

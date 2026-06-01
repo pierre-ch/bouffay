@@ -1,7 +1,7 @@
 FROM php:8.2-fpm-alpine AS base
 
 RUN apk add --no-cache \
-        git curl unzip bash gettext \
+        git curl unzip bash gettext su-exec \
         nginx supervisor postgresql-dev \
         libpng-dev libjpeg-turbo-dev libwebp-dev libzip-dev icu-dev oniguruma-dev \
     && docker-php-ext-configure gd --with-jpeg --with-webp \
@@ -30,7 +30,9 @@ ENV APP_DEBUG=0
 
 RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader --no-scripts \
     && composer dump-autoload --optimize --classmap-authoritative --no-dev \
-    && mkdir -p var/cache var/log
+    && mkdir -p var/cache var/log \
+    && php bin/console cache:clear --env=prod --no-debug \
+    && php bin/console cache:warmup --env=prod --no-debug --no-optional-warmers
 
 FROM base AS final
 

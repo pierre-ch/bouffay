@@ -227,7 +227,29 @@ class AppFixtures extends Fixture
                         $review->setAuthor($buyer);
                         $review->setSeller($product->getSeller());
                         $review->setRating(rand(3, 5));
-                        $review->setContent('Super vendeur, envoi rapide et soigné !');
+                        $comments = [
+                            'Super vendeur, envoi rapide et soigné !',
+                            'Très bonne transaction, je recommande.',
+                            'Great seller, fast and careful shipping!',
+                            'Perfect transaction, highly recommended.',
+                            'Ótimo vendedor, envio rápido e cuidadoso!',
+                            'Transação perfeita, recomendo.',
+                            '素晴らしい出品者です。迅速で丁寧な発送でした！',
+                            '完璧な取引でした。おすすめです。',
+                            'Bon vandè, anbake rapid ak atansyon!',
+                            'Tranzaksyon pafè, mwen rekòmande li.',
+                            'بائع رائع، شحن سريع وعناية فائقة!',
+                            'معاملة مثالية، أوصي به بشدة.',
+                            'Excelente vendedor, envío rápido y cuidadoso.',
+                            'Transacción perfecta, totalmente recomendado.',
+                            'Toller Verkäufer, schneller und sorgfältiger Versand!',
+                            'Perfekte Transaktion, sehr zu empfehlen.',
+                            '훌륭한 판매자, 빠르고 꼼꼼한 배송!',
+                            '완벽한 거래, 강력히 추천합니다.',
+                            'Ottimo venditore, spedizione veloce e curata!',
+                            'Transazione perfetta, lo consiglio vivamente.'
+                        ];
+                        $review->setContent($comments[array_rand($comments)]);
                         $review->setCreatedAt(new \DateTimeImmutable('-' . rand(1, 10) . ' days'));
                         $manager->persist($review);
                         

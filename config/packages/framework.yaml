@@ -8,7 +8,7 @@ framework:
     trusted_headers: ['x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-port', 'x-forwarded-host']
 
     default_locale: 'fr'
-    enabled_locales: ['fr', 'en', 'pt', 'ja']
+    enabled_locales: ['fr', 'en', 'pt', 'ja', 'ht', 'ar', 'es', 'de', 'ko', 'it']
     translator:
         default_path: '%kernel.project_dir%/translations'
         enabled: true

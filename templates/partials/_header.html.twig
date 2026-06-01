@@ -72,29 +72,29 @@
                 {# Sélecteur de langue #}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                        {% if app.request.locale == 'en' %}
-                        🇬🇧 EN
-                        {% elseif app.request.locale == 'pt' %}
-                        🇧🇷 PT
-                        {% elseif app.request.locale == 'ja' %}
-                        🇯🇵 JA
-                        {% else %}
-                        🇫🇷 FR
+                        {% if app.request.locale == 'en' %}🇬🇧 EN
+                        {% elseif app.request.locale == 'pt' %}🇧🇷 PT
+                        {% elseif app.request.locale == 'ja' %}🇯🇵 JA
+                        {% elseif app.request.locale == 'ht' %}🇭🇹 HT
+                        {% elseif app.request.locale == 'ar' %}🇸🇦 AR
+                        {% elseif app.request.locale == 'es' %}🇪🇸 ES
+                        {% elseif app.request.locale == 'de' %}🇩🇪 DE
+                        {% elseif app.request.locale == 'ko' %}🇰🇷 KO
+                        {% elseif app.request.locale == 'it' %}🇮🇹 IT
+                        {% else %}🇫🇷 FR
                         {% endif %}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'fr'}) }}">
-                            🇫🇷 Français
-                        </a></li>
-                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'en'}) }}">
-                            🇬🇧 English
-                        </a></li>
-                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'pt'}) }}">
-                            🇧🇷 Português
-                        </a></li>
-                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'ja'}) }}">
-                            🇯🇵 日本語
-                        </a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'fr'}) }}">🇫🇷 Français</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'en'}) }}">🇬🇧 English</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'pt'}) }}">🇧🇷 Português</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'es'}) }}">🇪🇸 Español</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'it'}) }}">🇮🇹 Italiano</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'de'}) }}">🇩🇪 Deutsch</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'ht'}) }}">🇭🇹 Kreyòl Ayisyen</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'ar'}) }}">🇸🇦 العربية</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'ja'}) }}">🇯🇵 日本語</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'ko'}) }}">🇰🇷 한국어</a></li>
                     </ul>
                 </li>
 

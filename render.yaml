@@ -12,7 +12,7 @@ services:
     plan: free
     region: frankfurt
     dockerfilePath: ./Dockerfile.render
-    healthCheckPath: /fr
+    healthCheckPath: /fr/
     envVars:
       - key: APP_ENV
         value: prod

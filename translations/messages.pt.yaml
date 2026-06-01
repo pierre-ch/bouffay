@@ -94,8 +94,8 @@ form.images: Images
 form.is_default: 'Par défaut'
 form.last_name: Nom
 form.locale: Langue
-form.locale_en: English
-form.locale_fr: Français
+form.locale_en: Inglês
+form.locale_fr: Francês
 form.name: Nom
 form.origin: Origine
 form.password: 'Mot de passe'
@@ -178,29 +178,29 @@ message.success_product_updated: 'Produit mis à jour avec succès.'
 message.success_review_created: 'Avis créé avec succès.'
 message.success_review_deleted: 'Avis supprimé avec succès.'
 nav.addresses: Adresses
-nav.admin: Administration
-nav.cart: Panier
+nav.admin: Administração
+nav.cart: Carrinho
 nav.dashboard: 'Tableau de bord'
-nav.home: Accueil
-nav.language: Langue
-nav.login: Connexion
-nav.logout: Déconnexion
-nav.my_account: 'Mon compte'
+nav.home: Início
+nav.language: Idioma
+nav.login: Entrar
+nav.logout: Sair
+nav.my_account: 'Minha Conta'
 nav.my_ads: 'Mes annonces'
 nav.my_favorites: 'Mes favoris'
-nav.my_orders: 'Mes commandes'
+nav.my_orders: 'Meus Pedidos'
 nav.my_profile: 'Mon profil'
 nav.my_sales: 'Mes ventes'
 nav.notifications: Notifications
 nav.orders_received: 'Commandes reçues'
-nav.products: Produits
-nav.register: Inscription
+nav.products: Produtos
+nav.register: Cadastrar
 nav.sign_up: "S'inscrire"
 notification.new_order: 'Nouvelle commande reçue ! (%order_id%)'
 notification.order_status_updated: 'Votre colis pour la commande #%order_id% a été mis à jour par %seller%'
 published_on_date: 'Publié le'
 section.all_orders: 'Toutes les commandes'
-section.discover: 'Découvrez des snacks du monde entier.'
+section.discover: 'Descubra snacks do mundo inteiro.'
 section.items_sold_by_you: 'Produits vendus par vous'
 section.leave_review: 'Laisser un avis'
 section.my_review: 'Mon avis'
@@ -214,7 +214,7 @@ section.recap: Récapitulatif
 section.recent_orders: 'Dernières commandes'
 section.shipping_address: 'Adresse de livraison'
 section.status_history: 'Historique des statuts'
-section.welcome: 'Bienvenue sur Bouffay'
+section.welcome: 'Bem-vindo ao Bouffay'
 select_shipping_address: 'Sélectionner une adresse de livraison'
 status.cancelled: Annulée
 status.delivered: Livrée
@@ -249,13 +249,13 @@ table.subtotal: Sous-total
 table.total: Total
 table.total_for_you: 'Total de vos ventes :'
 table.unit_price: 'Prix unitaire'
-title.cart: 'Mon Panier - Bouffay Shop'
+title.cart: 'Meu Carrinho - Bouffay Shop'
 title.checkout: 'Valider la Commande - Bouffay Shop'
 title.dashboard: 'Tableau de Bord - Bouffay Shop'
 title.edit_product: 'Éditer Annonce - Bouffay Shop'
 title.favorites: 'Mes Favoris - Bouffay Shop'
-title.home: 'Accueil — Bouffay'
-title.login: 'Connexion — Bouffay'
+title.home: 'Início — Bouffay'
+title.login: 'Entrar — Bouffay'
 title.my_products: 'Mes Annonces - Bouffay Shop'
 title.my_profile: 'Mon Profil - Bouffay Shop'
 title.my_sales: 'Mes ventes'
@@ -263,8 +263,8 @@ title.new_product: 'Nouvelle Annonce - Bouffay Shop'
 title.order_show: 'Commande'
 title.orders: 'Mes Commandes - Bouffay Shop'
 title.product_show: 'Produit — Bouffay'
-title.products: 'Annonces — Bouffay'
-title.register: 'Inscription — Bouffay'
+title.products: 'Produtos — Bouffay'
+title.register: 'Cadastrar — Bouffay'
 title.sale_show: 'Commande Client'
 title.seller: 'Vendeur - Bouffay Shop'
 form.locale_pt: 'Português (BR)'

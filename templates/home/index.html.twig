@@ -4,9 +4,66 @@
 
 {% block body %}
 <style>
+/* CSS Variables for Hero */
+:root {
+  --hero-bg-1: #ff9a9e;
+  --hero-bg-2: #fecfef;
+  --hero-bg-3: #a1c4fd;
+}
+
+[data-bs-theme="dark"] {
+  --hero-bg-1: #2a0845;
+  --hero-bg-2: #6441a5;
+  --hero-bg-3: #121212;
+}
+
+/* Animations */
 @keyframes slide-up-fade {
   from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  margin-bottom: 4rem;
+  background: linear-gradient(-45deg, var(--hero-bg-1), var(--hero-bg-2), var(--hero-bg-3));
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+[data-bs-theme="dark"] .hero-overlay {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
 }
 
 .hero-animate > * {
@@ -16,13 +73,201 @@
 
 .hero-animate h1 { animation-delay: 0.1s; }
 .hero-animate p { animation-delay: 0.3s; }
-.hero-animate a { animation-delay: 0.5s; }
+.hero-animate .cta-buttons { animation-delay: 0.5s; }
+
+/* Floating Elements */
+.floating-snack {
+  position: absolute;
+  z-index: 1;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2));
+  animation: float 6s ease-in-out infinite;
+}
+.snack-1 { right: 10%; top: 20%; width: 180px; animation-delay: 0s; transform: rotate(15deg); }
+.snack-2 { right: 25%; bottom: 15%; width: 140px; animation-delay: 2s; transform: rotate(-10deg); }
+.snack-3 { right: 5%; bottom: 30%; width: 120px; animation-delay: 4s; transform: rotate(25deg); }
+
+/* Features */
+.feature-card {
+  border: none;
+  border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: var(--bs-body-bg);
+}
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 1rem;
+  background: rgba(var(--bs-primary-rgb), 0.1);
+  color: var(--bs-primary);
+}
+
+/* Scroll Animations */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes reveal-scale {
+      from { opacity: 0; transform: scale(0.8) translateY(50px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .scroll-reveal {
+      animation: reveal-scale auto linear both;
+      animation-timeline: view(block);
+      animation-range: entry 5% cover 25%;
+    }
+  }
+}
 </style>
 
-<div class="py-5 text-center hero-animate">
-    <h1 class="display-5 fw-bold text-primary">{{ 'section.welcome'|trans }}</h1>
-    <p class="lead text-muted">{{ 'section.discover'|trans }}</p>
-    <a href="{{ path('app_product_index') }}" class="btn btn-primary btn-lg mt-3 shadow-sm">{{ 'nav.products'|trans }} <i class="bi bi-arrow-right ms-2"></i></a>
-</div>
-{% endblock %}
+<!-- Hero Section -->
+<div class="hero-section text-center text-md-start">
+    <div class="hero-overlay"></div>
+    <!-- Decorative floating elements (visible on md+) -->
+    <div class="d-none d-md-block">
+        <img src="{{ asset('build/images/placeholder_snack1.png') }}" class="floating-snack snack-1" alt="Snack" onerror="this.style.display='none'">
+        <img src="{{ asset('build/images/placeholder_snack2.png') }}" class="floating-snack snack-2" alt="Snack" onerror="this.style.display='none'">
+        <img src="{{ asset('build/images/placeholder_snack3.png') }}" class="floating-snack snack-3" alt="Snack" onerror="this.style.display='none'">
+    </div>
 
+    <div class="container hero-content py-5">
+        <div class="row align-items-center">
+            <div class="col-md-7 hero-animate">
+                <span class="badge bg-primary rounded-pill px-3 py-2 mb-3 fw-bold shadow-sm">
+                    ✨ {{ 'section.welcome'|trans }}
+                </span>
+                <h1 class="display-3 fw-bolder mb-3" style="line-height: 1.1;">
+                    Explore the World<br>
+                    <span class="text-primary">One Snack at a Time</span>
+                </h1>
+                <p class="lead mb-4 fw-medium text-body-secondary" style="max-width: 500px;">
+                    {{ 'section.discover'|trans }} We bring the best international candies, chips, and drinks straight to your door.
+                </p>
+                <div class="cta-buttons d-flex gap-3 justify-content-center justify-content-md-start">
+                    <a href="{{ path('app_product_index') }}" class="btn btn-primary btn-lg rounded-pill px-4 shadow-lg">
+                        {{ 'nav.products'|trans }} <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                    {% if not app.user %}
+                        <a href="{{ path('app_login') }}" class="btn btn-outline-dark btn-lg rounded-pill px-4 bg-white">
+                            {{ 'nav.login'|trans }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container mb-5 pb-5 border-bottom">
+    <div class="row g-4 text-center">
+        <div class="col-md-4">
+            <div class="card feature-card h-100 p-4">
+                <div class="feature-icon">
+                    <i class="bi bi-globe-americas"></i>
+                </div>
+                <h4 class="fw-bold">Global Selection</h4>
+                <p class="text-muted mb-0">Rare and exclusive snacks from Japan, USA, Mexico, and more.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card h-100 p-4">
+                <div class="feature-icon">
+                    <i class="bi bi-lightning-charge"></i>
+                </div>
+                <h4 class="fw-bold">Fast Delivery</h4>
+                <p class="text-muted mb-0">Get your cravings satisfied quickly with our express shipping network.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card h-100 p-4">
+                <div class="feature-icon">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+                <h4 class="fw-bold">Secure Marketplace</h4>
+                <p class="text-muted mb-0">Safe transactions between verified sellers and snack enthusiasts.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Latest Products Section -->
+<div class="container mb-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h2 class="display-6 fw-bold mb-1">Trending Drops 🔥</h2>
+            <p class="text-muted mb-0">Freshly added to our catalog.</p>
+        </div>
+        <a href="{{ path('app_product_index') }}" class="btn btn-outline-primary rounded-pill px-4">View All</a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+        {% for product in latestProducts %}
+            <div class="col scroll-reveal">
+                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden" style="transition: transform 0.2s;">
+                    {% if product.images|length > 0 %}
+                        <img src="{{ asset('uploads/products/' ~ product.images.first.filename) }}"
+                             class="card-img-top" style="height:250px;object-fit:cover;"
+                             alt="{{ product.name }}">
+                    {% else %}
+                        <div class="bg-body-tertiary d-flex align-items-center justify-content-center"
+                             style="height:250px;">
+                            <i class="bi bi-image text-muted fs-1"></i>
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="card-title fw-bold mb-0 text-truncate" title="{{ product.name }}">{{ product.name }}</h5>
+                            <span class="badge bg-primary rounded-pill">{{ product.price }} {{ 'format.currency'|trans }}</span>
+                        </div>
+                        <p class="card-text text-muted small mb-3">
+                            <i class="bi bi-tag-fill me-1"></i> {{ product.category.name }}
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0 pb-3 px-3 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center fw-bold" style="width: 28px; height: 28px; font-size: 0.8rem;">
+                                {{ product.seller.firstName|first|upper }}
+                            </div>
+                            <small class="text-muted fw-medium">{{ product.seller.firstName }}</small>
+                        </div>
+                        <a href="{{ path('app_product_show', {slug: product.slug}) }}"
+                           class="btn btn-sm btn-dark rounded-pill px-3 shadow-sm">View</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Fallback JS for browsers that don't support scroll-driven animations -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (!CSS.supports('(animation-timeline: view()) and (animation-range: entry)')) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.transition = 'all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)';
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'scale(1) translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'scale(0.8) translateY(50px)';
+            observer.observe(el);
+        });
+    }
+});
+</script>
+{% endblock %}

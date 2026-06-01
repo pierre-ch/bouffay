@@ -2,6 +2,20 @@
 
 Application marketplace multi-vendeurs développée avec **Symfony 6.4**. Elle permet à des vendeurs de publier des produits et à des clients de les consulter, les ajouter au panier, passer commande et laisser des avis.
 
+## Démo en ligne
+
+Application déployée sur Render : **https://bouffay-shop.onrender.com/fr**
+
+> Le service free tier s'endort après 15 minutes d'inactivité — la première requête après une période d'inactivité peut prendre ~30 secondes.
+
+### Comptes de test (Render)
+
+| Rôle | Email | Mot de passe |
+|------|-------|--------------|
+| Admin | `admin@bouffay.test` | `password` |
+| Vendeur | `vendeur@bouffay.test` | `password` |
+| Client | `client@bouffay.test` | `password` |
+
 ## Stack technique
 
 | Composant | Technologie |

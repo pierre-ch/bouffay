@@ -60,8 +60,29 @@ class AppFixtures extends Fixture
             $tags[] = $tag;
         }
 
+        // --- Comptes de test déterministes (documentés dans le README) ---
+        $testAccounts = [
+            ['admin@bouffay.test',   'Admin',   'Test', ['ROLE_ADMIN']],
+            ['vendeur@bouffay.test', 'Vendeur', 'Test', ['ROLE_VENDEUR']],
+            ['client@bouffay.test',  'Client',  'Test', ['ROLE_CLIENT']],
+        ];
+        $testUsers = [];
+        foreach ($testAccounts as [$email, $first, $last, $roles]) {
+            $u = new User();
+            $u->setFirstName($first);
+            $u->setLastName($last);
+            $u->setEmail($email);
+            $u->setRoles($roles);
+            $u->setPassword($this->hasher->hashPassword($u, 'password'));
+            $u->setTheme('light');
+            $u->setLocale('fr');
+            $u->setCreatedAt(new \DateTimeImmutable());
+            $manager->persist($u);
+            $testUsers[$roles[0]] = $u;
+        }
+
         // --- Vendeurs ---
-        $sellers = [];
+        $sellers = [$testUsers['ROLE_VENDEUR']];
         for ($i = 0; $i < 5; $i++) {
             $user = new User();
             $user->setFirstName($faker->firstName());
@@ -123,8 +144,16 @@ class AppFixtures extends Fixture
         }
 
         // --- Clients (Acheteurs) & Adresses ---
-        $buyers = [];
-        $addresses = [];
+        $buyers = [$testUsers['ROLE_CLIENT']];
+        $clientAddress = new \App\Entity\Address();
+        $clientAddress->setStreet('1 rue de la Démo');
+        $clientAddress->setCity('Paris');
+        $clientAddress->setZipCode('75001');
+        $clientAddress->setCountry('France');
+        $clientAddress->setIsDefault(true);
+        $clientAddress->setUser($testUsers['ROLE_CLIENT']);
+        $manager->persist($clientAddress);
+        $addresses = [spl_object_id($testUsers['ROLE_CLIENT']) => $clientAddress];
         for ($i = 0; $i < 10; $i++) {
             $user = new User();
             $user->setFirstName($faker->firstName());

@@ -267,9 +267,32 @@ class AppFixtures extends Fixture
             $manager->persist($order);
         }
 
-        // Add some random reviews from users who haven't ordered from the seller (to test unverified badge)
+        // Add explicit multi-language reviews for both sellers to guarantee they have plenty of reviews
+        $multiLangComments = [
+            'Super vendeur, envoi rapide et soigné !', // FR
+            'Great seller, fast and careful shipping!', // EN
+            'Ótimo vendedor, envio rápido e cuidadoso!', // PT
+            '素晴らしい出品者です。迅速で丁寧な発送でした！', // JA
+            'Bon vandè, anbake rapid ak atansyon!', // HT
+            'بائع رائع، شحن سريع وعناية فائقة!', // AR
+            'Excelente vendedor, envío rápido y cuidadoso.', // ES
+            'Toller Verkäufer, schneller und sorgfältiger Versand!', // DE
+            '훌륭한 판매자, 빠르고 꼼꼼한 배송!', // KO
+            'Ottimo venditore, spedizione veloce e curata!', // IT
+            'Отличный продавец, быстрая и аккуратная доставка!', // RU
+            'Moun-la seryé, koli-la rivé vit!', // MQ
+            'Vandè-la seryé, i voyé sa vit!', // GP
+        ];
+
         foreach ($sellers as $seller) {
-            foreach (array_slice($buyers, 0, 15) as $buyer) {
+            $buyerIndex = 0;
+            foreach ($multiLangComments as $comment) {
+                if ($buyerIndex >= count($buyers)) {
+                    break;
+                }
+                
+                $buyer = $buyers[$buyerIndex];
+                
                 $alreadyReviewed = false;
                 foreach ($seller->getReviewsReceived() as $rev) {
                     if ($rev->getAuthor() === $buyer) {
@@ -277,16 +300,19 @@ class AppFixtures extends Fixture
                         break;
                     }
                 }
-                if (!$alreadyReviewed && rand(1, 100) > 30) {
+                
+                if (!$alreadyReviewed) {
                     $review = new Review();
                     $review->setAuthor($buyer);
                     $review->setSeller($seller);
-                    $review->setRating(rand(2, 4));
-                    $review->setContent('Un avis sans achat vérifié pour tester le système !');
-                    $review->setCreatedAt(new \DateTimeImmutable('-' . rand(1, 5) . ' days'));
+                    $review->setRating(rand(4, 5));
+                    $review->setContent($comment);
+                    $review->setCreatedAt(new \DateTimeImmutable('-' . rand(1, 15) . ' days'));
                     $manager->persist($review);
                     $seller->addReviewReceived($review);
                 }
+                
+                $buyerIndex++;
             }
         }
 

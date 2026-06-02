@@ -80,6 +80,7 @@
                         {% elseif app.request.locale == 'es' %}🇪🇸 ES
                         {% elseif app.request.locale == 'de' %}🇩🇪 DE
                         {% elseif app.request.locale == 'ko' %}🇰🇷 KO
+                        {% elseif app.request.locale == 'ru' %}🇷🇺 RU
                         {% elseif app.request.locale == 'it' %}🇮🇹 IT
                         {% else %}🇫🇷 FR
                         {% endif %}
@@ -95,6 +96,7 @@
                         <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'ar'}) }}">🇸🇦 العربية</a></li>
                         <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'ja'}) }}">🇯🇵 日本語</a></li>
                         <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'ko'}) }}">🇰🇷 한국어</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'ru'}) }}">🇷🇺 Русский</a></li>
                     </ul>
                 </li>
 

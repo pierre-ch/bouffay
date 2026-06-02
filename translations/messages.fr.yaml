@@ -290,3 +290,5 @@ home.features.secure.title: 'Marché Sécurisé'
 home.features.secure.desc: 'Transactions sûres entre vendeurs vérifiés et passionnés de snacks.'
 home.trending.title: 'Nouveautés 🔥'
 home.trending.desc: 'Fraîchement ajoutés à notre catalogue.'
+
+form.locale_ru: 'Русский'

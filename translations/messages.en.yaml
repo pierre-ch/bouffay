@@ -290,3 +290,5 @@ home.features.secure.title: 'Secure Marketplace'
 home.features.secure.desc: 'Safe transactions between verified sellers and snack enthusiasts.'
 home.trending.title: 'Trending Drops 🔥'
 home.trending.desc: 'Freshly added to our catalog.'
+
+form.locale_ru: 'Русский'

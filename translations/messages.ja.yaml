@@ -228,3 +228,5 @@ home.features.secure.title: '安全なマーケットプレイス'
 home.features.secure.desc: '確認済みの販売者とお菓子愛好家の間の安全な取引。'
 home.trending.title: '新着アイテム 🔥'
 home.trending.desc: 'カタログに新しく追加されました。'
+
+form.locale_ru: 'Русский'

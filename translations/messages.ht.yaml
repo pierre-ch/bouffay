@@ -228,3 +228,5 @@ home.features.secure.title: 'Mache Sekirize'
 home.features.secure.desc: 'Tranzaksyon an sekirite ant vandè verifye ak moun ki renmen ti goute.'
 home.trending.title: 'Kisa ki nouvo 🔥'
 home.trending.desc: 'Sot ajoute nan katalòg nou an.'
+
+form.locale_ru: 'Русский'

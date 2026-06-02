@@ -228,3 +228,5 @@ home.features.secure.title: 'سوق آمن'
 home.features.secure.desc: 'معاملات آمنة بين البائعين المعتمدين وعشاق الوجبات الخفيفة.'
 home.trending.title: 'أحدث الإضافات 🔥'
 home.trending.desc: 'تمت إضافتها حديثاً إلى كتالوجنا.'
+
+form.locale_ru: 'Русский'

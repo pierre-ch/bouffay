@@ -215,7 +215,8 @@ title.register: 'Registro — Bouffay'
 title.sale_show: 'Pedido de Cliente'
 title.seller: 'Vendedor - Bouffay Shop'
 info.registration_disabled: 'Los registros están temporalmente desactivados.'
-\nbutton.view_all: 'Ver todo'
+
+button.view_all: 'Ver todo'
 home.hero.title_1: 'Explora el Mundo'
 home.hero.title_2: 'Un Snack a la Vez'
 home.hero.subtitle: 'Llevamos los mejores dulces, papas fritas y bebidas internacionales directamente a tu puerta.'
@@ -226,4 +227,4 @@ home.features.delivery.desc: 'Satisface tus antojos rápidamente con nuestra red
 home.features.secure.title: 'Mercado Seguro'
 home.features.secure.desc: 'Transacciones seguras entre vendedores verificados y entusiastas de los snacks.'
 home.trending.title: 'Novedades 🔥'
-home.trending.desc: 'Recién añadidos a nuestro catálogo.'\n
+home.trending.desc: 'Recién añadidos a nuestro catálogo.'

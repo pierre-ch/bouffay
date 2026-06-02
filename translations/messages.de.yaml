@@ -215,7 +215,8 @@ title.register: 'Registrierung — Bouffay'
 title.sale_show: 'Kundenbestellung'
 title.seller: 'Verkäufer - Bouffay Shop'
 info.registration_disabled: 'Die Registrierung ist vorübergehend deaktiviert.'
-\nbutton.view_all: 'Alle ansehen'
+
+button.view_all: 'Alle ansehen'
 home.hero.title_1: 'Entdecke die Welt'
 home.hero.title_2: 'Einen Snack nach dem anderen'
 home.hero.subtitle: 'Wir bringen die besten internationalen Süßigkeiten, Chips und Getränke direkt vor deine Haustür.'
@@ -226,4 +227,4 @@ home.features.delivery.desc: 'Stille deine Gelüste schnell mit unserem Express-
 home.features.secure.title: 'Sicherer Marktplatz'
 home.features.secure.desc: 'Sichere Transaktionen zwischen verifizierten Verkäufern und Snack-Liebhabern.'
 home.trending.title: 'Neuigkeiten 🔥'
-home.trending.desc: 'Frisch zu unserem Katalog hinzugefügt.'\n
+home.trending.desc: 'Frisch zu unserem Katalog hinzugefügt.'

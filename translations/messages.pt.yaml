@@ -215,7 +215,8 @@ form.locale_de: 'Deutsch'
 form.locale_ko: '한국어'
 form.locale_it: 'Italiano'
 info.registration_disabled: 'As inscrições estão temporariamente desativadas.'
-\nbutton.view_all: 'Ver todos'
+
+button.view_all: 'Ver todos'
 home.hero.title_1: 'Explore o Mundo'
 home.hero.title_2: 'Um Snack de Cada Vez'
 home.hero.subtitle: 'Levamos os melhores doces, salgadinhos e bebidas internacionais diretamente até à sua porta.'
@@ -226,4 +227,4 @@ home.features.delivery.desc: 'Satisfaça os seus desejos rapidamente com a nossa
 home.features.secure.title: 'Mercado Seguro'
 home.features.secure.desc: 'Transações seguras entre vendedores verificados e entusiastas de snacks.'
 home.trending.title: 'Novidades 🔥'
-home.trending.desc: 'Adicionados recentemente ao nosso catálogo.'\n
+home.trending.desc: 'Adicionados recentemente ao nosso catálogo.'

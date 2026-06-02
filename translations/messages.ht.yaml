@@ -215,7 +215,8 @@ title.register: 'Enskripsyon — Bouffay'
 title.sale_show: 'Kòmand Kliyan'
 title.seller: 'Vandè - Bouffay Shop'
 info.registration_disabled: 'Enskripsyon yo dezaktive pou kounye a.'
-\nbutton.view_all: 'Wè tout'
+
+button.view_all: 'Wè tout'
 home.hero.title_1: 'Eksplore Mond lan'
 home.hero.title_2: 'Yon ti Goute a la Fwa'
 home.hero.subtitle: 'Nou pote pi bon sirèt, chips ak bwason entènasyonal yo dirèkteman nan pòt ou.'
@@ -226,4 +227,4 @@ home.features.delivery.desc: 'Satisfe anvi ou vit ak rezo anbake eksprime nou an
 home.features.secure.title: 'Mache Sekirize'
 home.features.secure.desc: 'Tranzaksyon an sekirite ant vandè verifye ak moun ki renmen ti goute.'
 home.trending.title: 'Kisa ki nouvo 🔥'
-home.trending.desc: 'Sot ajoute nan katalòg nou an.'\n
+home.trending.desc: 'Sot ajoute nan katalòg nou an.'

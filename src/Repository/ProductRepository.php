@@ -81,4 +81,14 @@ class ProductRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function getTotalStockValue(): float
+    {
+        $result = $this->createQueryBuilder('p')
+            ->select('SUM(p.price * p.stock) as total_value')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return (float) $result;
+    }
 }

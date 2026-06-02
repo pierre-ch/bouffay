@@ -4,37 +4,49 @@
 
 {% block main %}
     <div class="row">
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="card bg-primary text-white shadow">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-users me-2"></i> Utilisateurs</h5>
                     <p class="card-text fs-2 fw-bold">{{ users_count }}</p>
                     <a href="{{ path('admin_user_index') }}" class="text-white text-decoration-none">
-                        Gérer les utilisateurs <i class="fas fa-arrow-right ms-1"></i>
+                        Gérer <i class="fas fa-arrow-right ms-1"></i>
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="card bg-success text-white shadow">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-box me-2"></i> Produits</h5>
                     <p class="card-text fs-2 fw-bold">{{ products_count }}</p>
                     <a href="{{ path('admin_product_index') }}" class="text-white text-decoration-none">
-                        Gérer les produits <i class="fas fa-arrow-right ms-1"></i>
+                        Gérer <i class="fas fa-arrow-right ms-1"></i>
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="card bg-info text-white shadow">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-shopping-cart me-2"></i> Commandes</h5>
                     <p class="card-text fs-2 fw-bold">{{ orders_count }}</p>
                     <a href="{{ path('admin_order_index') }}" class="text-white text-decoration-none">
-                        Gérer les commandes <i class="fas fa-arrow-right ms-1"></i>
+                        Gérer <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card bg-warning text-dark shadow">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-euro-sign me-2"></i> Valeur du Stock</h5>
+                    <p class="card-text fs-2 fw-bold">{{ stock_value|number_format(2, ',', ' ') }} €</p>
+                    <a href="{{ path('admin_product_index') }}" class="text-dark text-decoration-none">
+                        Détails <i class="fas fa-arrow-right ms-1"></i>
                     </a>
                 </div>
             </div>

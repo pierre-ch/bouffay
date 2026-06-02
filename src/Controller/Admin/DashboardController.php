@@ -35,6 +35,7 @@ class DashboardController extends AbstractDashboardController
             'users_count' => $this->userRepository->count([]),
             'products_count' => $this->productRepository->count([]),
             'orders_count' => $this->orderRepository->count([]),
+            'stock_value' => $this->productRepository->getTotalStockValue(),
             'recent_orders' => $this->orderRepository->findBy([], ['createdAt' => 'DESC'], 5),
         ]);
     }

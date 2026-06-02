@@ -91,4 +91,15 @@ class ProductRepository extends ServiceEntityRepository
 
         return (float) $result;
     }
+
+    public function getStockValueByCategory(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->select('c.name as category_name, SUM(p.price * p.stock) as total_value')
+            ->leftJoin('p.category', 'c')
+            ->groupBy('c.id')
+            ->orderBy('total_value', 'DESC')
+            ->getQuery()
+            ->getArrayResult();
+    }
 }

@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\ReviewFormType;
 use App\Repository\ProductRepository;
 use App\Repository\ReviewRepository;
+use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +22,7 @@ class SellerController extends AbstractController
         Request $request,
         ProductRepository $productRepo,
         ReviewRepository $reviewRepo,
+        OrderRepository $orderRepo,
         EntityManagerInterface $em,
     ): Response {
         $currentUser = $this->getUser();
@@ -52,13 +54,23 @@ class SellerController extends AbstractController
             }
         }
 
+        $ordersForSeller = $orderRepo->findOrdersForSeller($seller);
+        $verifiedBuyerIds = [];
+        foreach ($ordersForSeller as $order) {
+            if ($order->getBuyer()) {
+                $verifiedBuyerIds[] = $order->getBuyer()->getId();
+            }
+        }
+        $verifiedBuyerIds = array_unique($verifiedBuyerIds);
+
         return $this->render('seller/show.html.twig', [
-            'seller'          => $seller,
-            'products'        => $productRepo->findBy(['seller' => $seller, 'status' => 'active'], ['createdAt' => 'DESC']),
-            'reviews'         => $reviewRepo->findBy(['seller' => $seller], ['createdAt' => 'DESC']),
-            'averageRating'   => $reviewRepo->getAverageRating($seller),
-            'userReview'      => $userReview,
-            'form'            => $form,
+            'seller'           => $seller,
+            'products'         => $productRepo->findBy(['seller' => $seller, 'status' => 'active'], ['createdAt' => 'DESC']),
+            'reviews'          => $reviewRepo->findBy(['seller' => $seller], ['createdAt' => 'DESC']),
+            'averageRating'    => $reviewRepo->getAverageRating($seller),
+            'userReview'       => $userReview,
+            'form'             => $form,
+            'verifiedBuyerIds' => $verifiedBuyerIds,
         ]);
     }
 

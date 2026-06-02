@@ -173,7 +173,7 @@ class AppFixtures extends Fixture
 
         // 5. Create Orders (and link reviews)
         $statuses = ['pending', 'paid', 'shipped', 'delivered', 'cancelled'];
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             $order = new Order();
             $buyer = $buyers[array_rand($buyers)];
             $address = null;
@@ -213,7 +213,7 @@ class AppFixtures extends Fixture
                 $total += $item->getQuantity() * $product->getPrice();
 
                 // If delivered, maybe add a review for the seller!
-                if ($globalStatus === 'delivered' && rand(1, 100) > 30) {
+                if ($globalStatus === 'delivered' && rand(1, 100) > 20) {
                     // Check if buyer already reviewed this seller
                     $alreadyReviewed = false;
                     foreach ($product->getSeller()->getReviewsReceived() as $rev) {
@@ -232,22 +232,6 @@ class AppFixtures extends Fixture
                             'Très bonne transaction, je recommande.',
                             'Great seller, fast and careful shipping!',
                             'Perfect transaction, highly recommended.',
-                            'Ótimo vendedor, envio rápido e cuidadoso!',
-                            'Transação perfeita, recomendo.',
-                            '素晴らしい出品者です。迅速で丁寧な発送でした！',
-                            '完璧な取引でした。おすすめです。',
-                            'Bon vandè, anbake rapid ak atansyon!',
-                            'Tranzaksyon pafè, mwen rekòmande li.',
-                            'بائع رائع، شحن سريع وعناية فائقة!',
-                            'معاملة مثالية، أوصي به بشدة.',
-                            'Excelente vendedor, envío rápido y cuidadoso.',
-                            'Transacción perfecta, totalmente recomendado.',
-                            'Toller Verkäufer, schneller und sorgfältiger Versand!',
-                            'Perfekte Transaktion, sehr zu empfehlen.',
-                            '훌륭한 판매자, 빠르고 꼼꼼한 배송!',
-                            '완벽한 거래, 강력히 추천합니다.',
-                            'Ottimo venditore, spedizione veloce e curata!',
-                            'Transazione perfetta, lo consiglio vivamente.'
                         ];
                         $review->setContent($comments[array_rand($comments)]);
                         $review->setCreatedAt(new \DateTimeImmutable('-' . rand(1, 10) . ' days'));
@@ -266,6 +250,29 @@ class AppFixtures extends Fixture
             }
             
             $manager->persist($order);
+        }
+
+        // Add some random reviews from users who haven't ordered from the seller (to test unverified badge)
+        foreach ($sellers as $seller) {
+            foreach (array_slice($buyers, 0, 2) as $buyer) {
+                $alreadyReviewed = false;
+                foreach ($seller->getReviewsReceived() as $rev) {
+                    if ($rev->getAuthor() === $buyer) {
+                        $alreadyReviewed = true;
+                        break;
+                    }
+                }
+                if (!$alreadyReviewed && rand(1, 100) > 50) {
+                    $review = new Review();
+                    $review->setAuthor($buyer);
+                    $review->setSeller($seller);
+                    $review->setRating(rand(2, 4));
+                    $review->setContent('Un avis sans achat vérifié pour tester le système !');
+                    $review->setCreatedAt(new \DateTimeImmutable('-' . rand(1, 5) . ' days'));
+                    $manager->persist($review);
+                    $seller->addReviewReceived($review);
+                }
+            }
         }
 
         $manager->flush();

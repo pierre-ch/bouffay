@@ -97,6 +97,18 @@ class AppFixtures extends Fixture
             ['email' => 'client2@bouffay.com', 'first' => 'Bob', 'last' => 'Léponge'],
             ['email' => 'client3@bouffay.com', 'first' => 'Charlie', 'last' => 'Chaplin'],
         ];
+        
+        $firstNames = ['David', 'Emma', 'François', 'Sophie', 'Hugo', 'Juliette', 'Lucas', 'Camille', 'Tom', 'Léa', 'Antoine', 'Chloé', 'Nicolas', 'Manon', 'Maxime', 'Sarah'];
+        $lastNames = ['Bernard', 'Thomas', 'Petit', 'Robert', 'Richard', 'Durand', 'Dubois', 'Moreau', 'Laurent', 'Simon', 'Michel', 'Lefevre', 'Leroy', 'Roux', 'David', 'Bertrand'];
+        
+        for ($i = 4; $i <= 20; $i++) {
+            $buyersData[] = [
+                'email' => "client{$i}@bouffay.com",
+                'first' => $firstNames[array_rand($firstNames)],
+                'last' => $lastNames[array_rand($lastNames)],
+            ];
+        }
+
         $buyers = [];
         $addresses = [];
         foreach ($buyersData as $data) {
@@ -254,7 +266,7 @@ class AppFixtures extends Fixture
 
         // Add some random reviews from users who haven't ordered from the seller (to test unverified badge)
         foreach ($sellers as $seller) {
-            foreach (array_slice($buyers, 0, 2) as $buyer) {
+            foreach (array_slice($buyers, 0, 6) as $buyer) {
                 $alreadyReviewed = false;
                 foreach ($seller->getReviewsReceived() as $rev) {
                     if ($rev->getAuthor() === $buyer) {

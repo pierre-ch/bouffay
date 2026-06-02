@@ -146,16 +146,27 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block body_javascript %}
+    {{ parent() }}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const ctx = document.getElementById('stockChart').getContext('2d');
+        function initStockChart() {
+            const canvas = document.getElementById('stockChart');
+            if (!canvas) return;
+            
+            if (window.stockChartInstance) {
+                window.stockChartInstance.destroy();
+            }
+
+            const ctx = canvas.getContext('2d');
             const data = {{ stock_by_category|json_encode|raw }};
             
             const labels = data.map(item => item.category_name || 'Non catégorisé');
             const values = data.map(item => parseFloat(item.total_value));
             
-            new Chart(ctx, {
+            window.stockChartInstance = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
                     labels: labels,
@@ -179,6 +190,10 @@
                     }
                 }
             });
-        });
+        }
+
+        document.addEventListener('turbo:load', initStockChart);
+        document.addEventListener('DOMContentLoaded', initStockChart);
+        initStockChart();
     </script>
 {% endblock %}

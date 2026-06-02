@@ -241,12 +241,89 @@ class AppFixtures extends Fixture
                         $review->setSeller($product->getSeller());
                         $review->setRating(rand(3, 5));
                         $comments = [
+                            // French
                             'Super vendeur, envoi rapide et soigné !',
                             'Très bonne transaction, je recommande.',
+                            'Livraison au top, les produits sont géniaux !',
+                            'Vendeur sérieux, je commanderai à nouveau.',
+                            'Colis arrivé en parfait état, merci beaucoup.',
+                            'Excellente qualité, exactement comme décrit.',
+                            'Je suis ravie de mon achat, livraison très rapide.',
+                            'Service client très réactif, je suis satisfait.',
+                            'Rien à redire, tout s\'est super bien passé.',
+                            'Un de mes vendeurs préférés, jamais déçu.',
+                            'Les bonbons sont délicieux, je recommande vivement.',
+                            'Parfait, comme d\'habitude.',
+                            'Un peu de retard sur la livraison, mais très bon produit.',
+                            'Emballage très sécurisé, c\'est appréciable.',
+                            'Je n\'hésiterai pas à racheter ici.',
+                            'Prix très correct pour la qualité proposée.',
+                            'Je valide à 100% !',
+                            'Très professionnel, merci pour le petit cadeau en plus.',
+                            'Conforme aux photos et à la description.',
+                            'Une belle découverte, je reviendrai vite.',
+                            // English
                             'Great seller, fast and careful shipping!',
                             'Perfect transaction, highly recommended.',
-                            'Livraison au top, les produits sont géniaux !',
-                            'Vendeur sérieux, je commanderai à nouveau.'
+                            'Amazing products, will buy again for sure.',
+                            'Everything arrived safely. Thank you!',
+                            'Top quality, exactly as described on the page.',
+                            'Really happy with my purchase.',
+                            'Excellent customer service.',
+                            'Five stars all the way!',
+                            'Delicious snacks, my kids loved them.',
+                            'Fast delivery and great packaging.',
+                            // Portuguese
+                            'Ótimo vendedor, envio rápido e cuidadoso!',
+                            'Tudo perfeito, recomendo muito.',
+                            'Os doces são deliciosos, comprarei novamente.',
+                            'Chegou antes do prazo, excelente!',
+                            'Qualidade incrível.',
+                            // Japanese
+                            '素晴らしい出品者です。迅速で丁寧な発送でした！',
+                            'また購入したいと思います。',
+                            '美味しいお菓子をありがとうございます。',
+                            '梱包がとても丁寧でした。',
+                            '対応が早くて安心しました。',
+                            // Haitian Creole
+                            'Bon vandè, anbake rapid ak atansyon!',
+                            'Mwen renmen sa mwen achte a anpil.',
+                            'Bagay yo trè bon.',
+                            'Mwen ap tounen achte ankò.',
+                            // Arabic
+                            'بائع رائع، شحن سريع وعناية فائقة!',
+                            'منتجات ممتازة، أوصي بها بشدة.',
+                            'تغليف جيد جداً.',
+                            'شكراً لك.',
+                            // Spanish
+                            'Excelente vendedor, envío rápido y cuidadoso.',
+                            'Muy buena transacción, lo recomiendo.',
+                            'Los dulces están buenísimos.',
+                            'Todo llegó en perfecto estado.',
+                            // German
+                            'Toller Verkäufer, schneller und sorgfältiger Versand!',
+                            'Alles bestens, gerne wieder.',
+                            'Sehr lecker und schnell geliefert.',
+                            // Korean
+                            '훌륭한 판매자, 빠르고 꼼꼼한 배송!',
+                            '너무 맛있어요, 또 주문할게요.',
+                            '포장이 아주 잘 되어있습니다.',
+                            // Italian
+                            'Ottimo venditore, spedizione veloce e curata!',
+                            'Tutto perfetto, grazie mille.',
+                            'I prodotti sono deliziosi.',
+                            // Russian
+                            'Отличный продавец, быстрая и аккуратная доставка!',
+                            'Всё пришло в целости и сохранности.',
+                            'Очень вкусные сладости!',
+                            // Martinican Creole
+                            'Moun-la seryé, koli-la rivé vit!',
+                            'Bagay la bon menm.',
+                            'Mwen byen kontan.',
+                            // Guadeloupean Creole
+                            'Vandè-la seryé, i voyé sa vit!',
+                            'Sé on bon zafè.',
+                            'Mwen ké wouvini.',
                         ];
                         $review->setContent($comments[array_rand($comments)]);
                         $review->setCreatedAt(new \DateTimeImmutable('-' . rand(1, 10) . ' days'));

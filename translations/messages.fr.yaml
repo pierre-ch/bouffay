@@ -298,3 +298,7 @@ form.locale_mq: 'Kréyòl Matinik'
 form.locale_gp: 'Kréyòl Gwadloup'
 
 info.verified_purchase: 'Achat vérifié'
+
+title.add_address: 'Ajouter une adresse'
+title.edit_address: 'Modifier l''adresse'
+form.use_as_default: 'Utiliser cette adresse par défaut'

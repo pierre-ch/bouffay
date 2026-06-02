@@ -236,3 +236,6 @@ form.locale_mq: 'Kréyòl Matinik'
 form.locale_gp: 'Kréyòl Gwadloup'
 
 info.verified_purchase: '確認済み購入'
+title.add_address: '住所を追加'
+title.edit_address: '住所を編集'
+form.use_as_default: 'この住所をデフォルトにする'

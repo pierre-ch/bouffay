@@ -236,3 +236,6 @@ form.locale_mq: 'Kréyòl Matinik'
 form.locale_gp: 'Kréyòl Gwadloup'
 
 info.verified_purchase: '확인된 구매'
+title.add_address: '주소 추가'
+title.edit_address: '주소 수정'
+form.use_as_default: '이 주소를 기본값으로 사용'

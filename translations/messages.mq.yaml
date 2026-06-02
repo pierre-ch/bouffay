@@ -294,3 +294,6 @@ home.trending.desc: 'Sot mété adan katalog-la.'
 form.locale_gp: 'Kréyòl Gwadloup'
 
 info.verified_purchase: 'Acha Verifyé'
+title.add_address: 'Ajouté on adrès'
+title.edit_address: 'Modifyé adrès-la'
+form.use_as_default: 'Mété adrès-tala kòm défout'

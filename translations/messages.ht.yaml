@@ -236,3 +236,6 @@ form.locale_mq: 'Kréyòl Matinik'
 form.locale_gp: 'Kréyòl Gwadloup'
 
 info.verified_purchase: 'Acha Verifye'
+title.add_address: 'Ajoute yon adrès'
+title.edit_address: 'Modifye adrès la'
+form.use_as_default: 'Sèvi ak adrès sa kòm defo'

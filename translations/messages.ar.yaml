@@ -236,3 +236,6 @@ form.locale_mq: 'Kréyòl Matinik'
 form.locale_gp: 'Kréyòl Gwadloup'
 
 info.verified_purchase: 'شراء مؤكد'
+title.add_address: 'إضافة عنوان'
+title.edit_address: 'تعديل العنوان'
+form.use_as_default: 'استخدم هذا العنوان كافتراضي'

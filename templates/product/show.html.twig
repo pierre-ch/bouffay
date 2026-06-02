@@ -57,6 +57,11 @@
     border-radius: 1rem;
     font-weight: 500;
 }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
 </style>
 
 <div class="row g-5 align-items-start mt-2">
@@ -87,7 +92,7 @@
 
     {# Infos #}
     <div class="col-md-6">
-        <h1 class="display-5 fw-bolder mb-3">{{ product.name }}</h1>
+        <h1 class="display-6 fw-bolder mb-3">{{ product.name }}</h1>
 
         <div class="d-flex flex-wrap gap-2 mb-4 align-items-center">
             <span class="tag-badge">
@@ -98,7 +103,7 @@
             {% endfor %}
         </div>
 
-        <h2 class="price-badge display-6 fw-bold mb-4">{{ product.price }} {{ 'format.currency'|trans }}</h2>
+        <h2 class="price-badge fs-3 fw-bold mb-4">{{ product.price }} {{ 'format.currency'|trans }}</h2>
 
         <div class="card border-0 bg-body-tertiary rounded-4 p-4 mb-4">
             <ul class="list-unstyled mb-0 d-flex flex-column gap-3 text-body-secondary fw-medium">
@@ -170,9 +175,9 @@
                 {% set isFav = app.user.favorites|filter(f => f.product.id == product.id)|length > 0 %}
                 <form method="post" action="{{ path('app_account_favorite_toggle', {id: product.id}) }}">
                     <input type="hidden" name="_token" value="{{ csrf_token('favorite-' ~ product.id) }}">
-                    <button class="btn action-btn w-100 {% if isFav %}btn-danger shadow-sm{% else %}btn-outline-danger{% endif %}">
-                        <i class="bi bi-heart{% if isFav %}-fill{% endif %} me-2"></i>
-                        {% if isFav %}{{ 'button.remove_from_favorites'|trans }}{% else %}{{ 'button.add_to_favorites'|trans }}{% endif %}
+                    <button class="btn action-btn rounded-pill w-100 {% if isFav %}btn-danger shadow{% else %}btn-outline-danger{% endif %} d-flex align-items-center justify-content-center gap-2">
+                        <i class="bi bi-heart{% if isFav %}-fill{% endif %} fs-5"></i>
+                        <span class="fw-bold">{% if isFav %}{{ 'button.remove_from_favorites'|trans }}{% else %}{{ 'button.add_to_favorites'|trans }}{% endif %}</span>
                     </button>
                 </form>
             {% endif %}

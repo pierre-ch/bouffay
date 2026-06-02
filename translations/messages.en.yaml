@@ -107,8 +107,8 @@ form.quantity: Quantity
 form.quantity_placeholder: Quantity
 form.rating: Rating
 form.remember_me: 'Remember me'
-form.review_content: 'Your comment'
-form.review_placeholder: 'Describe your experience with this seller…'
+form.review_content: 'Your review'
+form.review_placeholder: 'Write your review here...'
 form.search.expires_after: 'Expires after'
 form.search.expires_before: 'Expires before'
 form.search.max_price: 'Max price'

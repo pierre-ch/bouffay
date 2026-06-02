@@ -108,7 +108,7 @@ form.quantity_placeholder: Quantité
 form.rating: Note
 form.remember_me: 'Se souvenir de moi'
 form.review_content: 'Votre commentaire'
-form.review_placeholder: 'Décrivez votre expérience avec ce vendeur…'
+form.review_placeholder: 'Écrivez votre commentaire ici...'
 form.search.expires_after: 'Expire après le'
 form.search.expires_before: 'Expire avant le'
 form.search.max_price: 'Prix max'

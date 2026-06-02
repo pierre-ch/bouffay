@@ -1,18 +1,20 @@
 <!-- Add to Cart Form -->
-<form method="POST" action="{{ path('app_cart_add', {productId: product.id}) }}" class="add-to-cart-form">
+<form method="POST" action="{{ path('app_cart_add', {productId: product.id}) }}" class="add-to-cart-form mb-2">
     <input type="hidden" name="_token" value="{{ csrf_token('add_to_cart') }}">
-    <div class="input-group">
-        <input
-            type="number"
-            name="quantity"
-            class="form-control"
-            min="1"
-            max="999"
-            value="1"
-            placeholder="Quantité"
-            aria-label="Quantité"
-        >
-        <button type="submit" class="btn btn-primary">
-            <i class="bi bi-bag-plus"></i>{{ 'button.add_to_cart'|trans }}</button>
+    <div class="d-flex gap-3 align-items-center">
+        <div class="quantity-selector d-flex align-items-center rounded-pill border p-1" style="background-color: var(--bs-body-bg); width: 140px;">
+            <button type="button" class="btn btn-sm btn-light rounded-circle shadow-none" onclick="this.nextElementSibling.stepDown()" style="width: 32px; height: 32px; padding: 0;">
+                <i class="bi bi-dash"></i>
+            </button>
+            <input type="number" name="quantity" class="form-control border-0 text-center bg-transparent px-1 fw-bold shadow-none" min="1" max="999" value="1" aria-label="Quantité" style="width: 50px; appearance: textfield;">
+            <button type="button" class="btn btn-sm btn-light rounded-circle shadow-none" onclick="this.previousElementSibling.stepUp()" style="width: 32px; height: 32px; padding: 0;">
+                <i class="bi bi-plus"></i>
+            </button>
+        </div>
+        
+        <button type="submit" class="btn btn-primary rounded-pill action-btn flex-fill shadow d-flex align-items-center justify-content-center gap-2" style="background: linear-gradient(135deg, var(--bs-primary) 0%, #00d2ff 100%); border: none;">
+            <i class="bi bi-bag-plus fs-5"></i>
+            <span class="fw-bold">{{ 'button.add_to_cart'|trans }}</span>
+        </button>
     </div>
 </form>

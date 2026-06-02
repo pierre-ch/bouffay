@@ -46,7 +46,7 @@
                 {# Liens réservés aux admins #}
                 {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
-                    <a class="nav-link text-danger" href="{{ path('admin') }}">
+                    <a class="nav-link text-danger" href="{{ path('admin', {'_locale': app.request.locale}) }}">
                         <i class="bi bi-shield-lock"></i> {{ 'nav.admin'|trans }}
                     </a>
                 </li>

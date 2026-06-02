@@ -12,11 +12,11 @@
 
     {% block stylesheets %}{% endblock %}
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     {% include 'partials/_header.html.twig' with {theme: theme} %}
 
-    <main class="container py-4">
+    <main class="container py-4 flex-grow-1">
         {% for message in app.flashes('success') %}
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ message|trans }}
@@ -32,6 +32,16 @@
 
         {% block body %}{% endblock %}
     </main>
+
+    <footer class="bg-body-tertiary border-top py-5 mt-auto">
+        <div class="container text-center">
+            <div class="mb-3">
+                <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/4/4b/Logo_Nantes_Universit%C3%A9_2022.svg/512px-Logo_Nantes_Universit%C3%A9_2022.svg.png" alt="Nantes Université" height="50">
+            </div>
+            <p class="mb-1 text-muted fw-semibold">Projet Dev Web - L3 Miage</p>
+            <small class="text-muted">© {{ 'now'|date('Y') }} Bouffay. Tous droits réservés.</small>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     {% block javascripts %}{% endblock %}

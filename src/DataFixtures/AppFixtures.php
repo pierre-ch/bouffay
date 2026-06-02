@@ -184,8 +184,9 @@ class AppFixtures extends Fixture
         }
 
         // 5. Create Orders (and link reviews)
-        $statuses = ['pending', 'paid', 'shipped', 'delivered', 'cancelled'];
-        for ($i = 0; $i < 40; $i++) {
+        // Make 'delivered' more common
+        $statuses = ['pending', 'paid', 'shipped', 'delivered', 'delivered', 'delivered', 'cancelled'];
+        for ($i = 0; $i < 150; $i++) {
             $order = new Order();
             $buyer = $buyers[array_rand($buyers)];
             $address = null;
@@ -224,8 +225,8 @@ class AppFixtures extends Fixture
                 
                 $total += $item->getQuantity() * $product->getPrice();
 
-                // If delivered, maybe add a review for the seller!
-                if ($globalStatus === 'delivered' && rand(1, 100) > 20) {
+                // If delivered, ALWAYS add a review for the seller!
+                if ($globalStatus === 'delivered') {
                     // Check if buyer already reviewed this seller
                     $alreadyReviewed = false;
                     foreach ($product->getSeller()->getReviewsReceived() as $rev) {
@@ -244,6 +245,8 @@ class AppFixtures extends Fixture
                             'Très bonne transaction, je recommande.',
                             'Great seller, fast and careful shipping!',
                             'Perfect transaction, highly recommended.',
+                            'Livraison au top, les produits sont géniaux !',
+                            'Vendeur sérieux, je commanderai à nouveau.'
                         ];
                         $review->setContent($comments[array_rand($comments)]);
                         $review->setCreatedAt(new \DateTimeImmutable('-' . rand(1, 10) . ' days'));
@@ -266,7 +269,7 @@ class AppFixtures extends Fixture
 
         // Add some random reviews from users who haven't ordered from the seller (to test unverified badge)
         foreach ($sellers as $seller) {
-            foreach (array_slice($buyers, 0, 6) as $buyer) {
+            foreach (array_slice($buyers, 0, 15) as $buyer) {
                 $alreadyReviewed = false;
                 foreach ($seller->getReviewsReceived() as $rev) {
                     if ($rev->getAuthor() === $buyer) {
@@ -274,7 +277,7 @@ class AppFixtures extends Fixture
                         break;
                     }
                 }
-                if (!$alreadyReviewed && rand(1, 100) > 50) {
+                if (!$alreadyReviewed && rand(1, 100) > 30) {
                     $review = new Review();
                     $review->setAuthor($buyer);
                     $review->setSeller($seller);

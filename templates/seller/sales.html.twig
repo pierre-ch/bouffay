@@ -49,7 +49,7 @@
                             <td>#{{ order.id }}</td>
                             <td>{{ order.createdAt|date('d/m/Y') }}</td>
                             <td>{{ order.buyer.firstName }} {{ order.buyer.lastName }}</td>
-                            <td>{{ sellerItems|length }} article(s)</td>
+                            <td>{{ sellerItems|length }} {{ 'info.articles'|trans }}</td>
                             <td class="fw-semibold">{{ sellerTotal }} {{ 'format.currency'|trans }}</td>
                             <td>
                                 <span class="badge bg-{{ badges[sellerStatus] ?? 'secondary' }}">

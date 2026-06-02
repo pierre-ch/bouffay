@@ -307,9 +307,7 @@
                     </div>
                     <div class="card-footer bg-transparent border-top-0 pb-4 px-4 pt-0 d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center gap-2">
-                            <div class="rounded-circle bg-gradient text-white d-flex align-items-center justify-content-center fw-bold shadow-sm" style="width: 32px; height: 32px; background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);">
-                                {{ product.seller.firstName|first|upper }}
-                            </div>
+                            <i class="bi bi-person-circle fs-5 text-muted"></i>
                             <small class="text-muted fw-bold">{{ product.seller.firstName }}</small>
                         </div>
                         <a href="{{ path('app_product_show', {slug: product.slug}) }}"

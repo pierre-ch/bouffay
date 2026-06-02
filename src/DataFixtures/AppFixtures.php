@@ -74,6 +74,7 @@ class AppFixtures extends Fixture
         $sellersData = [
             ['email' => 'vendeur1@bouffay.com', 'first' => 'Jean', 'last' => 'Dupont'],
             ['email' => 'vendeur2@bouffay.com', 'first' => 'Maria', 'last' => 'Garcia'],
+            ['email' => 'vendeur3@bouffay.com', 'first' => 'Sophie', 'last' => 'Martin'],
         ];
         $sellers = [];
         foreach ($sellersData as $data) {
@@ -150,6 +151,21 @@ class AppFixtures extends Fixture
             ['name' => 'Twinkies Original', 'cat' => 'Snacks Américains', 'tags' => ['Sucré', 'USA'], 'price' => '3.50', 'origin' => 'USA', 'img' => 'twinkies.png'],
             ['name' => 'Buldak Ramen', 'cat' => 'Nouilles & Plats instantanés', 'tags' => ['Épicé', 'Salé', 'Corée'], 'price' => '2.00', 'origin' => 'Corée du Sud', 'img' => 'buldak.png'],
             ['name' => 'Doritos Cool Ranch', 'cat' => 'Snacks Américains', 'tags' => ['Salé', 'USA'], 'price' => '3.80', 'origin' => 'USA', 'img' => 'doritos.png'],
+            ['name' => "Reese's Peanut Butter Cups", 'cat' => 'Chocolats & Biscuits', 'tags' => ['Sucré', 'USA'], 'price' => '2.50', 'origin' => 'USA', 'img' => 'reeses.png'],
+            ['name' => 'Sriracha Hot Chili Sauce', 'cat' => 'Sauces & Condiments', 'tags' => ['Épicé', 'Salé'], 'price' => '6.90', 'origin' => 'USA', 'img' => 'sriracha.png'],
+            ['name' => 'Ramune Original', 'cat' => 'Boissons & Sodas', 'tags' => ['Boisson', 'Japon', 'Sucré'], 'price' => '3.50', 'origin' => 'Japon', 'img' => 'ramune.png'],
+            ['name' => 'Spicy Tteokbokki Snacks', 'cat' => 'Snacks Asiatiques', 'tags' => ['Épicé', 'Corée', 'Salé'], 'price' => '4.20', 'origin' => 'Corée du Sud', 'img' => 'tteokbokki.png'],
+            ['name' => 'Jalapeño Cheddar Cheetos', 'cat' => 'Snacks Américains', 'tags' => ['Épicé', 'Salé', 'USA'], 'price' => '4.80', 'origin' => 'USA', 'img' => 'jalapeno_cheetos.png'],
+            ['name' => 'Mac & Cheese Kraft', 'cat' => 'Snacks Américains', 'tags' => ['Salé', 'USA'], 'price' => '3.90', 'origin' => 'USA', 'img' => 'kraft_mac_cheese.png'],
+            ['name' => 'Pringles Sour Cream & Onion', 'cat' => 'Snacks Américains', 'tags' => ['Salé', 'USA'], 'price' => '2.90', 'origin' => 'USA', 'img' => 'pringles_sour_cream.png'],
+            ['name' => 'Tokyo Banana', 'cat' => 'Snacks Asiatiques', 'tags' => ['Sucré', 'Japon'], 'price' => '8.50', 'origin' => 'Japon', 'img' => 'tokyo_banana.png'],
+            ['name' => 'Sabritas Adobadas', 'cat' => 'Snacks Latino & Mexicains', 'tags' => ['Épicé', 'Salé', 'Mexique'], 'price' => '4.00', 'origin' => 'Mexique', 'img' => 'sabritas_adobadas.png'],
+            ['name' => 'Dr Pepper Cherry', 'cat' => 'Boissons & Sodas', 'tags' => ['Boisson', 'Sucré', 'USA'], 'price' => '2.50', 'origin' => 'USA', 'img' => 'dr_pepper_cherry.png'],
+            ['name' => 'Haribo Goldbears', 'cat' => 'Bonbons & Confiseries', 'tags' => ['Sucré', 'USA'], 'price' => '2.80', 'origin' => 'USA', 'img' => 'haribo_goldbears.png'],
+            ['name' => 'Nongshim Shin Ramyun', 'cat' => 'Nouilles & Plats instantanés', 'tags' => ['Épicé', 'Salé', 'Corée'], 'price' => '1.90', 'origin' => 'Corée du Sud', 'img' => 'shin_ramyun.png'],
+            ['name' => 'Milka Oreo Chocolate Bar', 'cat' => 'Chocolats & Biscuits', 'tags' => ['Sucré', 'USA'], 'price' => '3.50', 'origin' => 'Europe', 'img' => 'milka_oreo.png'],
+            ['name' => 'Cholula Hot Sauce', 'cat' => 'Sauces & Condiments', 'tags' => ['Épicé', 'Salé', 'Mexique'], 'price' => '5.90', 'origin' => 'Mexique', 'img' => 'cholula_hot_sauce.png'],
+            ['name' => 'Mtn Dew Baja Blast', 'cat' => 'Boissons & Sodas', 'tags' => ['Boisson', 'Sucré', 'USA'], 'price' => '3.00', 'origin' => 'USA', 'img' => 'mtn_dew_baja_blast.png'],
         ];
 
         $products = [];

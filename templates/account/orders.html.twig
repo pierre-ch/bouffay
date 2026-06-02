@@ -35,7 +35,7 @@
                         <tr>
                             <td>#{{ order.id }}</td>
                             <td>{{ order.createdAt|date('d/m/Y') }}</td>
-                            <td>{{ order.orderItems|length }} article(s)</td>
+                            <td>{{ order.orderItems|length }} {{ 'info.articles'|trans }}</td>
                             <td class="fw-semibold">{{ order.totalPrice }} {{ 'format.currency'|trans }}</td>
                             <td>
                                 <span class="badge bg-{{ badges[order.globalStatus] ?? 'secondary' }}">

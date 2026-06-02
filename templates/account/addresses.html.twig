@@ -23,7 +23,7 @@
                 <div class="alert alert-info">
                     <p>{{ 'empty.no_addresses'|trans }}</p>
                     <a href="{{ path('app_account_address_add') }}" class="btn btn-primary btn-sm">
-                        Ajouter votre première adresse
+                        {{ 'button.add_address'|trans }}
                     </a>
                 </div>
             {% else %}
@@ -53,7 +53,7 @@
                                             <form method="POST" action="{{ path('app_account_address_default', {id: address.id}) }}" class="d-inline" style="flex: 1;">
                                                 <input type="hidden" name="_token" value="{{ csrf_token('default-address-' ~ address.id) }}">
                                                 <button type="submit" class="btn btn-sm btn-outline-warning w-100">
-                                                    <i class="bi bi-star"></i> Par défaut
+                                                    <i class="bi bi-star"></i> {{ 'button.set_as_default'|trans }}
                                                 </button>
                                             </form>
                                         {% endif %}
@@ -79,7 +79,7 @@ document.querySelectorAll('.delete-address-btn').forEach(btn => {
         const addressId = this.dataset.addressId;
         const csrf = this.dataset.csrf;
 
-        if (confirm('Êtes-vous sûr de vouloir supprimer cette adresse ?')) {
+        if (confirm('{{ "message.confirm_delete_address"|trans }}')) {
             const form = document.createElement('form');
             form.method = 'POST';
             form.action = '{{ path("app_account_address_delete", {"id": "PLACEHOLDER"}) }}'.replace('PLACEHOLDER', addressId);

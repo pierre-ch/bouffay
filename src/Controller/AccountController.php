@@ -142,7 +142,7 @@ class AccountController extends AbstractController
 
         return $this->render('account/address_form.html.twig', [
             'form' => $form,
-            'title' => 'Ajouter une adresse',
+            'title' => 'title.add_address',
         ]);
     }
 
@@ -174,7 +174,7 @@ class AccountController extends AbstractController
 
         return $this->render('account/address_form.html.twig', [
             'form' => $form,
-            'title' => 'Modifier l\'adresse',
+            'title' => 'title.edit_address',
         ]);
     }
 

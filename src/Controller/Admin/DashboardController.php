@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Routing\Attribute\Route;
+use function Symfony\Component\Translation\t;
 
 use App\Repository\UserRepository;
 use App\Repository\ProductRepository;
@@ -75,21 +76,21 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('menu.dashboard', 'fa fa-home');
-        yield MenuItem::linkToRoute('menu.back_to_site', 'fa fa-arrow-left', 'app_home');
+        yield MenuItem::linkToDashboard(t('menu.dashboard', [], 'admin'), 'fa fa-home');
+        yield MenuItem::linkToRoute(t('menu.back_to_site', [], 'admin'), 'fa fa-arrow-left', 'app_home');
         
-        yield MenuItem::section('menu.users');
-        yield MenuItem::linkToRoute('menu.accounts', 'fas fa-users', 'admin_user_index');
+        yield MenuItem::section(t('menu.users', [], 'admin'));
+        yield MenuItem::linkToRoute(t('menu.accounts', [], 'admin'), 'fas fa-users', 'admin_user_index');
         
-        yield MenuItem::section('menu.shop');
-        yield MenuItem::linkToRoute('menu.products', 'fas fa-box', 'admin_product_index');
-        yield MenuItem::linkToRoute('menu.categories', 'fas fa-tags', 'admin_category_index');
-        yield MenuItem::linkToRoute('menu.orders', 'fas fa-shopping-cart', 'admin_order_index');
+        yield MenuItem::section(t('menu.shop', [], 'admin'));
+        yield MenuItem::linkToRoute(t('menu.products', [], 'admin'), 'fas fa-box', 'admin_product_index');
+        yield MenuItem::linkToRoute(t('menu.categories', [], 'admin'), 'fas fa-tags', 'admin_category_index');
+        yield MenuItem::linkToRoute(t('menu.orders', [], 'admin'), 'fas fa-shopping-cart', 'admin_order_index');
         
-        yield MenuItem::section('menu.moderation');
-        yield MenuItem::linkToRoute('menu.reviews', 'fas fa-star', 'admin_review_index');
+        yield MenuItem::section(t('menu.moderation', [], 'admin'));
+        yield MenuItem::linkToRoute(t('menu.reviews', [], 'admin'), 'fas fa-star', 'admin_review_index');
 
-        yield MenuItem::section('menu.system');
-        yield MenuItem::linkToRoute('menu.logs', 'fas fa-file-alt', 'admin_logs');
+        yield MenuItem::section(t('menu.system', [], 'admin'));
+        yield MenuItem::linkToRoute(t('menu.logs', [], 'admin'), 'fas fa-file-alt', 'admin_logs');
     }
 }

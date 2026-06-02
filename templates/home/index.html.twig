@@ -9,12 +9,16 @@
   --hero-bg-1: #ff9a9e;
   --hero-bg-2: #fecfef;
   --hero-bg-3: #a1c4fd;
+  --glass-bg: rgba(255, 255, 255, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.5);
 }
 
 [data-bs-theme="dark"] {
   --hero-bg-1: #2a0845;
   --hero-bg-2: #6441a5;
   --hero-bg-3: #121212;
+  --glass-bg: rgba(0, 0, 0, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 /* Animations */
@@ -24,9 +28,9 @@
 }
 
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0px); }
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(3deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
 }
 
 @keyframes gradient-shift {
@@ -38,32 +42,39 @@
 /* Hero Section */
 .hero-section {
   position: relative;
-  min-height: 75vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
-  border-radius: 1.5rem;
-  overflow: hidden;
+  border-radius: 2rem;
+  overflow: hidden; /* Use clip instead of hidden if needed, but hidden is fine */
   margin-bottom: 4rem;
   background: linear-gradient(-45deg, var(--hero-bg-1), var(--hero-bg-2), var(--hero-bg-3));
   background-size: 400% 400%;
   animation: gradient-shift 15s ease infinite;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-[data-bs-theme="dark"] .hero-overlay {
-  background: rgba(0, 0, 0, 0.4);
+  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+  pointer-events: none;
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 10;
+}
+
+/* Glassmorphism Card */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 1.5rem;
+  padding: 3rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
 .hero-animate > * {
@@ -71,29 +82,68 @@
   animation: slide-up-fade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
-.hero-animate h1 { animation-delay: 0.1s; }
-.hero-animate p { animation-delay: 0.3s; }
-.hero-animate .cta-buttons { animation-delay: 0.5s; }
+.hero-animate .badge { animation-delay: 0.1s; }
+.hero-animate h1 { animation-delay: 0.2s; }
+.hero-animate p { animation-delay: 0.4s; }
+.hero-animate .cta-buttons { animation-delay: 0.6s; }
 
-/* Floating Elements */
-.floating-snack {
+/* Floating Elements Base */
+.floating-product-wrapper {
   position: absolute;
-  z-index: 1;
-  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2));
-  animation: float 6s ease-in-out infinite;
+  z-index: 5;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3));
 }
-.snack-1 { right: 10%; top: 20%; width: 180px; animation-delay: 0s; transform: rotate(15deg); }
-.snack-2 { right: 25%; bottom: 15%; width: 140px; animation-delay: 2s; transform: rotate(-10deg); }
-.snack-3 { right: 5%; bottom: 30%; width: 120px; animation-delay: 4s; transform: rotate(25deg); }
 
-/* Feature Icons (Keeping the circle background since Bootstrap lacks a circle-icon class) */
+.floating-product-wrapper img, .floating-product-wrapper .placeholder-snack {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+}
+
+/* Initial Layout & Float Animations */
+.snack-container-1 { right: 8%; top: 15%; width: 180px; height: 180px; animation: float 7s ease-in-out infinite; }
+.snack-container-2 { left: 5%; bottom: 15%; width: 140px; height: 140px; animation: float 5s ease-in-out infinite reverse; }
+.snack-container-3 { right: 25%; bottom: -5%; width: 220px; height: 220px; animation: float 8s ease-in-out infinite 1s; }
+
+/* Scroll-driven Parallax */
+@supports ((animation-timeline: view()) and (animation-range: entry)) {
+  .hero-section {
+    view-timeline: --hero-section;
+  }
+
+  @keyframes parallax-layer {
+    from { transform: translateY(0); }
+    to { transform: translateY(var(--parallax-offset)); }
+  }
+
+  .parallax-layer {
+    animation: parallax-layer linear both;
+    animation-timeline: --hero-section;
+    /* Move up as the user scrolls down (hero leaves the view) */
+    animation-range: exit 0% exit 100%;
+  }
+
+  .snack-container-1 .parallax-layer { --parallax-offset: -100px; }
+  .snack-container-2 .parallax-layer { --parallax-offset: -200px; }
+  .snack-container-3 .parallax-layer { --parallax-offset: -50px; }
+}
+
+/* Feature Icons */
 .feature-icon-wrapper {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.75rem;
+  font-size: 2rem;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.card:hover .feature-icon-wrapper {
+  transform: scale(1.1) rotate(5deg);
 }
 
 /* Scroll Animations */
@@ -111,40 +161,69 @@
     }
   }
 }
+
+/* Product Card Hover */
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 1rem 3rem rgba(0,0,0,0.15) !important;
+}
 </style>
 
 <!-- Hero Section -->
 <div class="hero-section text-center d-flex align-items-center justify-content-center">
     <div class="hero-overlay"></div>
-    <!-- Decorative floating elements (visible on md+) -->
+    
+    <!-- Decorative floating products (visible on md+) -->
     <div class="d-none d-md-block">
-        <img src="{{ asset('build/images/placeholder_snack1.png') }}" class="floating-snack snack-1" alt="Snack" onerror="this.style.display='none'">
-        <img src="{{ asset('build/images/placeholder_snack2.png') }}" class="floating-snack snack-2" alt="Snack" onerror="this.style.display='none'">
-        <img src="{{ asset('build/images/placeholder_snack3.png') }}" class="floating-snack snack-3" alt="Snack" onerror="this.style.display='none'">
+        {% set float_classes = ['snack-container-1', 'snack-container-2', 'snack-container-3'] %}
+        {% for i in 0..2 %}
+            {% set product = latestProducts[i] ?? null %}
+            {% if product %}
+                <div class="floating-product-wrapper {{ float_classes[i] }}">
+                    <div class="parallax-layer w-100 h-100">
+                        {% if product.images|length > 0 %}
+                            <img src="{{ asset('uploads/products/' ~ product.images.first.filename) }}" alt="{{ product.name }}">
+                        {% else %}
+                            <div class="placeholder-snack d-flex align-items-center justify-content-center fw-bold fs-1">🛍️</div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
 
     <div class="container hero-content py-5">
         <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6 hero-animate">
-                <span class="badge bg-primary rounded-pill px-3 py-2 mb-3 fw-bold shadow-sm">
-                    ✨ {{ 'section.welcome'|trans }}
-                </span>
-                <h1 class="display-3 fw-bolder mb-3" style="line-height: 1.1;">
-                    {{ 'home.hero.title_1'|trans }}<br>
-                    <span class="text-primary">{{ 'home.hero.title_2'|trans }}</span>
-                </h1>
-                <p class="lead mb-4 fw-medium text-body-secondary mx-auto">
-                    {{ 'section.discover'|trans }} {{ 'home.hero.subtitle'|trans }}
-                </p>
-                <div class="cta-buttons d-flex gap-3 justify-content-center">
-                    <a href="{{ path('app_product_index') }}" class="btn btn-primary btn-lg rounded-pill px-4 shadow-sm">
-                        {{ 'nav.products'|trans }} <i class="bi bi-arrow-right ms-2"></i>
-                    </a>
-                    {% if not app.user %}
-                        <a href="{{ path('app_login') }}" class="btn btn-outline-dark btn-lg rounded-pill px-4 bg-white shadow-sm">
-                            {{ 'nav.login'|trans }}
+            <div class="col-md-10 col-lg-8 hero-animate">
+                <div class="glass-card">
+                    <span class="badge bg-primary text-white rounded-pill px-4 py-2 mb-4 fw-bold shadow-sm fs-6">
+                        ✨ {{ 'section.welcome'|trans }}
+                    </span>
+                    <h1 class="display-3 fw-bolder mb-3 text-body-emphasis" style="line-height: 1.2;">
+                        {{ 'home.hero.title_1'|trans }}<br>
+                        <span class="text-primary position-relative d-inline-block">
+                            {{ 'home.hero.title_2'|trans }}
+                            <svg class="position-absolute bottom-0 start-0 w-100" style="z-index:-1; transform: translateY(30%);" viewBox="0 0 200 20" preserveAspectRatio="none">
+                                <path d="M 0,10 C 50,20 150,0 200,10" fill="none" stroke="rgba(var(--bs-primary-rgb), 0.3)" stroke-width="8" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                    </h1>
+                    <p class="lead mb-5 fw-medium text-body mx-auto fs-4" style="max-width: 600px;">
+                        {{ 'section.discover'|trans }} {{ 'home.hero.subtitle'|trans }}
+                    </p>
+                    <div class="cta-buttons d-flex gap-3 justify-content-center flex-wrap">
+                        <a href="{{ path('app_product_index') }}" class="btn btn-primary btn-lg rounded-pill px-5 py-3 shadow-lg d-flex align-items-center gap-2 fw-bold">
+                            {{ 'nav.products'|trans }} <i class="bi bi-arrow-right-circle-fill fs-5"></i>
                         </a>
-                    {% endif %}
+                        {% if not app.user %}
+                            <a href="{{ path('app_login') }}" class="btn btn-light btn-lg rounded-pill px-5 py-3 shadow-sm d-flex align-items-center gap-2 fw-bold text-dark">
+                                <i class="bi bi-person-circle fs-5"></i> {{ 'nav.login'|trans }}
+                            </a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -154,31 +233,31 @@
 <!-- Features Section -->
 <div class="container mb-5 pb-5 border-bottom">
     <div class="row g-4 text-center">
-        <div class="col-md-4">
-            <div class="card h-100 p-4 border-0 shadow-sm rounded-4 bg-body">
-                <div class="feature-icon-wrapper rounded-circle bg-primary bg-opacity-10 text-primary mx-auto mb-3">
+        <div class="col-md-4 scroll-reveal" style="animation-delay: 0.1s">
+            <div class="card h-100 p-5 border-0 shadow-sm rounded-5 bg-body product-card">
+                <div class="feature-icon-wrapper rounded-circle bg-primary bg-opacity-10 text-primary mx-auto mb-4">
                     <i class="bi bi-globe-americas"></i>
                 </div>
-                <h4 class="fw-bold">{{ 'home.features.selection.title'|trans }}</h4>
-                <p class="text-muted mb-0">{{ 'home.features.selection.desc'|trans }}</p>
+                <h4 class="fw-bold mb-3">{{ 'home.features.selection.title'|trans }}</h4>
+                <p class="text-muted mb-0 fs-5">{{ 'home.features.selection.desc'|trans }}</p>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card h-100 p-4 border-0 shadow-sm rounded-4 bg-body">
-                <div class="feature-icon-wrapper rounded-circle bg-primary bg-opacity-10 text-primary mx-auto mb-3">
-                    <i class="bi bi-lightning-charge"></i>
+        <div class="col-md-4 scroll-reveal" style="animation-delay: 0.2s">
+            <div class="card h-100 p-5 border-0 shadow-sm rounded-5 bg-body product-card">
+                <div class="feature-icon-wrapper rounded-circle bg-success bg-opacity-10 text-success mx-auto mb-4">
+                    <i class="bi bi-lightning-charge-fill"></i>
                 </div>
-                <h4 class="fw-bold">{{ 'home.features.delivery.title'|trans }}</h4>
-                <p class="text-muted mb-0">{{ 'home.features.delivery.desc'|trans }}</p>
+                <h4 class="fw-bold mb-3">{{ 'home.features.delivery.title'|trans }}</h4>
+                <p class="text-muted mb-0 fs-5">{{ 'home.features.delivery.desc'|trans }}</p>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card h-100 p-4 border-0 shadow-sm rounded-4 bg-body">
-                <div class="feature-icon-wrapper rounded-circle bg-primary bg-opacity-10 text-primary mx-auto mb-3">
+        <div class="col-md-4 scroll-reveal" style="animation-delay: 0.3s">
+            <div class="card h-100 p-5 border-0 shadow-sm rounded-5 bg-body product-card">
+                <div class="feature-icon-wrapper rounded-circle bg-info bg-opacity-10 text-info mx-auto mb-4">
                     <i class="bi bi-shield-check"></i>
                 </div>
-                <h4 class="fw-bold">{{ 'home.features.secure.title'|trans }}</h4>
-                <p class="text-muted mb-0">{{ 'home.features.secure.desc'|trans }}</p>
+                <h4 class="fw-bold mb-3">{{ 'home.features.secure.title'|trans }}</h4>
+                <p class="text-muted mb-0 fs-5">{{ 'home.features.secure.desc'|trans }}</p>
             </div>
         </div>
     </div>
@@ -186,46 +265,57 @@
 
 <!-- Latest Products Section -->
 <div class="container mb-5">
-    <div class="d-flex justify-content-between align-items-end mb-4">
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-end mb-5 gap-3">
         <div>
-            <h2 class="display-6 fw-bold mb-1">{{ 'home.trending.title'|trans }} 🔥</h2>
-            <p class="text-muted mb-0">{{ 'home.trending.desc'|trans }}</p>
+            <h2 class="display-5 fw-bold mb-2">{{ 'home.trending.title'|trans }} <span class="text-warning">🔥</span></h2>
+            <p class="text-muted mb-0 fs-5">{{ 'home.trending.desc'|trans }}</p>
         </div>
-        <a href="{{ path('app_product_index') }}" class="btn btn-outline-primary rounded-pill px-4">{{ 'button.view_all'|trans }}</a>
+        <a href="{{ path('app_product_index') }}" class="btn btn-outline-primary rounded-pill px-4 py-2 fw-bold d-inline-flex align-items-center gap-2">
+            {{ 'button.view_all'|trans }} <i class="bi bi-arrow-right"></i>
+        </a>
     </div>
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
         {% for product in latestProducts %}
             <div class="col scroll-reveal">
-                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
-                    {% if product.images|length > 0 %}
-                        <img src="{{ asset('uploads/products/' ~ product.images.first.filename) }}"
-                             class="card-img-top" style="height:250px;object-fit:cover;"
-                             alt="{{ product.name }}">
-                    {% else %}
-                        <div class="bg-body-tertiary d-flex align-items-center justify-content-center"
-                             style="height:250px;">
-                            <i class="bi bi-image text-muted fs-1"></i>
+                <div class="card h-100 shadow-sm border-0 rounded-5 overflow-hidden product-card">
+                    <div class="position-relative">
+                        {% if product.images|length > 0 %}
+                            <img src="{{ asset('uploads/products/' ~ product.images.first.filename) }}"
+                                 class="card-img-top" style="height:280px;object-fit:cover;"
+                                 alt="{{ product.name }}">
+                        {% else %}
+                            <div class="bg-body-tertiary d-flex align-items-center justify-content-center"
+                                 style="height:280px;">
+                                <i class="bi bi-image text-muted" style="font-size: 4rem;"></i>
+                            </div>
+                        {% endif %}
+                        <div class="position-absolute top-0 end-0 p-3">
+                            <span class="badge bg-dark bg-opacity-75 backdrop-blur rounded-pill fs-6 px-3 py-2 shadow">
+                                {{ product.price }} {{ 'format.currency'|trans }}
+                            </span>
                         </div>
-                    {% endif %}
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h5 class="card-title fw-bold mb-0 text-truncate" title="{{ product.name }}">{{ product.name }}</h5>
-                            <span class="badge bg-primary rounded-pill">{{ product.price }} {{ 'format.currency'|trans }}</span>
-                        </div>
-                        <p class="card-text text-muted small mb-3">
-                            <i class="bi bi-tag-fill me-1"></i> {{ product.category.name }}
-                        </p>
                     </div>
-                    <div class="card-footer bg-transparent border-top-0 pb-3 px-3 d-flex justify-content-between align-items-center">
+                    
+                    <div class="card-body p-4">
+                        <div class="mb-2">
+                            <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-1 mb-2">
+                                <i class="bi bi-tag-fill me-1"></i> {{ product.category.name }}
+                            </span>
+                        </div>
+                        <h5 class="card-title fw-bold mb-1 text-truncate fs-4" title="{{ product.name }}">{{ product.name }}</h5>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0 pb-4 px-4 pt-0 d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center gap-2">
-                            <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center fw-bold" style="width: 28px; height: 28px; font-size: 0.8rem;">
+                            <div class="rounded-circle bg-gradient text-white d-flex align-items-center justify-content-center fw-bold shadow-sm" style="width: 32px; height: 32px; background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);">
                                 {{ product.seller.firstName|first|upper }}
                             </div>
-                            <small class="text-muted fw-medium">{{ product.seller.firstName }}</small>
+                            <small class="text-muted fw-bold">{{ product.seller.firstName }}</small>
                         </div>
                         <a href="{{ path('app_product_show', {slug: product.slug}) }}"
-                           class="btn btn-sm btn-dark rounded-pill px-3 shadow-sm">{{ 'button.view'|trans }}</a>
+                           class="btn btn-dark rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                           <i class="bi bi-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -240,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.transition = 'all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)';
+                    entry.target.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
                     entry.target.style.opacity = 1;
                     entry.target.style.transform = 'scale(1) translateY(0)';
                     observer.unobserve(entry.target);
@@ -253,6 +343,21 @@ document.addEventListener("DOMContentLoaded", () => {
             el.style.transform = 'scale(0.8) translateY(50px)';
             observer.observe(el);
         });
+
+        // Fallback for parallax layers using standard scroll event
+        const heroSection = document.querySelector('.hero-section');
+        const parallaxLayers = document.querySelectorAll('.parallax-layer');
+        if (heroSection && parallaxLayers.length > 0) {
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                if (scrollY < window.innerHeight) {
+                    parallaxLayers.forEach((layer, index) => {
+                        const speed = (index + 1) * -0.15; // Different speeds
+                        layer.style.transform = `translateY(${scrollY * speed}px)`;
+                    });
+                }
+            });
+        }
     }
 });
 </script>

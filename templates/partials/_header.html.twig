@@ -82,6 +82,7 @@
                         {% elseif app.request.locale == 'ko' %}🇰🇷 KO
                         {% elseif app.request.locale == 'ru' %}🇷🇺 RU
                         {% elseif app.request.locale == 'mq' %}🇲🇶 MQ
+                        {% elseif app.request.locale == 'gp' %}🇬🇵 GP
                         {% elseif app.request.locale == 'it' %}🇮🇹 IT
                         {% else %}🇫🇷 FR
                         {% endif %}
@@ -99,6 +100,7 @@
                         <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'ko'}) }}">🇰🇷 한국어</a></li>
                         <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'ru'}) }}">🇷🇺 Русский</a></li>
                         <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'mq'}) }}">🇲🇶 Kréyòl Matinik</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_change_locale', {'locale': 'gp'}) }}">🇬🇵 Kréyòl Gwadloup</a></li>
                     </ul>
                 </li>
 

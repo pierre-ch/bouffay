@@ -44,6 +44,7 @@ class ProfileFormType extends AbstractType
                     'form.locale_ko' => 'ko',
                     'form.locale_ru' => 'ru',
                     'form.locale_mq' => 'mq',
+                    'form.locale_gp' => 'gp',
                 ],
             ])
             ->add('theme', ChoiceType::class, [

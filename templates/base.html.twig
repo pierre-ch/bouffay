@@ -33,13 +33,41 @@
         {% block body %}{% endblock %}
     </main>
 
-    <footer class="bg-body-tertiary border-top py-5 mt-auto">
-        <div class="container text-center">
-            <div class="mb-3">
-                <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/4/4b/Logo_Nantes_Universit%C3%A9_2022.svg/512px-Logo_Nantes_Universit%C3%A9_2022.svg.png" alt="Nantes Université" height="50">
+    <footer class="bg-body-tertiary border-top mt-auto pt-5 pb-4">
+        <div class="container">
+            <div class="row gy-4 mb-4">
+                <div class="col-md-6">
+                    <h5 class="fw-bold mb-3 d-flex align-items-center">
+                        <i class="bi bi-shop text-primary fs-4 me-2"></i> Bouffay Shop
+                    </h5>
+                    <p class="text-muted small mb-0 pe-md-4" style="line-height: 1.6; max-width: 400px;">
+                        La marketplace de référence pour découvrir, acheter et vendre vos produits préférés en toute sécurité.
+                    </p>
+                </div>
+                
+                <div class="col-md-6 text-md-end">
+                    <h5 class="fw-bold mb-3">Projet Universitaire</h5>
+                    <div class="d-flex align-items-center justify-content-md-end">
+                        <div class="text-end me-3">
+                            <div class="fw-semibold">Développement Web</div>
+                            <div class="text-muted small">Licence 3 MIAGE</div>
+                        </div>
+                        <img src="https://www.univ-nantes.fr/images/logo.png" alt="Nantes Université" height="40">
+                    </div>
+                </div>
             </div>
-            <p class="mb-1 text-muted fw-semibold">Projet Dev Web - L3 Miage</p>
-            <small class="text-muted">© {{ 'now'|date('Y') }} Bouffay. Tous droits réservés.</small>
+            
+            <hr class="opacity-10 mb-4">
+            
+            <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center gap-3 text-center text-lg-start">
+                <div class="text-muted small">
+                    &copy; {{ 'now'|date('Y') }} <span class="fw-semibold">Bouffay Shop</span>. Tous droits réservés.
+                </div>
+                
+                <div class="text-muted text-lg-end" style="font-size: 0.70rem; max-width: 650px;">
+                    <i class="bi bi-info-circle me-1"></i> Ce site est un projet strictement universitaire à but éducatif et non lucratif. Les marques, images et noms de produits affichés appartiennent à leurs ayants droit respectifs et sont utilisés uniquement à des fins d'illustration.
+                </div>
+            </div>
         </div>
     </footer>
 

@@ -131,7 +131,7 @@
                         <a href="{{ path('app_cart_checkout') }}" class="btn btn-success w-100 mb-2">
                             <i class="bi bi-credit-card"></i>{{ 'button.checkout'|trans }}</a>
 
-                        <form method="POST" action="{{ path('app_cart_clear') }}" onsubmit="return confirm('{{ \"message.confirm_empty_cart\"|trans }}');">
+                        <form method="POST" action="{{ path('app_cart_clear') }}" onsubmit="return confirm('{{ "message.confirm_empty_cart"|trans|escape("js") }}');">
                             <input type="hidden" name="_token" value="{{ csrf_token('clear-cart') }}">
                             <button type="submit" class="btn btn-outline-danger w-100">
                                 <i class="bi bi-trash"></i>{{ 'button.empty_cart'|trans }}</button>
